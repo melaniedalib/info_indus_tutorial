@@ -36,5 +36,6 @@ Le rendu attendu est un site web correspondant à un fork du site internet de M.
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-
+   
+   00_creation_site_web/00_site_web
    01_description_des_elements_maquette/description_maquette

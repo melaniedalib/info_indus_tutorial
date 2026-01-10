@@ -1,0 +1,257 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Création du site web &mdash; Documentation Dm_info_indus__tutorial </title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fdcf8bf8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d1a510d7"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Décrire la plateforme mécanique" href="../01_description_des_elements_maquette/description_maquette.html" />
+    <link rel="prev" title="Informatique industrielle" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dm_info_indus__tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Création du site web</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-du-projet">Création du projet</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-de-vs-code">Configuration de VS Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creation-des-fichiers-de-configuration">Création des fichiers de configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ouverture-du-projet-dans-vs-code">Ouverture du projet dans VS Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-des-raccourcis-clavier">Configuration des raccourcis clavier</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-des-extensions-vs-code">Installation des extensions VS Code</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#edition-de-code">Édition de code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#git">Git</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python">Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#documentation">Documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ros-2">ROS 2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assistant-ia">Assistant IA</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/description_maquette.html">Décrire la plateforme mécanique</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dm_info_indus__tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Création du site web</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/00_creation_site_web/00_site_web.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="creation-du-site-web">
+<h1>Création du site web<a class="headerlink" href="#creation-du-site-web" title="Lien vers cette rubrique"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cette partie s’inspire de la documentation fournie par <strong>M. Yguel</strong>
+dans le cadre du cours d’informatique industrielle. voir ici pour la documentation exacte.</p>
+</div>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons créé ce site web afin de documenter le projet de pantographe
+et de présenter les différentes étapes de conception, de simulation
+et de contrôle sous ROS 2.</p>
+<p>Le site est basé sur <strong>Sphinx</strong> et hébergé via <strong>GitHub Pages</strong>.</p>
+<p>—</p>
+</section>
+<section id="creation-du-projet">
+<h2>Création du projet<a class="headerlink" href="#creation-du-projet" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons ouvert un terminal sous Ubuntu à l’aide du raccourci :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">T</span></code></p></li>
+</ul>
+<p>Nous avons ensuite créé le répertoire du projet dans notre dossier personnel :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/info_indus/info_indus_tutorial
+</pre></div>
+</div>
+<p>Nous avons nommé ce projet <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code>.</p>
+<p>Puis, nous nous sommes placés dans le répertoire du projet :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="configuration-de-vs-code">
+<h2>Configuration de VS Code<a class="headerlink" href="#configuration-de-vs-code" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons utilisé <strong>Visual Studio Code</strong> comme éditeur de code.</p>
+<section id="creation-des-fichiers-de-configuration">
+<h3>Création des fichiers de configuration<a class="headerlink" href="#creation-des-fichiers-de-configuration" title="Lien vers cette rubrique"></a></h3>
+<p>Nous avons créé un dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> à la racine du projet, ainsi qu’un fichier
+<code class="docutils literal notranslate"><span class="pre">settings.json</span></code> vide :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>.vscode
+touch<span class="w"> </span>.vscode/settings.json
+</pre></div>
+</div>
+<p>Nous avons également créé un fichier <code class="docutils literal notranslate"><span class="pre">keybindings.json</span></code> dans le dossier de
+configuration utilisateur de VS Code :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/.config/Code/User
+touch<span class="w"> </span>keybindings.json
+</pre></div>
+</div>
+<p>—</p>
+</section>
+</section>
+<section id="ouverture-du-projet-dans-vs-code">
+<h2>Ouverture du projet dans VS Code<a class="headerlink" href="#ouverture-du-projet-dans-vs-code" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons ouvert le projet dans VS Code avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Nous avons ensuite complété le fichier <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> afin d’améliorer
+le formatage automatique et le confort d’édition.</p>
+<p>—</p>
+</section>
+<section id="configuration-des-raccourcis-clavier">
+<h2>Configuration des raccourcis clavier<a class="headerlink" href="#configuration-des-raccourcis-clavier" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons modifié les raccourcis clavier afin d’éviter certaines erreurs
+de manipulation et de corriger un bug lié à l’extension Sphinx.</p>
+<p>Après modification, nous avons rechargé VS Code via :</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Developer:</span> <span class="pre">Reload</span> <span class="pre">Window</span></code></p></li>
+</ul>
+<p>—</p>
+</section>
+<section id="installation-des-extensions-vs-code">
+<h2>Installation des extensions VS Code<a class="headerlink" href="#installation-des-extensions-vs-code" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons installé plusieurs extensions afin de faciliter le développement,
+la documentation et l’utilisation de ROS 2.</p>
+<section id="edition-de-code">
+<h3>Édition de code<a class="headerlink" href="#edition-de-code" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p><strong>Gremlins Tracker</strong>
+Permet de visualiser les caractères invisibles.</p></li>
+</ul>
+</section>
+<section id="git">
+<h3>Git<a class="headerlink" href="#git" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p><strong>Git Graph</strong>
+Permet de visualiser l’historique Git.</p></li>
+</ul>
+</section>
+<section id="python">
+<h3>Python<a class="headerlink" href="#python" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p><strong>Python</strong></p></li>
+<li><p><strong>Python Debugger</strong></p></li>
+</ul>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p><strong>Esbonio</strong>
+Permet l’édition et l’aperçu des fichiers Sphinx.</p></li>
+</ul>
+</section>
+<section id="ros-2">
+<h3>ROS 2<a class="headerlink" href="#ros-2" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p><strong>ROS 2</strong></p></li>
+<li><p><strong>ROS 2 Ament Task Provider</strong></p></li>
+<li><p><strong>Uncrustify</strong></p></li>
+</ul>
+</section>
+<section id="assistant-ia">
+<h3>Assistant IA<a class="headerlink" href="#assistant-ia" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p><strong>GitHub Copilot</strong></p></li>
+</ul>
+<p>Ces extensions nous ont permis d’améliorer la productivité
+et la qualité du code et de la documentation.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Informatique industrielle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="../01_description_des_elements_maquette/description_maquette.html" class="btn btn-neutral float-right" title="Décrire la plateforme mécanique" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, melanie.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

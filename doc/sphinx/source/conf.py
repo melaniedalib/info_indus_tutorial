@@ -20,23 +20,14 @@ author = 'melanie'
 # ones.
 
 extensions = [
-
     "sphinx.ext.graphviz",
-
     "sphinx.ext.ifconfig",
-
     "sphinx.ext.intersphinx",
-
     "sphinx_copybutton",
-
     "sphinx_tabs.tabs",
-
     "sphinx_rtd_theme",
-
     "myst_parser",
-
     "sphinx_design",
-
 ]
 
 

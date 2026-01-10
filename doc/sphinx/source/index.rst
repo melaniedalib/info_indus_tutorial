@@ -11,7 +11,7 @@ Add your content using ``reStructuredText`` syntax. See the
 documentation for details.
 
 Hello World !
-coucou
+coucou groupe Boliton
 
 .. toctree::
    :maxdepth: 2

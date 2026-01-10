@@ -19,7 +19,7 @@ Voici une image de la maquette :
 
 Le projet consiste à :
 
-#. Décrire la plateforme mécanique
+#. :doc:`Décrire la plateforme mécanique <01_description_des_elements_maquette/description_maquette>`
 #. Décrire le matériel électronique, la carte Dynamixel avec des liens vers les documentations techniques (datasheets)
 #. Créer la représentation mécanique du pantographe dans un fichier URDF
 #. Visualiser le résultat avec RViz

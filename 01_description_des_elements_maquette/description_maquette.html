@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="fr" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Décrire la plateforme mécanique &mdash; Documentation Dm_info_indus__tutorial </title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=fdcf8bf8" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=d1a510d7"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=30646c52"></script>
+      <script src="../_static/translations.js?v=e6b791cb"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="prev" title="Informatique industrielle" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Dm_info_indus__tutorial
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Rechercher docs" aria-label="Rechercher docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Décrire la plateforme mécanique</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#descriptions-des-elements">Descriptions des éléments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#servomoteur-ax-12a-dynamixel">Servomoteur AX-12A (Dynamixel)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fonction-principale">1. Fonction principale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#particularite-intelligente">2. Particularité « intelligente »</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#modes-de-fonctionnement">3. Modes de fonctionnement</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#avantages">4. Avantages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exemple-dutilisation">5. Exemple d’utilisation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#convertisseur-dinterface-u2d2">Convertisseur d’interface U2D2</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">1. Fonction principale</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#role-technique">2. Rôle technique</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#schema-typique-de-connexion">3. Schéma typique de connexion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">4. Avantages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#tests-et-installation-logicielle">Tests et installation logicielle</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#commandes-ros">Commandes ROS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recuperation-de-la-position-des-moteurs-ax-12a">Récupération de la position des moteurs (AX-12A)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation-de-la-bibliotheque">Installation de la bibliothèque</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#test-de-communication-python">Test de communication Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#interpretation-de-la-position-angulaire">Interprétation de la position angulaire</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Dm_info_indus__tutorial</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Décrire la plateforme mécanique</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/01_description_des_elements_maquette/description_maquette.rst.txt" rel="nofollow"> Afficher la source de la page</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="decrire-la-plateforme-mecanique">
+<h1>Décrire la plateforme mécanique<a class="headerlink" href="#decrire-la-plateforme-mecanique" title="Lien vers cette rubrique"></a></h1>
+<nav class="contents local" id="table-des-matieres">
+<p class="topic-title">Table des matières</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#descriptions-des-elements" id="id3">Descriptions des éléments</a></p>
+<ul>
+<li><p><a class="reference internal" href="#servomoteur-ax-12a-dynamixel" id="id4">Servomoteur AX-12A (Dynamixel)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#fonction-principale" id="id5">1. Fonction principale</a></p></li>
+<li><p><a class="reference internal" href="#particularite-intelligente" id="id6">2. Particularité « intelligente »</a></p></li>
+<li><p><a class="reference internal" href="#modes-de-fonctionnement" id="id7">3. Modes de fonctionnement</a></p></li>
+<li><p><a class="reference internal" href="#avantages" id="id8">4. Avantages</a></p></li>
+<li><p><a class="reference internal" href="#exemple-dutilisation" id="id9">5. Exemple d’utilisation</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#convertisseur-dinterface-u2d2" id="id10">Convertisseur d’interface U2D2</a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id11">1. Fonction principale</a></p></li>
+<li><p><a class="reference internal" href="#role-technique" id="id12">2. Rôle technique</a></p></li>
+<li><p><a class="reference internal" href="#schema-typique-de-connexion" id="id13">3. Schéma typique de connexion</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id14">4. Avantages</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#tests-et-installation-logicielle" id="id15">Tests et installation logicielle</a></p>
+<ul>
+<li><p><a class="reference internal" href="#commandes-ros" id="id16">Commandes ROS</a></p></li>
+<li><p><a class="reference internal" href="#recuperation-de-la-position-des-moteurs-ax-12a" id="id17">Récupération de la position des moteurs (AX-12A)</a></p>
+<ul>
+<li><p><a class="reference internal" href="#installation-de-la-bibliotheque" id="id18">Installation de la bibliothèque</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#test-de-communication-python" id="id19">Test de communication Python</a></p></li>
+<li><p><a class="reference internal" href="#interpretation-de-la-position-angulaire" id="id20">Interprétation de la position angulaire</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="descriptions-des-elements">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Descriptions des éléments</a><a class="headerlink" href="#descriptions-des-elements" title="Lien vers cette rubrique"></a></h2>
+<section id="servomoteur-ax-12a-dynamixel">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Servomoteur AX-12A (Dynamixel)</a><a class="headerlink" href="#servomoteur-ax-12a-dynamixel" title="Lien vers cette rubrique"></a></h3>
+<p>Un <strong>Dynamixel</strong> est un type de servo-moteur intelligent développé par la société <strong>ROBOTIS</strong>,
+largement utilisé en robotique (recherche, robots humanoïdes, bras robotiques, etc.).</p>
+<section id="fonction-principale">
+<h4><a class="toc-backref" href="#id5" role="doc-backlink">1. Fonction principale</a><a class="headerlink" href="#fonction-principale" title="Lien vers cette rubrique"></a></h4>
+<p>Le Dynamixel sert à générer un mouvement précis et contrôlé. Il peut être utilisé pour :</p>
+<ul class="simple">
+<li><p>Articuler un bras robotique</p></li>
+<li><p>Contrôler les jambes ou articulations d’un robot humanoïde</p></li>
+<li><p>Piloter des mécanismes orientables (caméra, capteur, plateforme)</p></li>
+</ul>
+</section>
+<section id="particularite-intelligente">
+<h4><a class="toc-backref" href="#id6" role="doc-backlink">2. Particularité « intelligente »</a><a class="headerlink" href="#particularite-intelligente" title="Lien vers cette rubrique"></a></h4>
+<p>Contrairement à un servo standard, un Dynamixel contient :</p>
+<ul class="simple">
+<li><p>Un microcontrôleur interne</p></li>
+<li><p>Un capteur de position (encodeur)</p></li>
+<li><p>Des capteurs de courant, tension et température</p></li>
+<li><p>Une interface de communication numérique (TTL, RS-485 ou CAN)</p></li>
+</ul>
+<p>Ces éléments permettent au moteur :</p>
+<ul class="simple">
+<li><p>De recevoir des ordres numériques (ex. : aller à 90°)</p></li>
+<li><p>De renvoyer des informations (position, effort, température)</p></li>
+<li><p>D’être chaîné avec d’autres Dynamixels sur une seule ligne de communication</p></li>
+</ul>
+</section>
+<section id="modes-de-fonctionnement">
+<h4><a class="toc-backref" href="#id7" role="doc-backlink">3. Modes de fonctionnement</a><a class="headerlink" href="#modes-de-fonctionnement" title="Lien vers cette rubrique"></a></h4>
+<p>Selon le modèle, un Dynamixel peut fonctionner en :</p>
+<ul class="simple">
+<li><p><strong>Position Control Mode</strong></p></li>
+<li><p><strong>Velocity Control Mode</strong></p></li>
+<li><p><strong>Current (Torque) Control Mode</strong></p></li>
+<li><p><strong>PWM Mode</strong></p></li>
+<li><p><strong>Extended Position Mode</strong></p></li>
+</ul>
+</section>
+<section id="avantages">
+<h4><a class="toc-backref" href="#id8" role="doc-backlink">4. Avantages</a><a class="headerlink" href="#avantages" title="Lien vers cette rubrique"></a></h4>
+<ul class="simple">
+<li><p>Haute précision avec retour d’état</p></li>
+<li><p>Communication série simplifiée (bus)</p></li>
+<li><p>Compatible avec ROS, MATLAB, Arduino, Raspberry Pi</p></li>
+<li><p>Grande fiabilité mécanique</p></li>
+</ul>
+</section>
+<section id="exemple-dutilisation">
+<h4><a class="toc-backref" href="#id9" role="doc-backlink">5. Exemple d’utilisation</a><a class="headerlink" href="#exemple-dutilisation" title="Lien vers cette rubrique"></a></h4>
+<p>Un Dynamixel MX-28 peut être utilisé dans un bras robotique à 6 axes.
+Chaque axe reçoit une consigne via un contrôleur (ROS, MATLAB) et renvoie sa position réelle
+pour la boucle de rétroaction.</p>
+<p>—</p>
+</section>
+</section>
+<section id="convertisseur-dinterface-u2d2">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Convertisseur d’interface U2D2</a><a class="headerlink" href="#convertisseur-dinterface-u2d2" title="Lien vers cette rubrique"></a></h3>
+<section id="id1">
+<h4><a class="toc-backref" href="#id11" role="doc-backlink">1. Fonction principale</a><a class="headerlink" href="#id1" title="Lien vers cette rubrique"></a></h4>
+<p>Le <strong>U2D2 (USB to Dynamixel 2)</strong> est un convertisseur d’interface permettant de relier
+un ordinateur ou une carte contrôleur à un ou plusieurs moteurs Dynamixel.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PC / Raspberry Pi / Arduino ⇄ U2D2 ⇄ Dynamixel(s)
+</pre></div>
+</div>
+<p>Il convertit les signaux USB en signaux série TTL ou RS-485.</p>
+</section>
+<section id="role-technique">
+<h4><a class="toc-backref" href="#id12" role="doc-backlink">2. Rôle technique</a><a class="headerlink" href="#role-technique" title="Lien vers cette rubrique"></a></h4>
+<ul class="simple">
+<li><p>Conversion de protocole :
+- USB → TTL (AX, XL, XM-T)
+- USB → RS-485 (XM-R, XH, PRO)</p></li>
+<li><p>Le U2D2 ne fournit <strong>pas</strong> l’alimentation moteur</p></li>
+<li><p>L’alimentation est externe (Power Hub recommandé)</p></li>
+</ul>
+</section>
+<section id="schema-typique-de-connexion">
+<h4><a class="toc-backref" href="#id13" role="doc-backlink">3. Schéma typique de connexion</a><a class="headerlink" href="#schema-typique-de-connexion" title="Lien vers cette rubrique"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">PC</span> <span class="o">/</span> <span class="n">MATLAB</span> <span class="o">/</span> <span class="n">ROS</span><span class="p">]</span>
+         <span class="o">|</span>
+        <span class="n">USB</span>
+         <span class="o">|</span>
+       <span class="p">[</span><span class="n">U2D2</span><span class="p">]</span>
+         <span class="o">|</span>
+<span class="p">[</span><span class="n">Dynamixel</span> <span class="c1">#1] ↔ [Dynamixel #2] ↔ ... ↔ [Dynamixel #n]</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4><a class="toc-backref" href="#id14" role="doc-backlink">4. Avantages</a><a class="headerlink" href="#id2" title="Lien vers cette rubrique"></a></h4>
+<ul class="simple">
+<li><p>Plug &amp; play</p></li>
+<li><p>Compatible avec tous les logiciels ROBOTIS</p></li>
+<li><p>Fonctionne avec ROS, MATLAB, Python, C++</p></li>
+<li><p>Diagnostic et mise à jour firmware possibles</p></li>
+</ul>
+<p>—</p>
+</section>
+</section>
+</section>
+<section id="tests-et-installation-logicielle">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Tests et installation logicielle</a><a class="headerlink" href="#tests-et-installation-logicielle" title="Lien vers cette rubrique"></a></h2>
+<section id="commandes-ros">
+<h3><a class="toc-backref" href="#id16" role="doc-backlink">Commandes ROS</a><a class="headerlink" href="#commandes-ros" title="Lien vers cette rubrique"></a></h3>
+<p>Initialisation de l’environnement ROS 2 :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.sh
+</pre></div>
+</div>
+<p>Vérification de la version ROS :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>show<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-ros-core
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="recuperation-de-la-position-des-moteurs-ax-12a">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Récupération de la position des moteurs (AX-12A)</a><a class="headerlink" href="#recuperation-de-la-position-des-moteurs-ax-12a" title="Lien vers cette rubrique"></a></h3>
+<p>Pour les servos AX-12A, la position actuelle se lit à l’adresse <strong>36</strong>.</p>
+<section id="installation-de-la-bibliotheque">
+<h4><a class="toc-backref" href="#id18" role="doc-backlink">Installation de la bibliothèque</a><a class="headerlink" href="#installation-de-la-bibliotheque" title="Lien vers cette rubrique"></a></h4>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
+pip<span class="w"> </span>install<span class="w"> </span>dynamixel-sdk
+</pre></div>
+</div>
+<p>Vérification du port série :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/dev/ttyUSB*
+</pre></div>
+</div>
+<p>—</p>
+</section>
+</section>
+<section id="test-de-communication-python">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Test de communication Python</a><a class="headerlink" href="#test-de-communication-python" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynamixel_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">DEVICENAME</span> <span class="o">=</span> <span class="s1">&#39;/dev/ttyUSB0&#39;</span>
+<span class="n">BAUDRATE</span> <span class="o">=</span> <span class="mi">57600</span>
+<span class="n">PROTOCOL_VERSION</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">DXL_ID</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ADDR_PRESENT_POSITION</span> <span class="o">=</span> <span class="mi">36</span>
+
+<span class="n">portHandler</span> <span class="o">=</span> <span class="n">PortHandler</span><span class="p">(</span><span class="n">DEVICENAME</span><span class="p">)</span>
+<span class="n">packetHandler</span> <span class="o">=</span> <span class="n">PacketHandler</span><span class="p">(</span><span class="n">PROTOCOL_VERSION</span><span class="p">)</span>
+
+<span class="n">portHandler</span><span class="o">.</span><span class="n">openPort</span><span class="p">()</span>
+<span class="n">portHandler</span><span class="o">.</span><span class="n">setBaudRate</span><span class="p">(</span><span class="n">BAUDRATE</span><span class="p">)</span>
+
+<span class="n">pos</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">packetHandler</span><span class="o">.</span><span class="n">read2ByteTxRx</span><span class="p">(</span>
+    <span class="n">portHandler</span><span class="p">,</span> <span class="n">DXL_ID</span><span class="p">,</span> <span class="n">ADDR_PRESENT_POSITION</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position actuelle : </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="interpretation-de-la-position-angulaire">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Interprétation de la position angulaire</a><a class="headerlink" href="#interpretation-de-la-position-angulaire" title="Lien vers cette rubrique"></a></h3>
+<ul class="simple">
+<li><p>0   → 0°</p></li>
+<li><p>512 → ~150°</p></li>
+<li><p>1023 → ~300°</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Le débattement angulaire maximal est de <strong>300°</strong>.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Informatique industrielle" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, melanie.</p>
+  </div>
+
+  Compilé avec <a href="https://www.sphinx-doc.org/">Sphinx</a> en utilisant un
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">thème</a>
+    fourni par <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

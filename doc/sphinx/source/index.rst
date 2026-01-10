@@ -6,7 +6,7 @@
 Informatique industrielle
 =====================================
 
-Ce projet a été réalisé par Bonnet Gaëtan, Dalibard Mélanie et Luton Philémon dans le cadre du cours d’informatique industrielle de l’année 2025/2026 en MIQ5.
+Ce projet a été réalisé par Bonnet Gaëtan, Dalibard Mélanie et Luton Philémon dans le cadre du cours d'informatique industrielle de l’année 2025/2026 en MIQ5.
 
 L'objectif de cette page internet est d'expliquer le fonctionnement de la plateforme robotique « pantographe » avec ROS2 sur une Raspberry Pi (PI5) et de documenter le projet.
 
@@ -36,3 +36,5 @@ Le rendu attendu est un site web correspondant à un fork du site internet de M.
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+
+   01_description_des_elements_maquette/description_maquette

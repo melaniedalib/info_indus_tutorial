@@ -11,6 +11,7 @@ Add your content using ``reStructuredText`` syntax. See the
 documentation for details.
 
 Hello World !
+coucou
 
 .. toctree::
    :maxdepth: 2

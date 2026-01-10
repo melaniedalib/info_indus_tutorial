@@ -72,6 +72,15 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#introduction-au-versionning-avec-git">Introduction au versionning avec Git</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#presentation-de-git">Présentation de Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#initialisation-du-depot-git">Initialisation du dépôt Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verification-de-letat-du-depot">Vérification de l’état du dépôt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ajout-des-fichiers-au-depot">Ajout des fichiers au dépôt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-du-premier-commit">Création du premier commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#consultation-de-lhistorique">Consultation de l’historique</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/description_maquette.html">Décrire la plateforme mécanique</a></li>
 </ul>
 
@@ -220,6 +229,96 @@ Permet l’édition et l’aperçu des fichiers Sphinx.</p></li>
 <p>Ces extensions nous ont permis d’améliorer la productivité
 et la qualité du code et de la documentation.</p>
 </section>
+</section>
+</section>
+<section id="introduction-au-versionning-avec-git">
+<h1>Introduction au versionning avec Git<a class="headerlink" href="#introduction-au-versionning-avec-git" title="Lien vers cette rubrique"></a></h1>
+<section id="presentation-de-git">
+<h2>Présentation de Git<a class="headerlink" href="#presentation-de-git" title="Lien vers cette rubrique"></a></h2>
+<p>Git est un logiciel de gestion de versions décentralisé.
+Nous l’avons utilisé pour suivre l’évolution du projet
+et conserver un historique clair des modifications.</p>
+<p>Git fonctionne principalement en ligne de commande,
+ce qui permet une meilleure compréhension de son fonctionnement.</p>
+<p>—</p>
+</section>
+<section id="initialisation-du-depot-git">
+<h2>Initialisation du dépôt Git<a class="headerlink" href="#initialisation-du-depot-git" title="Lien vers cette rubrique"></a></h2>
+<p>Nous nous sommes placés à la racine du projet :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial
+</pre></div>
+</div>
+<p>Nous avons initialisé un dépôt Git avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>init
+</pre></div>
+</div>
+<p>Cette commande a créé un répertoire caché <code class="docutils literal notranslate"><span class="pre">.git</span></code> contenant
+toutes les informations nécessaires au suivi des versions du projet.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Le répertoire <code class="docutils literal notranslate"><span class="pre">.git</span></code> ne doit jamais être modifié ou supprimé,
+sous peine de corrompre le dépôt.</p>
+</div>
+<p>—</p>
+</section>
+<section id="verification-de-letat-du-depot">
+<h2>Vérification de l’état du dépôt<a class="headerlink" href="#verification-de-letat-du-depot" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons vérifié l’état du dépôt avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
+</pre></div>
+</div>
+<p>Nous avons constaté que le répertoire <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> apparaissait
+comme non suivi par Git.</p>
+<p>Cette commande est utilisée régulièrement afin de vérifier
+l’état des fichiers du projet.</p>
+<p>—</p>
+</section>
+<section id="ajout-des-fichiers-au-depot">
+<h2>Ajout des fichiers au dépôt<a class="headerlink" href="#ajout-des-fichiers-au-depot" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons ajouté le répertoire <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> au suivi Git :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.vscode
+</pre></div>
+</div>
+<p>Nous avons ensuite vérifié l’état du dépôt :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
+</pre></div>
+</div>
+<p>Les fichiers sont désormais suivis par Git,
+mais pas encore enregistrés dans l’historique.</p>
+<p>—</p>
+</section>
+<section id="creation-du-premier-commit">
+<h2>Création du premier commit<a class="headerlink" href="#creation-du-premier-commit" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons enregistré les modifications avec un premier commit :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit&quot;</span>
+</pre></div>
+</div>
+<p>Git nous a demandé de configurer notre identité utilisateur.
+Nous avons renseigné notre nom et notre adresse e-mail :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;prenom.nom@insa-strasbourg.fr&quot;</span>
+git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Prénom NOM&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Nous n’avons pas utilisé l’option <code class="docutils literal notranslate"><span class="pre">--global</span></code> afin de ne pas
+modifier la configuration Git pour tous les projets de la machine.</p>
+</div>
+<p>Après cette configuration, nous avons relancé la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit&quot;</span>
+</pre></div>
+</div>
+<p>Ce commit a permis d’enregistrer l’état initial du projet.</p>
+<p>—</p>
+</section>
+<section id="consultation-de-lhistorique">
+<h2>Consultation de l’historique<a class="headerlink" href="#consultation-de-lhistorique" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons consulté l’historique des commits avec la commande :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log
+</pre></div>
+</div>
+<p>Cette commande affiche la liste des commits effectués,
+avec leur identifiant, leur auteur et leur date.</p>
 </section>
 </section>
 

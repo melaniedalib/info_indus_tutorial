@@ -12,8 +12,8 @@ Introduction
 ------------
 Nous avons créé ce site web afin de documenter le projet de pantographe et de présenter les étapes de conception, de simulation et de contrôle sous ROS 2. Le site repose sur **Sphinx** et est hébergé via **GitHub Pages**.
 
-Création du projet
-------------------
+Création du dossier
+-------------------
 Nous avons ouvert un terminal sous Ubuntu avec le raccourci ``Ctrl + Alt + T`` puis créé le répertoire du projet :
 
 .. code-block:: bash
@@ -31,7 +31,7 @@ Configuration de VS Code
 Nous avons utilisé **Visual Studio Code** comme éditeur principal.
 
 Création des fichiers de configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------
 Nous avons créé le dossier ``.vscode`` et le fichier ``settings.json`` :
 
 .. code-block:: bash
@@ -71,15 +71,15 @@ Nous avons modifié les raccourcis clavier afin d’éviter des erreurs de manip
 Nous avons ensuite rechargé VS Code via ``Ctrl + Shift + P`` puis ``Developer: Reload Window``.
 
 Installation des extensions
----------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Nous avons installé les extensions nécessaires au développement, à la documentation et à ROS 2 : Gremlins Tracker, Git Graph, Python, Python Debugger, Esbonio, ROS 2, ROS 2 Ament Task Provider, Uncrustify et GitHub Copilot. Ces extensions ont amélioré la productivité et la qualité de la documentation.
 
 Introduction au versionnement avec Git
---------------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Nous avons utilisé **Git** afin de suivre l’évolution du projet et conserver un historique clair des modifications.
 
 Initialisation du dépôt
-^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------
 Nous nous sommes placés à la racine du projet et avons initialisé le dépôt Git :
 
 .. code-block:: bash
@@ -90,7 +90,7 @@ Nous nous sommes placés à la racine du projet et avons initialisé le dépôt 
 Cette commande a créé le répertoire caché ``.git`` contenant l’historique du projet.
 
 Vérification de l’état du dépôt
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-------------------------------
 Nous avons vérifié l’état du dépôt avec :
 
 .. code-block:: bash
@@ -100,7 +100,7 @@ Nous avons vérifié l’état du dépôt avec :
 Le dossier ``.vscode`` apparaissait comme non suivi.
 
 Ajout des fichiers
-^^^^^^^^^^^^^^^^^^
+------------------
 Nous avons ajouté le dossier ``.vscode`` au suivi Git :
 
 .. code-block:: bash
@@ -109,7 +109,7 @@ Nous avons ajouté le dossier ``.vscode`` au suivi Git :
    git status
 
 Création du premier commit
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------
 Nous avons créé un premier commit :
 
 .. code-block:: bash
@@ -133,7 +133,7 @@ Nous avons ensuite relancé la commande de commit :
    git commit -m "First commit"
 
 Consultation de l’historique
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+----------------------------
 Nous avons consulté l’historique des commits avec :
 
 .. code-block:: bash
@@ -141,7 +141,7 @@ Nous avons consulté l’historique des commits avec :
    git log
 
 Création d’une première documentation Sphinx
-============================================
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 Installation de Sphinx
 ----------------------
 Nous avons installé Sphinx :
@@ -209,7 +209,7 @@ Nous avons ajouté la documentation au dépôt Git et effectué un commit :
    git commit -m "First commit of the documentation"
 
 Publication sur GitHub
-=====================
+^^^^^^^^^^^^^^^^^^^^^^
 Nous avons créé un dépôt GitHub public et configuré une clé SSH afin de pouvoir pousser le projet. Nous avons ensuite ajouté le dépôt distant, renommé la branche principale en ``rolling`` et poussé le code sur GitHub.
 
 Nous avons mis en place une **GitHub Action** permettant de générer et publier automatiquement la documentation à chaque modification. La documentation est ainsi mise à jour en temps réel via GitHub Pages.

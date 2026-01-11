@@ -27,3 +27,31 @@ pre {
     display: block;
     /* Ensure the element takes up full width */
 }
+
+
+/* Reduce space below titles */
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.3em;  /* default ~0.8–1em */
+}
+
+/* Reduce space above titles */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0.8em;
+}
+
+/* Reduce space after titles when followed by text */
+h1 + p,
+h2 + p,
+h3 + p,
+h4 + p,
+h5 + p,
+h6 + p {
+    margin-top: 0.3em;
+}
+
+/* Reduce space around code blocks */
+pre,
+div.highlight {
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+}

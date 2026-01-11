@@ -13,7 +13,15 @@ I. Équation reliant le point A3 et :math:`q_1` et :math:`q_2`
 -------------------------------------------------------------
 
 On choisit la mise en donnée suivante : on prend la base 0 comme origine du repère au
-point :math:`A_1`. Nous faisons deux fermetures géométriques :
+point :math:`A_1`. 
+
+.. figure:: ../images/mecanisme.png
+   :alt: Documentation technique du servomoteur AX-12A
+   :width: 400px
+   :align: center
+
+
+Nous faisons deux fermetures géométriques :
 
 .. math::
 
@@ -94,6 +102,11 @@ II. Vérifier ces équations en utilisant le modèle géométrique direct
 En traçant :math:`y` et les deux solutions pour :math:`x`, on peut obtenir tous les points atteignables avec
 le mécanisme. Ainsi il est possible de comparer si le modèle est correct en
 déplaçant manuellement l’effecteur dans l’espace.
+
+.. figure:: ../images/position_atteinte.png
+   :alt: Documentation technique du servomoteur AX-12A
+   :width: 400px
+   :align: center
 
 On balaye les angles :math:`q_1` et :math:`q_4` afin d’obtenir toute la zone accessible par l’effecteur.
 
@@ -207,11 +220,16 @@ Code Python :
     launch_gui()
 
 III. Utiliser le MGI afin d’avoir :math:`(q_1, q_2) = f(X_{A3}, Y_{A3})`
------------------------------------------------------------------------
+------------------------------------------------------------------------
 
 Maintenant que le modèle est vérifié, on peut passer au modèle indirect. Le code suivant
 permet de tracer les positions possibles du système. Il faut entrer les coordonnées du
 point :math:`A3` souhaité. Si le point n’est pas atteignable, le code renverra une erreur.
+
+.. figure:: ../images/config_mecanisme.png
+   :alt: Documentation technique du servomoteur AX-12A
+   :width: 400px
+   :align: center
 
 .. code-block:: python
 

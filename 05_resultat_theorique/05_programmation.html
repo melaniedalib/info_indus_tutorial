@@ -104,7 +104,12 @@ cet objectif, nous allons :</p>
 <section id="i-equation-reliant-le-point-a3-et-q-1-et-q-2">
 <h2>I. Équation reliant le point A3 et <span class="math notranslate nohighlight">\(q_1\)</span> et <span class="math notranslate nohighlight">\(q_2\)</span><a class="headerlink" href="#i-equation-reliant-le-point-a3-et-q-1-et-q-2" title="Lien vers cette rubrique"></a></h2>
 <p>On choisit la mise en donnée suivante : on prend la base 0 comme origine du repère au
-point <span class="math notranslate nohighlight">\(A_1\)</span>. Nous faisons deux fermetures géométriques :</p>
+point <span class="math notranslate nohighlight">\(A_1\)</span>.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/mecanisme.png"><img alt="Documentation technique du servomoteur AX-12A" src="../_images/mecanisme.png" style="width: 400px;" />
+</a>
+</figure>
+<p>Nous faisons deux fermetures géométriques :</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\vec{A_1A_2} + \vec{A_2A_3} + \vec{A_3A_4} + \vec{A_4A_5} + \vec{A_5A_1} = \vec{0} \\
 \vec{A_1A_2} + \vec{A_2A_3} = x + y\end{split}\]</div>
@@ -152,6 +157,10 @@ y = -\alpha x + \beta\end{split}\]</div>
 <p>En traçant <span class="math notranslate nohighlight">\(y\)</span> et les deux solutions pour <span class="math notranslate nohighlight">\(x\)</span>, on peut obtenir tous les points atteignables avec
 le mécanisme. Ainsi il est possible de comparer si le modèle est correct en
 déplaçant manuellement l’effecteur dans l’espace.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/position_atteinte.png"><img alt="Documentation technique du servomoteur AX-12A" src="../_images/position_atteinte.png" style="width: 400px;" />
+</a>
+</figure>
 <p>On balaye les angles <span class="math notranslate nohighlight">\(q_1\)</span> et <span class="math notranslate nohighlight">\(q_4\)</span> afin d’obtenir toute la zone accessible par l’effecteur.</p>
 <p>Code Python :</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -266,6 +275,10 @@ déplaçant manuellement l’effecteur dans l’espace.</p>
 <p>Maintenant que le modèle est vérifié, on peut passer au modèle indirect. Le code suivant
 permet de tracer les positions possibles du système. Il faut entrer les coordonnées du
 point <span class="math notranslate nohighlight">\(A3\)</span> souhaité. Si le point n’est pas atteignable, le code renverra une erreur.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/config_mecanisme.png"><img alt="Documentation technique du servomoteur AX-12A" src="../_images/config_mecanisme.png" style="width: 400px;" />
+</a>
+</figure>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 

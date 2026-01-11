@@ -59,35 +59,27 @@
 <li class="toctree-l3"><a class="reference internal" href="#creation-des-fichiers-de-configuration">Création des fichiers de configuration</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#ouverture-du-projet-dans-vs-code">Ouverture du projet dans VS Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ouverture-du-projet">Ouverture du projet</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#configuration-des-raccourcis-clavier">Configuration des raccourcis clavier</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-des-extensions-vs-code">Installation des extensions VS Code</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#introduction-au-versionning-avec-git">Introduction au versionning avec Git</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#presentation-de-git">Présentation de Git</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#initialisation-du-depot-git">Initialisation du dépôt Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation-des-extensions">Installation des extensions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#introduction-au-versionnement-avec-git">Introduction au versionnement avec Git</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#initialisation-du-depot">Initialisation du dépôt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#verification-de-letat-du-depot">Vérification de l’état du dépôt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ajout-des-fichiers-au-depot">Ajout des fichiers au dépôt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ajout-des-fichiers">Ajout des fichiers</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#creation-du-premier-commit">Création du premier commit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#consultation-de-lhistorique">Consultation de l’historique</a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#creation-d-une-premiere-documentation-sphinx">Création d’une première documentation sphinx</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#publier-la-documentation">Publier la documentation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#consultation-de-lhistorique">Consultation de l’historique</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="#creation-dune-premiere-documentation-sphinx">Création d’une première documentation Sphinx</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation-de-sphinx">Installation de Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-de-sphinx">Configuration de Sphinx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-de-la-documentation">Création de la documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#sauvegarde-avec-git">Sauvegarde avec Git</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#creer-un-compte-sur-github">Créer un compte sur github</a></li>
-<li class="toctree-l1"><a class="reference internal" href="#creer-un-depot-sur-github">Créer un dépôt sur github</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#creer-une-cle-ssh-et-l-ajouter-a-github">Créer une clé ssh et l’ajouter à github</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#poussez-le-projet-sur-github">Poussez le projet sur github</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#changement-de-nom-de-la-branche-principale">Changement de nom de la branche principale</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#pousser-le-code-sur-github">Pousser le code sur github</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="#creer-le-workflow-git-et-voir-la-documentation-apparaitre-sur-le-web-en-temps-reel">Créer le workflow git et voir la documentation apparaître sur le web en temps réel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#publication-sur-github">Publication sur GitHub</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/description_maquette.html">Décrire la plateforme mécanique</a></li>
 </ul>
 
@@ -120,205 +112,133 @@
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Cette partie s’inspire de la documentation fournie par <strong>M. Yguel</strong>
-dans le cadre du cours d’informatique industrielle. voir ici pour la documentation exacte.</p>
+dans le cadre du cours d’informatique industrielle. Le contenu a été
+reformulé et adapté à notre projet.</p>
 </div>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique"></a></h2>
-<p>Nous avons créé ce site web afin de documenter le projet de pantographe
-et de présenter les différentes étapes de conception, de simulation
-et de contrôle sous ROS 2.
-Le site est basé sur <strong>Sphinx</strong> et hébergé via <strong>GitHub Pages</strong>.</p>
+<p>Nous avons créé ce site web afin de documenter le projet de pantographe et de présenter les étapes de conception, de simulation et de contrôle sous ROS 2. Le site repose sur <strong>Sphinx</strong> et est hébergé via <strong>GitHub Pages</strong>.</p>
 </section>
 <section id="creation-du-projet">
 <h2>Création du projet<a class="headerlink" href="#creation-du-projet" title="Lien vers cette rubrique"></a></h2>
-<dl class="simple">
-<dt>Nous avons ouvert un terminal sous Ubuntu à l’aide du raccourci :</dt><dd><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">T</span></code></p>
-</dd>
-</dl>
-<p>Nous avons ensuite créé le répertoire du projet dans notre dossier personnel :</p>
+<p>Nous avons ouvert un terminal sous Ubuntu avec le raccourci <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">T</span></code> puis créé le répertoire du projet :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/info_indus/info_indus_tutorial
 </pre></div>
 </div>
-<p>Nous avons nommé ce projet <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code>.</p>
-<p>Puis, nous nous sommes placés dans le répertoire du projet :</p>
+<p>Nous avons nommé le projet <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code> puis nous nous sommes placés dans ce répertoire :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial
 </pre></div>
 </div>
 </section>
 <section id="configuration-de-vs-code">
 <h2>Configuration de VS Code<a class="headerlink" href="#configuration-de-vs-code" title="Lien vers cette rubrique"></a></h2>
-<p>Nous avons utilisé <strong>Visual Studio Code</strong> comme éditeur de code.</p>
+<p>Nous avons utilisé <strong>Visual Studio Code</strong> comme éditeur principal.</p>
 <section id="creation-des-fichiers-de-configuration">
 <h3>Création des fichiers de configuration<a class="headerlink" href="#creation-des-fichiers-de-configuration" title="Lien vers cette rubrique"></a></h3>
-<p>Nous avons créé un dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> à la racine du projet, ainsi qu’un fichier
-<code class="docutils literal notranslate"><span class="pre">settings.json</span></code> vide :</p>
+<p>Nous avons créé le dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> et le fichier <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>.vscode
 touch<span class="w"> </span>.vscode/settings.json
 </pre></div>
 </div>
-<p>Nous avons également créé un fichier <code class="docutils literal notranslate"><span class="pre">keybindings.json</span></code> dans le dossier de
-configuration utilisateur de VS Code :</p>
+<p>Nous avons également créé le fichier <code class="docutils literal notranslate"><span class="pre">keybindings.json</span></code> dans le dossier utilisateur de VS Code :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/.config/Code/User
 touch<span class="w"> </span>keybindings.json
 </pre></div>
 </div>
 </section>
 </section>
-<section id="ouverture-du-projet-dans-vs-code">
-<h2>Ouverture du projet dans VS Code<a class="headerlink" href="#ouverture-du-projet-dans-vs-code" title="Lien vers cette rubrique"></a></h2>
-<p>Nous avons ouvert le projet dans VS Code avec la commande :</p>
+<section id="ouverture-du-projet">
+<h2>Ouverture du projet<a class="headerlink" href="#ouverture-du-projet" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons ouvert le projet dans VS Code :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>code<span class="w"> </span>.
 </pre></div>
 </div>
-<p>Nous avons ensuite complété le fichier <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> afin d’améliorer
-le formatage automatique et le confort d’édition.</p>
+<p>Nous avons complété le fichier <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> afin d’améliorer le formatage et le confort d’édition.</p>
 </section>
 <section id="configuration-des-raccourcis-clavier">
 <h2>Configuration des raccourcis clavier<a class="headerlink" href="#configuration-des-raccourcis-clavier" title="Lien vers cette rubrique"></a></h2>
-<p>Nous avons modifié les raccourcis clavier afin d’éviter certaines erreurs
-de manipulation et de corriger un bug lié à l’extension Sphinx.</p>
-<p>Après modification, nous avons rechargé VS Code via :</p>
-<blockquote>
-<div><p><code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code>
-<code class="docutils literal notranslate"><span class="pre">Developer:</span> <span class="pre">Reload</span> <span class="pre">Window</span></code></p>
-</div></blockquote>
+<p>Nous avons modifié les raccourcis clavier afin d’éviter des erreurs de manipulation et de corriger un problème lié à l’extension Sphinx.</p>
+<p>Nous avons ensuite rechargé VS Code via <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code> puis <code class="docutils literal notranslate"><span class="pre">Developer:</span> <span class="pre">Reload</span> <span class="pre">Window</span></code>.</p>
 </section>
-<section id="installation-des-extensions-vs-code">
-<h2>Installation des extensions VS Code<a class="headerlink" href="#installation-des-extensions-vs-code" title="Lien vers cette rubrique"></a></h2>
-<p>Nous avons installé plusieurs extensions afin de faciliter le développement,
-la documentation et l’utilisation de ROS 2.</p>
-<ul class="simple">
-<li><p><strong>Gremlins Tracker</strong>
-Permet de visualiser les caractères invisibles.</p></li>
-<li><p><strong>Git Graph</strong>
-Permet de visualiser l’historique Git.</p></li>
-<li><p><strong>Python</strong></p></li>
-<li><p><strong>Python Debugger</strong></p></li>
-<li><p><strong>Esbonio</strong>
-Permet l’édition et l’aperçu des fichiers Sphinx.</p></li>
-<li><p><strong>ROS 2</strong></p></li>
-<li><p><strong>ROS 2 Ament Task Provider</strong></p></li>
-<li><p><strong>Uncrustify</strong></p></li>
-<li><p><strong>GitHub Copilot</strong></p></li>
-</ul>
-<p>Ces extensions nous ont permis d’améliorer la productivité
-et la qualité du code et de la documentation.</p>
-<p>—</p>
+<section id="installation-des-extensions">
+<h2>Installation des extensions<a class="headerlink" href="#installation-des-extensions" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons installé les extensions nécessaires au développement, à la documentation et à ROS 2 : Gremlins Tracker, Git Graph, Python, Python Debugger, Esbonio, ROS 2, ROS 2 Ament Task Provider, Uncrustify et GitHub Copilot. Ces extensions ont amélioré la productivité et la qualité de la documentation.</p>
 </section>
-<section id="introduction-au-versionning-avec-git">
-<h2>Introduction au versionning avec Git<a class="headerlink" href="#introduction-au-versionning-avec-git" title="Lien vers cette rubrique"></a></h2>
-<section id="presentation-de-git">
-<h3>Présentation de Git<a class="headerlink" href="#presentation-de-git" title="Lien vers cette rubrique"></a></h3>
-<p>Git est un logiciel de gestion de versions décentralisé.
-Nous l’avons utilisé pour suivre l’évolution du projet
-et conserver un historique clair des modifications.</p>
-<p>Git fonctionne principalement en ligne de commande,
-ce qui permet une meilleure compréhension de son fonctionnement.</p>
-</section>
-<section id="initialisation-du-depot-git">
-<h3>Initialisation du dépôt Git<a class="headerlink" href="#initialisation-du-depot-git" title="Lien vers cette rubrique"></a></h3>
-<p>Nous nous sommes placés à la racine du projet :</p>
+<section id="introduction-au-versionnement-avec-git">
+<h2>Introduction au versionnement avec Git<a class="headerlink" href="#introduction-au-versionnement-avec-git" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons utilisé <strong>Git</strong> afin de suivre l’évolution du projet et conserver un historique clair des modifications.</p>
+<section id="initialisation-du-depot">
+<h3>Initialisation du dépôt<a class="headerlink" href="#initialisation-du-depot" title="Lien vers cette rubrique"></a></h3>
+<p>Nous nous sommes placés à la racine du projet et avons initialisé le dépôt Git :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial
+git<span class="w"> </span>init
 </pre></div>
 </div>
-<p>Nous avons initialisé un dépôt Git avec la commande :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>init
-</pre></div>
-</div>
-<p>Cette commande a créé un répertoire caché <code class="docutils literal notranslate"><span class="pre">.git</span></code> contenant
-toutes les informations nécessaires au suivi des versions du projet.</p>
-<div class="admonition warning">
-<p class="admonition-title">Avertissement</p>
-<p>Le répertoire <code class="docutils literal notranslate"><span class="pre">.git</span></code> ne doit jamais être modifié ou supprimé,
-sous peine de corrompre le dépôt.</p>
-</div>
+<p>Cette commande a créé le répertoire caché <code class="docutils literal notranslate"><span class="pre">.git</span></code> contenant l’historique du projet.</p>
 </section>
 <section id="verification-de-letat-du-depot">
 <h3>Vérification de l’état du dépôt<a class="headerlink" href="#verification-de-letat-du-depot" title="Lien vers cette rubrique"></a></h3>
-<p>Nous avons vérifié l’état du dépôt avec la commande :</p>
+<p>Nous avons vérifié l’état du dépôt avec :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
 </pre></div>
 </div>
-<p>Nous avons constaté que le répertoire <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> apparaissait
-comme non suivi par Git.</p>
-<p>Cette commande est utilisée régulièrement afin de vérifier
-l’état des fichiers du projet.</p>
+<p>Le dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> apparaissait comme non suivi.</p>
 </section>
-<section id="ajout-des-fichiers-au-depot">
-<h3>Ajout des fichiers au dépôt<a class="headerlink" href="#ajout-des-fichiers-au-depot" title="Lien vers cette rubrique"></a></h3>
-<p>Nous avons ajouté le répertoire <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> au suivi Git :</p>
+<section id="ajout-des-fichiers">
+<h3>Ajout des fichiers<a class="headerlink" href="#ajout-des-fichiers" title="Lien vers cette rubrique"></a></h3>
+<p>Nous avons ajouté le dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> au suivi Git :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.vscode
+git<span class="w"> </span>status
 </pre></div>
 </div>
-<p>Nous avons ensuite vérifié l’état du dépôt :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
-</pre></div>
-</div>
-<p>Les fichiers sont désormais suivis par Git,
-mais pas encore enregistrés dans l’historique.</p>
-<p>—</p>
 </section>
 <section id="creation-du-premier-commit">
 <h3>Création du premier commit<a class="headerlink" href="#creation-du-premier-commit" title="Lien vers cette rubrique"></a></h3>
-<p>Nous avons enregistré les modifications avec un premier commit :</p>
+<p>Nous avons créé un premier commit :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit&quot;</span>
 </pre></div>
 </div>
-<p>Git nous a demandé de configurer notre identité utilisateur.
-Nous avons renseigné notre nom et notre adresse e-mail :</p>
+<p>Git a demandé une configuration utilisateur :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>config<span class="w"> </span>user.email<span class="w"> </span><span class="s2">&quot;prenom.nom@insa-strasbourg.fr&quot;</span>
 git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w"> </span><span class="s2">&quot;Prénom NOM&quot;</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Nous n’avons pas écrit notre adresse mail dans le rapport afin de ne pas divulguer nos informations personnel.</p>
+<p>Nous n’avons pas renseigné nos informations personnelles dans le rapport et n’avons pas utilisé l’option <code class="docutils literal notranslate"><span class="pre">--global</span></code>.</p>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Nous n’avons pas utilisé l’option <code class="docutils literal notranslate"><span class="pre">--global</span></code> afin de ne pas
-modifier la configuration Git pour tous les projets de la machine.</p>
-</div>
-<p>Après cette configuration, nous avons relancé la commande :</p>
+<p>Nous avons ensuite relancé la commande de commit :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit&quot;</span>
 </pre></div>
 </div>
-<p>Ce commit a permis d’enregistrer l’état initial du projet.</p>
 </section>
 <section id="consultation-de-lhistorique">
 <h3>Consultation de l’historique<a class="headerlink" href="#consultation-de-lhistorique" title="Lien vers cette rubrique"></a></h3>
-<p>Nous avons consulté l’historique des commits avec la commande :</p>
+<p>Nous avons consulté l’historique des commits avec :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log
 </pre></div>
 </div>
-<p>Cette commande affiche la liste des commits effectués,
-avec leur identifiant, leur auteur et leur date.</p>
-<section id="creation-d-une-premiere-documentation-sphinx">
-<h4>Création d’une première documentation sphinx<a class="headerlink" href="#creation-d-une-premiere-documentation-sphinx" title="Lien vers cette rubrique"></a></h4>
-<section id="installer-sphinx">
-<h5>Installer sphinx<a class="headerlink" href="#installer-sphinx" title="Lien vers cette rubrique"></a></h5>
+</section>
+</section>
+</section>
+<section id="creation-dune-premiere-documentation-sphinx">
+<h1>Création d’une première documentation Sphinx<a class="headerlink" href="#creation-dune-premiere-documentation-sphinx" title="Lien vers cette rubrique"></a></h1>
+<section id="installation-de-sphinx">
+<h2>Installation de Sphinx<a class="headerlink" href="#installation-de-sphinx" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons installé Sphinx :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-f<span class="w"> </span>python3-sphinx
 </pre></div>
 </div>
-<p>Créer un répertoire pour la documentation:</p>
+<p>Nous avons créé le répertoire de documentation :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>doc/sphinx
 </pre></div>
 </div>
-<p>Créer un fichier requirments.txt pour les dépendances de la documentation:</p>
+<p>Nous avons créé le fichier <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/requirements.txt
 </pre></div>
 </div>
-<p>Ajouter les dépendances suivantes dans le fichier <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> avec vscode:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mistune</span> <span class="o">&lt;</span> <span class="mf">1.0.0</span>
-<span class="n">myst</span><span class="o">-</span><span class="n">parser</span>
-<span class="n">sphinx</span><span class="o">-</span><span class="n">copybutton</span>
-<span class="n">sphinx</span><span class="o">-</span><span class="n">tabs</span>
-<span class="n">sphinx_rtd_theme</span>
-<span class="n">sphinx</span><span class="o">-</span><span class="n">design</span>
-</pre></div>
-</div>
-<p>Installer les dépendances:</p>
+<p>Nous avons ajouté les dépendances puis installé l’environnement virtuel :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx
 python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 <span class="nb">source</span><span class="w"> </span>.venv/bin/activate
@@ -326,452 +246,41 @@ pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </s
 </pre></div>
 </div>
 </section>
-<section id="configurer-la-documentation">
-<h5>Configurer la documentation<a class="headerlink" href="#configurer-la-documentation" title="Lien vers cette rubrique"></a></h5>
-<p>Initialiser la documentation avec les outils sphinx:</p>
+<section id="configuration-de-sphinx">
+<h2>Configuration de Sphinx<a class="headerlink" href="#configuration-de-sphinx" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons initialisé la documentation avec :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial/doc
 sphinx-quickstart<span class="w"> </span>sphinx
 </pre></div>
 </div>
-<p>Répondre aux questions posées par sphinx-quickstart.</p>
-<section id="separation-source-build">
-<h6>Séparation source/build<a class="headerlink" href="#separation-source-build" title="Lien vers cette rubrique"></a></h6>
-<p>Il est judicieux de séparer les sources du répertoire de build car du point de vue de la sauvegarde et du versionnement du projet avec git, on peut suivre tout ce qui se trouve dans le répertoire <code class="docutils literal notranslate"><span class="pre">source</span></code>.
-On ne versionne en effet pas le répertoire de build, car il contient des éléments générés automatiquement donc qui peuvent être intégralement déduits de tous les autres fichiers versionnés.
-On gagne ainsi beaucoup en quantité de données versionnées, c’est donc un gain de resources de temps de calcul et d’espace mémoire.</p>
+<p>Nous avons conservé une séparation claire entre les sources et le build afin de ne versionner que les fichiers utiles.</p>
 </section>
-<section id="nom-du-projet">
-<h6>Nom du projet<a class="headerlink" href="#nom-du-projet" title="Lien vers cette rubrique"></a></h6>
-<p>Pour le nom du projet, il faut choisir un nom le plus court possible et qui soit aussi représentatif que possible du projet et de son usage.
-Il est courant, par exemple, de préfixer une librairie python avec le préfix <code class="docutils literal notranslate"><span class="pre">py</span></code>.</p>
-<p>Pour ce projet, la règle que nous allons choisir est la suivante: utilisez les initiales des personnes de votre groupe suivi de <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code>. Par exemple, pour le groupe d” Amélie POULAIN, Jean DUPONT et Nikita TESTU, le nom du projet sera <code class="docutils literal notranslate"><span class="pre">PaDjTn_info_indus_tutorial</span></code>.</p>
-</section>
-<section id="examiner-les-fichiers-crees-par-sphinx-quickstart-du-point-de-vue-de-git">
-<h6>Examiner les fichiers créés par sphinx-quickstart du point de vue de git<a class="headerlink" href="#examiner-les-fichiers-crees-par-sphinx-quickstart-du-point-de-vue-de-git" title="Lien vers cette rubrique"></a></h6>
-<p>Regarder avec git les nouveaux fichiers créés:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
-</pre></div>
-</div>
-</section>
-<section id="editer-les-fichiers-de-configuration-de-sphinx">
-<h6>Éditer les fichiers de configuration de sphinx<a class="headerlink" href="#editer-les-fichiers-de-configuration-de-sphinx" title="Lien vers cette rubrique"></a></h6>
-<p>Modifier le fichier <code class="docutils literal notranslate"><span class="pre">conf.py</span></code>:</p>
-<ol class="arabic simple">
-<li><p>mettre-à-jour les extensions,</p></li>
-<li><p>mettre-à-jour le theme html de la documentation (<code class="code docutils literal notranslate"><span class="pre">html_theme</span></code>),</p></li>
-<li><p>donner les options pour l’extension copybutton,</p></li>
-<li><p>donner le chemin du fichier css</p></li>
-</ol>
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">Fichier de configuration de Sphinx (et oui! c’est du python)</span><a class="headerlink" href="#id1" title="Lien vers ce code"></a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">  1</span><span class="c1"># Configuration file for the Sphinx documentation builder.</span>
-<span class="linenos">  2</span><span class="c1">#</span>
-<span class="linenos">  3</span><span class="c1"># For the full list of built-in configuration values, see the documentation:</span>
-<span class="linenos">  4</span><span class="c1"># https://www.sphinx-doc.org/en/master/usage/configuration.html</span>
-<span class="linenos">  5</span>
-<span class="linenos">  6</span><span class="c1"># -- Project information -----------------------------------------------------</span>
-<span class="linenos">  7</span><span class="c1"># https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information</span>
-<span class="linenos">  8</span>
-<span class="linenos">  9</span><span class="n">project</span> <span class="o">=</span> <span class="s1">&#39;Dm_info_indus__tutorial&#39;</span>
-<span class="linenos"> 10</span><span class="n">copyright</span> <span class="o">=</span> <span class="s1">&#39;2025, melanie&#39;</span>
-<span class="linenos"> 11</span><span class="n">author</span> <span class="o">=</span> <span class="s1">&#39;melanie&#39;</span>
-<span class="linenos"> 12</span>
-<span class="linenos"> 13</span><span class="c1"># -- General configuration ---------------------------------------------------</span>
-<span class="linenos"> 14</span>
-<span class="linenos"> 15</span>
-<span class="linenos"> 16</span><span class="c1"># Add any Sphinx extension module names here, as strings. They can be</span>
-<span class="linenos"> 17</span>
-<span class="linenos"> 18</span><span class="c1"># extensions coming with Sphinx (named &#39;sphinx.ext.*&#39;) or your custom</span>
-<span class="linenos"> 19</span>
-<span class="linenos"> 20</span><span class="c1"># ones.</span>
-<span class="linenos"> 21</span>
-<span class="linenos"> 22</span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos"> 23</span>    <span class="s2">&quot;sphinx.ext.graphviz&quot;</span><span class="p">,</span>
-<span class="linenos"> 24</span>    <span class="s2">&quot;sphinx.ext.ifconfig&quot;</span><span class="p">,</span>
-<span class="linenos"> 25</span>    <span class="s2">&quot;sphinx.ext.intersphinx&quot;</span><span class="p">,</span>
-<span class="linenos"> 26</span>    <span class="s2">&quot;sphinx_copybutton&quot;</span><span class="p">,</span>
-<span class="linenos"> 27</span>    <span class="s2">&quot;sphinx_tabs.tabs&quot;</span><span class="p">,</span>
-<span class="linenos"> 28</span>    <span class="s2">&quot;sphinx_rtd_theme&quot;</span><span class="p">,</span>
-<span class="linenos"> 29</span>    <span class="s2">&quot;myst_parser&quot;</span><span class="p">,</span>
-<span class="linenos"> 30</span>    <span class="s2">&quot;sphinx_design&quot;</span><span class="p">,</span>
-<span class="linenos"> 31</span><span class="p">]</span>
-<span class="linenos"> 32</span>
-<span class="hll"><span class="linenos"> 33</span>
-</span><span class="hll"><span class="linenos"> 34</span><span class="n">myst_enable_extensions</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;colon_fence&quot;</span><span class="p">]</span>
-</span><span class="hll"><span class="linenos"> 35</span>
-</span><span class="hll"><span class="linenos"> 36</span>
-</span><span class="hll"><span class="linenos"> 37</span><span class="c1"># Add any paths that contain templates here, relative to this directory.</span>
-</span><span class="hll"><span class="linenos"> 38</span>
-</span><span class="hll"><span class="linenos"> 39</span><span class="n">templates_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_templates&#39;</span><span class="p">]</span>
-</span><span class="hll"><span class="linenos"> 40</span>
-</span><span class="hll"><span class="linenos"> 41</span>
-</span><span class="linenos"> 42</span><span class="c1"># The language for content autogenerated by Sphinx. Refer to documentation</span>
-<span class="linenos"> 43</span>
-<span class="linenos"> 44</span><span class="c1"># for a list of supported languages.</span>
-<span class="linenos"> 45</span>
-<span class="linenos"> 46</span><span class="c1">#</span>
-<span class="linenos"> 47</span>
-<span class="linenos"> 48</span><span class="c1"># This is also used if you do content translation via gettext catalogs.</span>
-<span class="linenos"> 49</span>
-<span class="linenos"> 50</span><span class="c1"># Usually you set &quot;language&quot; from the command line for these cases.</span>
-<span class="linenos"> 51</span>
-<span class="linenos"> 52</span><span class="n">language</span> <span class="o">=</span> <span class="s1">&#39;fr&#39;</span>
-<span class="linenos"> 53</span>
-<span class="linenos"> 54</span>
-<span class="linenos"> 55</span><span class="c1"># List of patterns, relative to source directory, that match files and</span>
-<span class="linenos"> 56</span>
-<span class="linenos"> 57</span><span class="c1"># directories to ignore when looking for source files.</span>
-<span class="linenos"> 58</span>
-<span class="linenos"> 59</span><span class="c1"># This pattern also affects html_static_path and html_extra_path.</span>
-<span class="linenos"> 60</span>
-<span class="linenos"> 61</span><span class="n">exclude_patterns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;_build&quot;</span><span class="p">,</span> <span class="s2">&quot;Thumbs.db&quot;</span><span class="p">,</span> <span class="s2">&quot;.DS_Store&quot;</span><span class="p">]</span>
-<span class="linenos"> 62</span>
-<span class="linenos"> 63</span><span class="n">source_suffix</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;.rst&quot;</span><span class="p">,</span> <span class="s2">&quot;.md&quot;</span><span class="p">]</span>
-<span class="linenos"> 64</span>
-<span class="hll"><span class="linenos"> 65</span>
-</span><span class="linenos"> 66</span>
-<span class="hll"><span class="linenos"> 67</span><span class="c1"># -- Options for HTML output -------------------------------------------------</span>
-</span><span class="hll"><span class="linenos"> 68</span>
-</span><span class="hll"><span class="linenos"> 69</span>
-</span><span class="linenos"> 70</span><span class="c1"># The theme to use for HTML and HTML Help pages.  See the documentation for</span>
-<span class="linenos"> 71</span>
-<span class="linenos"> 72</span><span class="c1"># a list of builtin themes.</span>
-<span class="linenos"> 73</span>
-<span class="linenos"> 74</span><span class="c1">#</span>
-<span class="linenos"> 75</span>
-<span class="hll"><span class="linenos"> 76</span><span class="n">html_theme</span> <span class="o">=</span> <span class="s1">&#39;sphinx_rtd_theme&#39;</span>
-</span><span class="hll"><span class="linenos"> 77</span>
-</span><span class="hll"><span class="linenos"> 78</span>
-</span><span class="linenos"> 79</span><span class="n">html_sidebars</span> <span class="o">=</span> <span class="p">{</span>
-<span class="linenos"> 80</span>
-<span class="linenos"> 81</span>    <span class="s1">&#39;**&#39;</span><span class="p">:</span> <span class="p">[</span>
-<span class="linenos"> 82</span>
-<span class="linenos"> 83</span>        <span class="s1">&#39;globaltoc.html&#39;</span><span class="p">,</span>   <span class="c1"># Use the global TOC instead of the local one</span>
-<span class="linenos"> 84</span>
-<span class="linenos"> 85</span>        <span class="s1">&#39;relations.html&#39;</span><span class="p">,</span>   <span class="c1"># Adds links to the previous and next chapters</span>
-<span class="linenos"> 86</span>
-<span class="linenos"> 87</span>        <span class="s1">&#39;searchbox.html&#39;</span><span class="p">,</span>   <span class="c1"># Adds a search box</span>
-<span class="linenos"> 88</span>
-<span class="linenos"> 89</span>    <span class="p">]</span>
-<span class="linenos"> 90</span>
-<span class="linenos"> 91</span><span class="p">}</span>
-<span class="linenos"> 92</span>
-<span class="linenos"> 93</span>
-<span class="linenos"> 94</span><span class="c1"># -- Options for copybutton extension ----------------------------------------</span>
-<span class="linenos"> 95</span>
-<span class="linenos"> 96</span><span class="n">copybutton_prompt_text</span> <span class="o">=</span> <span class="sa">r</span><span class="s2">&quot;&gt;&gt;&gt; |\.\.\. |\$ |In \[\d*\]: | {2,5}\.\.\.: | {5,8}: &quot;</span>
-<span class="linenos"> 97</span>
-<span class="linenos"> 98</span><span class="n">copybutton_prompt_is_regexp</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="linenos"> 99</span>
-<span class="linenos">100</span>
-<span class="linenos">101</span><span class="c1"># Add any paths that contain custom static files (such as style sheets) here,</span>
-<span class="linenos">102</span>
-<span class="linenos">103</span><span class="c1"># relative to this directory. They are copied after the builtin static files,</span>
-<span class="linenos">104</span>
-<span class="linenos">105</span><span class="c1"># so a file named &quot;default.css&quot; will overwrite the builtin &quot;default.css&quot;.</span>
-<span class="linenos">106</span>
-<span class="linenos">107</span><span class="n">html_static_path</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;_static&#39;</span><span class="p">]</span>
-<span class="linenos">108</span>
-<span class="linenos">109</span>
-<span class="linenos">110</span><span class="n">html_css_files</span> <span class="o">=</span> <span class="p">[</span>
-<span class="linenos">111</span>
-<span class="linenos">112</span>    <span class="s2">&quot;css/custom.css&quot;</span><span class="p">,</span>
-<span class="linenos">113</span>
-<span class="linenos">114</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<p>Ajouter les fichiers créés par sphinx-quickstart:</p>
-<p>Ajouter le fichier <code class="docutils literal notranslate"><span class="pre">custom.css</span></code> dans le répertoire <code class="docutils literal notranslate"><span class="pre">_static/css</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/source/_static/css
-touch<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/source/_static/css/custom.css
-</pre></div>
-</div>
-<div class="literal-block-wrapper docutils container" id="id2">
-<div class="code-block-caption"><span class="caption-text">Fichier css custom.css</span><a class="headerlink" href="#id2" title="Lien vers ce code"></a></div>
-<div class="highlight-css notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="c">/* Force line wraping in code instead of horizontal scrolling */</span>
-<span class="linenos"> 2</span><span class="nt">pre</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos"> 3</span><span class="w">    </span><span class="k">white-space</span><span class="p">:</span><span class="w"> </span><span class="kc">pre-wrap</span><span class="w"> </span><span class="cp">!important</span><span class="p">;</span>
-<span class="linenos"> 4</span><span class="w">    </span><span class="k">word-break</span><span class="p">:</span><span class="w"> </span><span class="n">break-all</span><span class="p">;</span>
-<span class="linenos"> 5</span><span class="p">}</span>
-<span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="c">/* Add the possibility to underline text */</span>
-<span class="linenos"> 8</span><span class="p">.</span><span class="nc">underline</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos"> 9</span><span class="w">    </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">underline</span><span class="p">;</span>
-<span class="linenos">10</span><span class="p">}</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span><span class="c">/* This allows the content to use most of the screen */</span>
-<span class="linenos">13</span><span class="p">@</span><span class="k">media</span><span class="w"> </span><span class="o">(</span><span class="nt">min-width</span><span class="o">:</span><span class="w"> </span><span class="nt">1200px</span><span class="o">)</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos">14</span><span class="w">    </span><span class="p">.</span><span class="nc">wy-nav-content</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos">15</span><span class="w">        </span><span class="k">max-width</span><span class="p">:</span><span class="w"> </span><span class="mi">95</span><span class="kt">%</span><span class="p">;</span>
-<span class="linenos">16</span><span class="w">        </span><span class="c">/* This allows the content to use most of the screen */</span>
-<span class="linenos">17</span><span class="w">    </span><span class="p">}</span>
-<span class="linenos">18</span><span class="p">}</span>
-<span class="linenos">19</span>
-<span class="linenos">20</span><span class="c">/** Allow caption from toctree to wrap nicely in sidebar */</span>
-<span class="linenos">21</span><span class="p">.</span><span class="nc">wy-menu</span><span class="w"> </span><span class="p">.</span><span class="nc">caption-text</span><span class="w"> </span><span class="p">{</span>
-<span class="linenos">22</span><span class="w">    </span><span class="k">white-space</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span>
-<span class="linenos">23</span><span class="w">    </span><span class="k">word-wrap</span><span class="p">:</span><span class="w"> </span><span class="kc">break-word</span><span class="p">;</span>
-<span class="linenos">24</span><span class="w">    </span><span class="k">overflow-wrap</span><span class="p">:</span><span class="w"> </span><span class="kc">break-word</span><span class="p">;</span>
-<span class="linenos">25</span><span class="w">    </span><span class="k">line-height</span><span class="p">:</span><span class="w"> </span><span class="mf">1.1</span><span class="p">;</span>
-<span class="linenos">26</span><span class="w">    </span><span class="c">/* Increase line height to prevent overlap */</span>
-<span class="linenos">27</span><span class="w">    </span><span class="k">display</span><span class="p">:</span><span class="w"> </span><span class="kc">block</span><span class="p">;</span>
-<span class="linenos">28</span><span class="w">    </span><span class="c">/* Ensure the element takes up full width */</span>
-<span class="linenos">29</span><span class="p">}</span>
-</pre></div>
-</div>
-</div>
-</section>
-</section>
-<section id="creer-la-documentation">
-<h5>Créer la documentation<a class="headerlink" href="#creer-la-documentation" title="Lien vers cette rubrique"></a></h5>
-<p>Depuis le répertoire <code class="docutils literal notranslate"><span class="pre">sphinx</span></code> faire:</p>
+<section id="creation-de-la-documentation">
+<h2>Création de la documentation<a class="headerlink" href="#creation-de-la-documentation" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons généré la documentation HTML :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx
 make<span class="w"> </span>html
 </pre></div>
 </div>
-<p>La documentation est un site statique html qui se trouve dans le répertoire <code class="docutils literal notranslate"><span class="pre">build/html</span></code>.
-Le fichier <code class="docutils literal notranslate"><span class="pre">index.html</span></code> est la page d’accueil de la documentation.
-Ouvrir la documentation avec un navigateur web, par exemple firefox:</p>
+<p>La documentation est accessible via le fichier <code class="docutils literal notranslate"><span class="pre">index.html</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefox<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html
 </pre></div>
 </div>
 </section>
-<section id="sauvegarder-la-documentation-avec-git">
-<h5>Sauvegarder la documentation avec git<a class="headerlink" href="#sauvegarder-la-documentation-avec-git" title="Lien vers cette rubrique"></a></h5>
-<p>Voir l’état de votre dépôt git:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
-</pre></div>
-</div>
-<p>Ajouter les fichiers de la documentation:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx
-git<span class="w"> </span>add<span class="w"> </span><span class="nb">source</span>
+<section id="sauvegarde-avec-git">
+<h2>Sauvegarde avec Git<a class="headerlink" href="#sauvegarde-avec-git" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons ajouté la documentation au dépôt Git et effectué un commit :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span><span class="nb">source</span>
 git<span class="w"> </span>add<span class="w"> </span>Makefile<span class="w"> </span>make.bat<span class="w"> </span>requirements.txt
-</pre></div>
-</div>
-<p>Fair le commit des modifications:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit of the documentation&quot;</span>
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit of the documentation&quot;</span>
 </pre></div>
 </div>
 </section>
 </section>
-<section id="publier-la-documentation">
-<h4>Publier la documentation<a class="headerlink" href="#publier-la-documentation" title="Lien vers cette rubrique"></a></h4>
-<p>Nous allons maintenant publier la documentation sur le web mais aussi sauvegarder notre projet sur un serveur git distant afin de le partager avec d’autres personnes.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Pour pouvoir partager le projet et sa documentation, il faut que le projet soit sur un serveur git distant, accessible par tout utilisateur que vous avez autorisé et tout le temps.
-Dans ce tutoriel nous allons créer un projet publique sur <code class="docutils literal notranslate"><span class="pre">github</span></code></p>
-</div>
-</section>
-</section>
-</section>
-</section>
-<section id="creer-un-compte-sur-github">
-<h1>Créer un compte sur github<a class="headerlink" href="#creer-un-compte-sur-github" title="Lien vers cette rubrique"></a></h1>
-<p>Si vous avez déjà un compte github, vous pouvez passer à la section suivante et utiliser votre compte.</p>
-<p>Pour créer un compte sur github, allez sur le site <a class="reference external" href="https://github.com/">github</a> et cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Sign</span> <span class="pre">up</span></code> en haut à droite ou cliquez sur le lien: <a class="reference external" href="https://github.com/signup">github signup</a>. Remplissez les informations demandées et cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Create</span> <span class="pre">account</span></code>.</p>
-</section>
-<section id="creer-un-depot-sur-github">
-<h1>Créer un dépôt sur github<a class="headerlink" href="#creer-un-depot-sur-github" title="Lien vers cette rubrique"></a></h1>
-<p>Une fois connecté sur github, vous pouvez créer un nouveau dépôt en cliquant sur le bouton <code class="docutils literal notranslate"><span class="pre">New</span></code> en haut à droite ou en cliquant sur le lien: <a class="reference external" href="https://github.com/new">github new repository</a>.</p>
-<p>Remplissez les informations demandées:
-et appelez votre dépôt <code class="docutils literal notranslate"><span class="pre">info_indus_tutorial</span></code>.</p>
-<section id="creer-une-cle-ssh-et-l-ajouter-a-github">
-<h2>Créer une clé ssh et l’ajouter à github<a class="headerlink" href="#creer-une-cle-ssh-et-l-ajouter-a-github" title="Lien vers cette rubrique"></a></h2>
-<p>Pour pouvoir pousser votre projet sur github, il est recommandé d’utiliser une clé ssh. Pour créer une clé ssh, ouvrez un terminal et tapez la commande suivante:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-keygen<span class="w"> </span>-t<span class="w"> </span>ed25519<span class="w"> </span>-C<span class="w"> </span><span class="s2">&quot;your_email@example.com&quot;</span><span class="w"> </span>-f<span class="w"> </span>~/.ssh/id_ed25519_info_indus_tutorial
-</pre></div>
-</div>
-<p>Remplacez <code class="docutils literal notranslate"><span class="pre">your_email&#64;example.com</span></code> par votre email.</p>
-<p>Maintenant vous allez ajouter la clé ssh à votre compte github. Pour cela, copiez le contenu de la clé publique dans le presse-papier:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>~/.ssh/id_ed25519_info_indus_tutorial.pub
-</pre></div>
-</div>
-<p>Allez sur la page de votre compte github et cliquez sur votre photo de profil en haut à droite, puis cliquez sur <code class="docutils literal notranslate"><span class="pre">Settings</span></code>. Dans la colonne de gauche, cliquez sur <code class="docutils literal notranslate"><span class="pre">SSH</span> <span class="pre">and</span> <span class="pre">GPG</span> <span class="pre">keys</span></code> et enfin sur le bouton <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">SSH</span> <span class="pre">key</span></code>. Collez le contenu de la clé publique dans le champ <code class="docutils literal notranslate"><span class="pre">Key</span></code> et cliquez sur le bouton <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">SSH</span> <span class="pre">key</span></code>.</p>
-<p>Vous pouvez maintenant ajouter votre clé à l’agent ssh, cela vous évitera de taper votre mot de passe à chaque fois que vous poussez sur github:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-agent<span class="w"> </span>/bin/bash
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ssh-add<span class="w"> </span>~/.ssh/id_ed25519_info_indus_tutorial
-</pre></div>
-</div>
-</section>
-</section>
-<section id="poussez-le-projet-sur-github">
-<h1>Poussez le projet sur github<a class="headerlink" href="#poussez-le-projet-sur-github" title="Lien vers cette rubrique"></a></h1>
-<p>Pour pousser le projet sur github, il faut ajouter le dépôt distant à votre dépôt local et pousser les modifications.</p>
-<p>Pour trouver l’adresse du dépôt distant à utiliser pour pousser votre projet, allez sur la page de votre dépôt github et copiez l’adresse du dépôt.</p>
-<p>Vous avez besoin de l’adresse ssh du dépôt (voir la procédure pas à pas). La procédure animée montre quant-à-elle la procédure pour obtenir l’adresse https du dépôt. Elles sont identiques jusqu’au moment où vous choisissez le type d’adresse du dépôt à copier.</p>
-<p>L’adresse ssh vous permet de pousser sans taper de mot de passe tandis qu’avec l’adresse https vous serez forcés d’entrer votre mot de passe à chaque fois que vous poussez. Par contre, comme le dépôt est public, vous pouvez utiliser l’adresse https sans aucune configuration pour copier le dépôt (le cloner) nous verrons plus loin où cela peut être utile.</p>
-<p id="index-0">Trouver l’adresse du dépôt distant pour les opérations de clone, pull, push, etc.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>MY_GIT_REMOTE_ADDRESS
-</pre></div>
-</div>
-<p>Remplacez <code class="docutils literal notranslate"><span class="pre">MY_GIT_REMOTE_ADDRESS</span></code> par l’adresse du dépôt distant que vous venez de copier.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Il y a une autre manière de récupérer l’adresse du dépôt gihub utilisable pour les opérations de clone, pull, push, etc. C’est en utilisant la commande suivante: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">get-url</span> <span class="pre">origin</span></code> . D’un point de vue mémo-techique, j’utilise une commande plus simple: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">-v</span></code> qui me donne l’adresse des dépôts distants et leur nom (<code class="docutils literal notranslate"><span class="pre">origin</span></code> est celui qui nous intéresse ici). Cette commande est plus simple à retenir pour 2 raisons en plus d’être plus courte: 1) <code class="docutils literal notranslate"><span class="pre">remote</span></code> design le dépôt distant, 2) <code class="docutils literal notranslate"><span class="pre">-v</span></code> pour verbose, c’est-à-dire afficher les informations de manière détaillée, c’est l’option courante dans le monde des commandes linux pour obtenir plus d’informations.</p>
-</div>
-<section id="changement-de-nom-de-la-branche-principale">
-<h2>Changement de nom de la branche principale<a class="headerlink" href="#changement-de-nom-de-la-branche-principale" title="Lien vers cette rubrique"></a></h2>
-<p>Effectuez les commandes suivantes:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-a
-git<span class="w"> </span>branch<span class="w"> </span>-M<span class="w"> </span>rolling
-git<span class="w"> </span>branch<span class="w"> </span>-a
-</pre></div>
-</div>
-<p>The branch commands permet de renommer la branche principale (appelée main ou master) en <code class="docutils literal notranslate"><span class="pre">rolling</span></code> en accord avec la politique de nommage de ROS2.</p>
-</section>
-<section id="pousser-le-code-sur-github">
-<h2>Pousser le code sur github<a class="headerlink" href="#pousser-le-code-sur-github" title="Lien vers cette rubrique"></a></h2>
-<p>Voyons maintenant la commande pour pousser le code sur github:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>rolling
-</pre></div>
-</div>
-<p>C’est seulement la première fois que vous poussez une branche sur un dépôt distant que vous devez utiliser l’option <code class="docutils literal notranslate"><span class="pre">-u</span> <span class="pre">remote_reopsitory</span> <span class="pre">local</span> <span class="pre">branch</span></code>. Cette option définit la branche en amont pour la branche que vous poussez. Après cela, vous pouvez utiliser <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> sans l’option <code class="docutils literal notranslate"><span class="pre">-u</span></code>.</p>
-<p>Maintenant vous pouvez aller sur la page de votre dépôt github et rafraîchir la page.
-Vous devriez voir les fichiers de votre projet s’afficher sur github.</p>
-</section>
-</section>
-<section id="creer-le-workflow-git-et-voir-la-documentation-apparaitre-sur-le-web-en-temps-reel">
-<h1>Créer le workflow git et voir la documentation apparaître sur le web en temps réel<a class="headerlink" href="#creer-le-workflow-git-et-voir-la-documentation-apparaitre-sur-le-web-en-temps-reel" title="Lien vers cette rubrique"></a></h1>
-<p>Regarder les branches existantes:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-a
-</pre></div>
-</div>
-<p>Créer la branche <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> vide:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>switch<span class="w"> </span>--orphan<span class="w"> </span>gh-pages
-</pre></div>
-</div>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>branch<span class="w"> </span>-a
-</pre></div>
-</div>
-<p>Créer un fichier sur cette branche nommée <code class="docutils literal notranslate"><span class="pre">.gitkeep</span></code> cela permet de garder le répertoire vide et de pouvoir pousser la branche sur github:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>touch<span class="w"> </span>.gitkeep
-git<span class="w"> </span>add<span class="w"> </span>.gitkeep
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit of the gh-pages branch&quot;</span>
-git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>gh-pages
-git<span class="w"> </span>checkout<span class="w"> </span>rolling
-</pre></div>
-</div>
-<p>Nous allons créer un fichier spécial qui va dire à github de créer et de publier la documentation à chaque fois qu’un changement est fait sur la branche rolling</p>
-<p>Créer le fichier <code class="docutils literal notranslate"><span class="pre">.github/workflows/documentation.yml</span></code> à la racine du projet git:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>.github/workflows
-touch<span class="w"> </span>.github/workflows/documentation.yml
-</pre></div>
-</div>
-<p>Ajouter le contenu suivant dans le fichier <code class="docutils literal notranslate"><span class="pre">.github/workflows/documentation.yml</span></code>:</p>
-<div class="literal-block-wrapper docutils container" id="id3">
-<span id="github-workflow-doc"></span><div class="code-block-caption"><span class="caption-text">Fichier de CI (action de workflow github) documentation.yml</span><a class="headerlink" href="#id3" title="Lien vers ce code"></a></div>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Documentation</span>
-<span class="linenos"> 2</span>
-<span class="linenos"> 3</span><span class="c1"># Controls when the workflow will run</span>
-<span class="linenos"> 4</span><span class="nt">on</span><span class="p">:</span>
-<span class="linenos"> 5</span><span class="w">  </span><span class="c1"># Triggers the workflow on push or pull request events but only for the master branch</span>
-<span class="linenos"> 6</span><span class="w">  </span><span class="nt">push</span><span class="p">:</span>
-<span class="linenos"> 7</span><span class="w">    </span><span class="nt">branches</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="w"> </span><span class="nv">rolling</span><span class="w"> </span><span class="p p-Indicator">]</span>
-<span class="linenos"> 8</span>
-<span class="linenos"> 9</span><span class="w">  </span><span class="c1"># Allows you to run this workflow manually from the Actions tab</span>
-<span class="linenos">10</span><span class="w">  </span><span class="nt">workflow_dispatch</span><span class="p">:</span>
-<span class="linenos">11</span>
-<span class="linenos">12</span><span class="c1"># A workflow run is made up of one or more jobs that can run sequentially or in parallel</span>
-<span class="linenos">13</span><span class="nt">jobs</span><span class="p">:</span>
-<span class="linenos">14</span><span class="w">  </span><span class="c1"># This workflow contains a single job called &quot;build&quot;</span>
-<span class="linenos">15</span><span class="w">  </span><span class="nt">build_documentation</span><span class="p">:</span>
-<span class="linenos">16</span><span class="w">    </span><span class="c1"># The type of runner that the job will run on</span>
-<span class="linenos">17</span><span class="w">    </span><span class="nt">runs-on</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ubuntu-22.04</span>
-<span class="linenos">18</span>
-<span class="linenos">19</span><span class="w">    </span><span class="c1"># Steps represent a sequence of tasks that will be executed as part of the job</span>
-<span class="linenos">20</span><span class="w">    </span><span class="nt">steps</span><span class="p">:</span>
-<span class="linenos">21</span><span class="w">      </span><span class="c1"># Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it</span>
-<span class="linenos">22</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/checkout@v4</span>
-<span class="linenos">23</span>
-<span class="linenos">24</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Install dependencies</span>
-<span class="linenos">25</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="linenos">26</span><span class="w">            </span><span class="no">sudo apt-get update -qq</span>
-<span class="linenos">27</span><span class="w">            </span><span class="no">sudo apt-get install -y -qq python3-sphinx</span>
-<span class="linenos">28</span><span class="w">            </span><span class="no">cd ./doc/sphinx/</span>
-<span class="linenos">29</span><span class="w">            </span><span class="no">python3 -m venv .venv</span>
-<span class="linenos">30</span><span class="w">            </span><span class="no">source .venv/bin/activate</span>
-<span class="linenos">31</span><span class="w">            </span><span class="no">pip install -r requirements.txt</span>
-<span class="linenos">32</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Build documentation</span>
-<span class="linenos">33</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="linenos">34</span><span class="w">            </span><span class="no">cd ./doc/sphinx/</span>
-<span class="linenos">35</span><span class="w">            </span><span class="no">source .venv/bin/activate</span>
-<span class="linenos">36</span><span class="w">            </span><span class="no">make html</span>
-<span class="linenos">37</span><span class="w">            </span><span class="no">cd ../..</span>
-<span class="linenos">38</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Create commit</span>
-<span class="linenos">39</span><span class="w">        </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
-<span class="hll"><span class="linenos">40</span><span class="w">            </span><span class="no">git clone https://github.com/melaniedalib/info_indus_tutorial.git --branch gh-pages --single-branch gh-pages</span>
-</span><span class="linenos">41</span><span class="w">            </span><span class="no">mkdir -p gh-pages/docs/</span>
-<span class="linenos">42</span><span class="w">            </span><span class="no">cp -r ./doc/sphinx/build/html/* gh-pages/</span>
-<span class="linenos">43</span><span class="w">            </span><span class="no">cd gh-pages</span>
-<span class="linenos">44</span><span class="w">            </span><span class="no">git config --local user.email &quot;action@github.com&quot;</span>
-<span class="linenos">45</span><span class="w">            </span><span class="no">git config --local user.name &quot;GitHub Action&quot;</span>
-<span class="linenos">46</span><span class="w">            </span><span class="no">touch .nojekyll</span>
-<span class="linenos">47</span><span class="w">            </span><span class="no">git add .</span>
-<span class="linenos">48</span><span class="w">            </span><span class="no">git commit -m &quot;Update documentation&quot; -a || true</span>
-<span class="linenos">49</span><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Push changes</span>
-<span class="linenos">50</span><span class="w">        </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ad-m/github-push-action@master</span>
-<span class="linenos">51</span><span class="w">        </span><span class="nt">with</span><span class="p">:</span>
-<span class="linenos">52</span><span class="w">          </span><span class="nt">branch</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gh-pages</span>
-<span class="linenos">53</span><span class="w">          </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">gh-pages</span>
-<span class="linenos">54</span><span class="w">          </span><span class="nt">github_token</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.GITHUB_TOKEN }}</span>
-</pre></div>
-</div>
-</div>
-<p>Modifiez la ligne surlignée du fichier de workflow commençant par <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span> <span class="pre">...</span></code>, pour que dans le workflow ce soit bien votre projet qui soit téléchargé. Remplacez <code class="docutils literal notranslate"><span class="pre">https://github.com/yguel/informatique_industrielle_avec_ROS2.git</span></code> par l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> de votre dépôt github (MY_GIT_REMOTE_ADDRESS que vous pouvez récupérer en suivant la <span class="xref std std-ref">procédure ci-dessus</span> (procédure pas-à-pas). Nous utilisons ici, l’adresse <code class="docutils literal notranslate"><span class="pre">HTTPS</span></code> pour que le workflow n’est pas besoin de code d’accès pour cloner le dépôt. Comme le dépôt est publique c’est la méthode d’accès la plus simple pour le workflow.</p>
-<p>Par contre pour modifier le dépôt: action <code class="docutils literal notranslate"><span class="pre">push</span></code>, il faut forcément des autorisations car le dépôt n’est pas en écriture pour tout le monde. C’est pour cela que dans le ::ref:` workflow&lt;github_workflow_doc&gt;`, l’action <code class="docutils literal notranslate"><span class="pre">Push</span> <span class="pre">changes</span></code> lignes 49-54, a un champ particulier <code class="docutils literal notranslate"><span class="pre">github_token</span></code> qui permet d’authentifier le workflow pour qu’il puisse pousser les modifications sur le dépôt. Le mot de passe est généré automatiquement par github, et les actions github auront le droit de pousser sur le dépôt une fois que vous aurez fait <a class="reference internal" href="#setup-git-actions"><span class="std std-ref">les modifications dans les settings du projet ci-après</span></a>.</p>
-<p>Il faut maintenant faire quelques modifications dans les settings du projet sur github
-Il faut:</p>
-<ol class="arabic">
-<li><p>aller dans les settings du projet</p></li>
-<li><p>aller dans la section <code class="docutils literal notranslate"><span class="pre">Actions</span></code></p></li>
-<li><p>aller dans la sous-section <code class="docutils literal notranslate"><span class="pre">General</span></code></p></li>
-<li><p>cocher les 3 cases :</p>
-<ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">all</span> <span class="pre">actions</span> <span class="pre">and</span> <span class="pre">reusable</span> <span class="pre">worflows</span></code> (normalement ok par défaut)</p></li>
-<li><p>Dans la section <code class="docutils literal notranslate"><span class="pre">Workflow</span> <span class="pre">permissions</span></code> cocher</p></li>
-</ol>
-<blockquote>
-<div><ol class="arabic simple">
-<li><p><code class="docutils literal notranslate"><span class="pre">Read</span> <span class="pre">and</span> <span class="pre">write</span> <span class="pre">permissions</span></code></p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">Allow</span> <span class="pre">GitHub</span> <span class="pre">Actions</span> <span class="pre">to</span> <span class="pre">create</span> <span class="pre">and</span> <span class="pre">approve</span> <span class="pre">pull</span> <span class="pre">requests</span></code></p></li>
-</ol>
-</div></blockquote>
-</li>
-</ol>
-<figure class="align-center" id="setup-git-actions">
-<a class="reference internal image-reference" href="00_creation_site_web/resources/img/setup_git_actions_01.png"><img alt="00_creation_site_web/resources/img/setup_git_actions_01.png" src="00_creation_site_web/resources/img/setup_git_actions_01.png" style="width: 80%;" />
-</a>
-</figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="00_creation_site_web/resources/img/setup_git_actions_02.png"><img alt="00_creation_site_web/resources/img/setup_git_actions_02.png" src="00_creation_site_web/resources/img/setup_git_actions_02.png" style="width: 80%;" />
-</a>
-</figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="00_creation_site_web/resources/img/setup_git_actions_03.png"><img alt="00_creation_site_web/resources/img/setup_git_actions_03.png" src="00_creation_site_web/resources/img/setup_git_actions_03.png" style="width: 80%;" />
-</a>
-</figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="00_creation_site_web/resources/img/setup_git_actions_04.png"><img alt="00_creation_site_web/resources/img/setup_git_actions_04.png" src="00_creation_site_web/resources/img/setup_git_actions_04.png" style="width: 80%;" />
-</a>
-</figure>
-<p>Maintenant vous pouvez ajouter le fichier de workflow à git et pusher:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.github/workflows/documentation.yml
-git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;Add github action to build and publish the documentation&quot;</span>
-git<span class="w"> </span>push
-</pre></div>
-</div>
-<p>Maintenant, vous pouvez voir la documentation apparaître sur le web en temps réel en allant sur la page de votre dépôt github et en cliquant sur le lien <code class="docutils literal notranslate"><span class="pre">Actions</span></code>.</p>
-<p>Vous avez peut-être besoin de faire un nouveau commit pour que le workflow se déclenche.</p>
-<p>Petit exercice: modifiez le fichier <code class="docutils literal notranslate"><span class="pre">doc/sphinx/source/index.rst</span></code> et ajoutez une ligne de texte. Poussez les modifications sur github à l’aide des commandes git : <code class="docutils literal notranslate"><span class="pre">add,</span> <span class="pre">commit</span> <span class="pre">puis</span> <span class="pre">push</span></code> et regardez la documentation se mettre à jour en temps réel.</p>
-<p>Allez sur l’onglet <code class="docutils literal notranslate"><span class="pre">Actions</span></code> de votre dépôt github pour voir le workflow se déclencher et construire la documentation, vous pouvez suivre en temps réel ce qui se passe et notamment voir les logs ou les erreurs s’il y en a.</p>
-<figure class="align-center" id="workflow-in-action">
-<a class="reference internal image-reference" href="00_creation_site_web/resources/img/workflow_in_action.gif"><img alt="00_creation_site_web/resources/img/workflow_in_action.gif" src="00_creation_site_web/resources/img/workflow_in_action.gif" style="width: 80%;" />
-</a>
-</figure>
+<section id="publication-sur-github">
+<h1>Publication sur GitHub<a class="headerlink" href="#publication-sur-github" title="Lien vers cette rubrique"></a></h1>
+<p>Nous avons créé un dépôt GitHub public et configuré une clé SSH afin de pouvoir pousser le projet. Nous avons ensuite ajouté le dépôt distant, renommé la branche principale en <code class="docutils literal notranslate"><span class="pre">rolling</span></code> et poussé le code sur GitHub.</p>
+<p>Nous avons mis en place une <strong>GitHub Action</strong> permettant de générer et publier automatiquement la documentation à chaque modification. La documentation est ainsi mise à jour en temps réel via GitHub Pages.</p>
 </section>
 
 

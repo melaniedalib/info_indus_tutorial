@@ -20,10 +20,10 @@ Voici une image de la maquette :
 Le projet consiste à :
 
 #. :doc:`Décrire la plateforme mécanique <01_description_des_elements_maquette/description_maquette>`
-#. Décrire le matériel électronique, la carte Dynamixel avec des liens vers les documentations techniques (datasheets)
-#. Créer la représentation mécanique du pantographe dans un fichier URDF
-#. Visualiser le résultat avec RViz
-#. Décrire la dynamique et donner les équations permettant de piloter la position de l’organe terminal du pantographe
+#. :doc:`Décrire le matériel électronique, la carte Dynamixel avec des liens vers les documentations techniques (datasheets) <01_description_des_elements_maquette/materiel_electronique>`
+#. :doc:`Créer la représentation mécanique du pantographe dans un fichier URDF <03_URDF/03_URDF>`
+#. :doc:`Visualiser le résultat avec RViz <04_RViz/04_RViz>`
+#. :doc:`Décrire la dynamique et donner les équations permettant de piloter la position de l'organe terminal du pantographe <05_resultat_theorique/05_programmation>`
 #. Créer un package ROS2 pour contrôler le pantographe
 #. Créer des tests et documenter ces tests
 #. Créer un code pour dessiner avec le pantographe
@@ -39,3 +39,7 @@ Le rendu attendu est un site web correspondant à un fork du site internet de M.
    
    00_creation_site_web/00_site_web
    01_description_des_elements_maquette/description_maquette
+   01_description_des_elements_maquette/materiel_electronique
+   03_URDF/03_URDF
+   04_RViz/04_RViz
+   05_resultat_theorique/05_programmation

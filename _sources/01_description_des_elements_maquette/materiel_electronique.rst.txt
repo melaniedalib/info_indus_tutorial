@@ -8,6 +8,10 @@ Matériel électronique
 
 Descriptions des éléments
 -------------------------
+Nous nous sommes concentré sur les deux éléments centraux de la maquette : 
+
+- les servomoteurs AX-12A (Dynamixel)
+- et le convertisseur d’interface U2D2
 
 Servomoteur AX-12A (Dynamixel)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -84,6 +88,7 @@ pour la boucle de rétroaction.
    :align: center
 
 Les sources des images sont disponibles `à cette adresse <https://emanual.robotis.com/docs/en/dxl/ax/ax-12a/>`_.
+A présent, interressons nous au convertisseur d'interface U2D2.
 
 Convertisseur d’interface U2D2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -130,83 +135,5 @@ Il convertit les signaux USB en signaux série TTL ou RS-485.
 - Fonctionne avec ROS, MATLAB, Python, C++
 - Diagnostic et mise à jour firmware possibles
 
----
 
-Tests et installation logicielle
----------------------------------
 
-Commandes ROS
-^^^^^^^^^^^^^
-
-Initialisation de l’environnement ROS 2 :
-
-.. code-block:: bash
-
-   source /opt/ros/jazzy/setup.sh
-
-Vérification de la version ROS :
-
-.. code-block:: bash
-
-   apt show ros-${ROS_DISTRO}-ros-core
-
----
-
-Récupération de la position des moteurs (AX-12A)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Pour les servos AX-12A, la position actuelle se lit à l’adresse **36**.
-
-Installation de la bibliothèque
-"""""""""""""""""""""""""""""""
-
-.. code-block:: bash
-
-   sudo apt update
-   sudo apt install python3-pip
-   pip install dynamixel-sdk
-
-Vérification du port série :
-
-.. code-block:: bash
-
-   ls /dev/ttyUSB*
-
----
-
-Test de communication Python
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. code-block:: python
-
-   from dynamixel_sdk import *
-
-   DEVICENAME = '/dev/ttyUSB0'
-   BAUDRATE = 57600
-   PROTOCOL_VERSION = 1.0
-   DXL_ID = 1
-   ADDR_PRESENT_POSITION = 36
-
-   portHandler = PortHandler(DEVICENAME)
-   packetHandler = PacketHandler(PROTOCOL_VERSION)
-
-   portHandler.openPort()
-   portHandler.setBaudRate(BAUDRATE)
-
-   pos, _, _ = packetHandler.read2ByteTxRx(
-       portHandler, DXL_ID, ADDR_PRESENT_POSITION)
-
-   print(f"Position actuelle : {pos}")
-
----
-
-Interprétation de la position angulaire
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-- 0   → 0°
-- 512 → ~150°
-- 1023 → ~300°
-
-.. warning::
-
-   Le débattement angulaire maximal est de **300°**.

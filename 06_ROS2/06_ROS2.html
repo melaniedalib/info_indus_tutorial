@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>&lt;no title&gt; &mdash; Documentation Dm_info_indus__tutorial </title>
+  <title>Tests et installation logicielle &mdash; Documentation Dm_info_indus__tutorial </title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -26,7 +26,8 @@
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Recherche" href="../search.html" /> 
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="prev" title="Comparaison entre résultats pratiques et analyse théorique" href="../05_resultat_theorique/05_programmation.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -49,13 +50,23 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
+<ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../00_creation_site_web/00_site_web.html">Création du site web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/description_maquette.html">Décrire la plateforme mécanique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/materiel_electronique.html">Matériel électronique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_URDF/03_URDF.html">Modèle URDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_RViz/04_RViz.html">Visualisation RViz</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../05_resultat_theorique/05_programmation.html">Programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_resultat_theorique/05_programmation.html">Comparaison entre résultats pratiques et analyse théorique</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tests et installation logicielle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#commandes-ros">Commandes ROS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#recuperation-de-la-position-des-moteurs-ax-12a">Récupération de la position des moteurs (AX-12A)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#installation-de-la-bibliotheque">Installation de la bibliothèque</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#test-de-communication-python">Test de communication Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#interpretation-de-la-position-angulaire">Interprétation de la position angulaire</a></li>
+</ul>
+</li>
 </ul>
 
         </div>
@@ -72,7 +83,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">&lt;no title&gt;</li>
+      <li class="breadcrumb-item active">Tests et installation logicielle</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/06_ROS2/06_ROS2.rst.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
@@ -82,11 +93,81 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  
+  <section id="tests-et-installation-logicielle">
+<h1>Tests et installation logicielle<a class="headerlink" href="#tests-et-installation-logicielle" title="Lien vers cette rubrique"></a></h1>
+<section id="commandes-ros">
+<h2>Commandes ROS<a class="headerlink" href="#commandes-ros" title="Lien vers cette rubrique"></a></h2>
+<p>Initialisation de l’environnement ROS 2 :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.sh
+</pre></div>
+</div>
+<p>Vérification de la version ROS :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>show<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-ros-core
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="recuperation-de-la-position-des-moteurs-ax-12a">
+<h2>Récupération de la position des moteurs (AX-12A)<a class="headerlink" href="#recuperation-de-la-position-des-moteurs-ax-12a" title="Lien vers cette rubrique"></a></h2>
+<p>Pour les servos AX-12A, la position actuelle se lit à l’adresse <strong>36</strong>.</p>
+<section id="installation-de-la-bibliotheque">
+<h3>Installation de la bibliothèque<a class="headerlink" href="#installation-de-la-bibliotheque" title="Lien vers cette rubrique"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
+pip<span class="w"> </span>install<span class="w"> </span>dynamixel-sdk
+</pre></div>
+</div>
+<p>Vérification du port série :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/dev/ttyUSB*
+</pre></div>
+</div>
+<p>—</p>
+</section>
+</section>
+<section id="test-de-communication-python">
+<h2>Test de communication Python<a class="headerlink" href="#test-de-communication-python" title="Lien vers cette rubrique"></a></h2>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynamixel_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">DEVICENAME</span> <span class="o">=</span> <span class="s1">&#39;/dev/ttyUSB0&#39;</span>
+<span class="n">BAUDRATE</span> <span class="o">=</span> <span class="mi">57600</span>
+<span class="n">PROTOCOL_VERSION</span> <span class="o">=</span> <span class="mf">1.0</span>
+<span class="n">DXL_ID</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">ADDR_PRESENT_POSITION</span> <span class="o">=</span> <span class="mi">36</span>
+
+<span class="n">portHandler</span> <span class="o">=</span> <span class="n">PortHandler</span><span class="p">(</span><span class="n">DEVICENAME</span><span class="p">)</span>
+<span class="n">packetHandler</span> <span class="o">=</span> <span class="n">PacketHandler</span><span class="p">(</span><span class="n">PROTOCOL_VERSION</span><span class="p">)</span>
+
+<span class="n">portHandler</span><span class="o">.</span><span class="n">openPort</span><span class="p">()</span>
+<span class="n">portHandler</span><span class="o">.</span><span class="n">setBaudRate</span><span class="p">(</span><span class="n">BAUDRATE</span><span class="p">)</span>
+
+<span class="n">pos</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">packetHandler</span><span class="o">.</span><span class="n">read2ByteTxRx</span><span class="p">(</span>
+    <span class="n">portHandler</span><span class="p">,</span> <span class="n">DXL_ID</span><span class="p">,</span> <span class="n">ADDR_PRESENT_POSITION</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position actuelle : </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>—</p>
+</section>
+<section id="interpretation-de-la-position-angulaire">
+<h2>Interprétation de la position angulaire<a class="headerlink" href="#interpretation-de-la-position-angulaire" title="Lien vers cette rubrique"></a></h2>
+<ul class="simple">
+<li><p>0   → 0°</p></li>
+<li><p>512 → ~150°</p></li>
+<li><p>1023 → ~300°</p></li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Le débattement angulaire maximal est de <strong>300°</strong>.</p>
+</div>
+</section>
+</section>
+
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
+        <a href="../05_resultat_theorique/05_programmation.html" class="btn btn-neutral float-left" title="Comparaison entre résultats pratiques et analyse théorique" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+    </div>
 
   <hr/>
 

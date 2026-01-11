@@ -24,6 +24,7 @@
       <script src="_static/copybutton.js?v=30646c52"></script>
       <script src="_static/translations.js?v=e6b791cb"></script>
       <script src="_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
@@ -56,7 +57,8 @@
 <li class="toctree-l1"><a class="reference internal" href="01_description_des_elements_maquette/materiel_electronique.html">Matériel électronique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="03_URDF/03_URDF.html">Modèle URDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_RViz/04_RViz.html">Visualisation RViz</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_resultat_theorique/05_programmation.html">Programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_resultat_theorique/05_programmation.html">Comparaison entre résultats pratiques et analyse théorique</a></li>
+<li class="toctree-l1"><a class="reference internal" href="06_ROS2/06_ROS2.html">Tests et installation logicielle</a></li>
 </ul>
 
         </div>
@@ -97,7 +99,7 @@
 <li><p><a class="reference internal" href="03_URDF/03_URDF.html"><span class="doc">Créer la représentation mécanique du pantographe dans un fichier URDF</span></a></p></li>
 <li><p><a class="reference internal" href="04_RViz/04_RViz.html"><span class="doc">Visualiser le résultat avec RViz</span></a></p></li>
 <li><p><a class="reference internal" href="05_resultat_theorique/05_programmation.html"><span class="doc">Décrire la dynamique et donner les équations permettant de piloter la position de l’organe terminal du pantographe</span></a></p></li>
-<li><p>Créer un package ROS2 pour contrôler le pantographe</p></li>
+<li><p><a class="reference internal" href="06_ROS2/06_ROS2.html"><span class="doc">Créer un package ROS2 pour contrôler le pantographe</span></a></p></li>
 <li><p>Créer des tests et documenter ces tests</p></li>
 <li><p>Créer un code pour dessiner avec le pantographe</p></li>
 <li><p>Tester le pantographe en conditions réelles</p></li>
@@ -122,12 +124,23 @@
 </li>
 <li class="toctree-l1"><a class="reference internal" href="01_description_des_elements_maquette/materiel_electronique.html">Matériel électronique</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="01_description_des_elements_maquette/materiel_electronique.html#descriptions-des-elements">Descriptions des éléments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="01_description_des_elements_maquette/materiel_electronique.html#tests-et-installation-logicielle">Tests et installation logicielle</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="03_URDF/03_URDF.html">Modèle URDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="04_RViz/04_RViz.html">Visualisation RViz</a></li>
-<li class="toctree-l1"><a class="reference internal" href="05_resultat_theorique/05_programmation.html">Programmation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="05_resultat_theorique/05_programmation.html">Comparaison entre résultats pratiques et analyse théorique</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="05_resultat_theorique/05_programmation.html#i-equation-reliant-le-point-a3-et-q-1-et-q-2">I. Équation reliant le point A3 et <span class="math notranslate nohighlight">\(q_1\)</span> et <span class="math notranslate nohighlight">\(q_2\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_resultat_theorique/05_programmation.html#ii-verifier-ces-equations-en-utilisant-le-modele-geometrique-direct">II. Vérifier ces équations en utilisant le modèle géométrique direct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="05_resultat_theorique/05_programmation.html#iii-utiliser-le-mgi-afin-davoir-q-1-q-2-f-x-a3-y-a3">III. Utiliser le MGI afin d’avoir <span class="math notranslate nohighlight">\((q_1, q_2) = f(X_{A3}, Y_{A3})\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="06_ROS2/06_ROS2.html">Tests et installation logicielle</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="06_ROS2/06_ROS2.html#commandes-ros">Commandes ROS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_ROS2/06_ROS2.html#recuperation-de-la-position-des-moteurs-ax-12a">Récupération de la position des moteurs (AX-12A)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_ROS2/06_ROS2.html#test-de-communication-python">Test de communication Python</a></li>
+<li class="toctree-l2"><a class="reference internal" href="06_ROS2/06_ROS2.html#interpretation-de-la-position-angulaire">Interprétation de la position angulaire</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </section>

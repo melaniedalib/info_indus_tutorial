@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Programmation &mdash; Documentation Dm_info_indus__tutorial </title>
+  <title>Comparaison entre résultats pratiques et analyse théorique &mdash; Documentation Dm_info_indus__tutorial </title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -24,9 +24,11 @@
       <script src="../_static/copybutton.js?v=30646c52"></script>
       <script src="../_static/translations.js?v=e6b791cb"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Tests et installation logicielle" href="../06_ROS2/06_ROS2.html" />
     <link rel="prev" title="Visualisation RViz" href="../04_RViz/04_RViz.html" /> 
 </head>
 
@@ -56,7 +58,13 @@
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/materiel_electronique.html">Matériel électronique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../03_URDF/03_URDF.html">Modèle URDF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../04_RViz/04_RViz.html">Visualisation RViz</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Programmation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Comparaison entre résultats pratiques et analyse théorique</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#i-equation-reliant-le-point-a3-et-q-1-et-q-2">I. Équation reliant le point A3 et <span class="math notranslate nohighlight">\(q_1\)</span> et <span class="math notranslate nohighlight">\(q_2\)</span></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ii-verifier-ces-equations-en-utilisant-le-modele-geometrique-direct">II. Vérifier ces équations en utilisant le modèle géométrique direct</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#iii-utiliser-le-mgi-afin-davoir-q-1-q-2-f-x-a3-y-a3">III. Utiliser le MGI afin d’avoir <span class="math notranslate nohighlight">\((q_1, q_2) = f(X_{A3}, Y_{A3})\)</span></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../06_ROS2/06_ROS2.html">Tests et installation logicielle</a></li>
 </ul>
 
         </div>
@@ -73,7 +81,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Programmation</li>
+      <li class="breadcrumb-item active">Comparaison entre résultats pratiques et analyse théorique</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/05_resultat_theorique/05_programmation.rst.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
@@ -83,8 +91,238 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="programmation">
-<h1>Programmation<a class="headerlink" href="#programmation" title="Lien vers cette rubrique"></a></h1>
+  <section id="comparaison-entre-resultats-pratiques-et-analyse-theorique">
+<h1>Comparaison entre résultats pratiques et analyse théorique<a class="headerlink" href="#comparaison-entre-resultats-pratiques-et-analyse-theorique" title="Lien vers cette rubrique"></a></h1>
+<p>Le but de cette partie est de comparer les résultats obtenus dans la pratique grâce à la
+maquette avec une analyse théorique obtenue grâce à un code Python. Pour répondre à
+cet objectif, nous allons :</p>
+<ul class="simple">
+<li><p>Équation reliant le point A3 et <span class="math notranslate nohighlight">\(q_1\)</span> et <span class="math notranslate nohighlight">\(q_2\)</span></p></li>
+<li><p>Vérifier ces équations en utilisant le modèle géométrique direct</p></li>
+<li><p>Utiliser le MGI afin d’avoir <span class="math notranslate nohighlight">\((q_1, q_2) = f(X_{A3}, Y_{A3})\)</span></p></li>
+</ul>
+<section id="i-equation-reliant-le-point-a3-et-q-1-et-q-2">
+<h2>I. Équation reliant le point A3 et <span class="math notranslate nohighlight">\(q_1\)</span> et <span class="math notranslate nohighlight">\(q_2\)</span><a class="headerlink" href="#i-equation-reliant-le-point-a3-et-q-1-et-q-2" title="Lien vers cette rubrique"></a></h2>
+<p>On choisit la mise en donnée suivante : on prend la base 0 comme origine du repère au
+point <span class="math notranslate nohighlight">\(A_1\)</span>. Nous faisons deux fermetures géométriques :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{A_1A_2} + \vec{A_2A_3} + \vec{A_3A_4} + \vec{A_4A_5} + \vec{A_5A_1} = \vec{0} \\
+\vec{A_1A_2} + \vec{A_2A_3} = x + y\end{split}\]</div>
+<p>En projetant dans la base 0, on obtient :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}l_1 \cos(q_1) + l_2 \cos(q_2) + l_3 \cos(q_3) - l_4 \cos(q_4) - l_0 = 0 \\
+l_1 \sin(q_1) + l_2 \sin(q_2) + l_3 \sin(q_3) - l_4 \sin(q_4) = 0 \\
+x = l_1 \cos(q_1) + l_2 \cos(q_2) \\
+y = l_1 \sin(q_1) + l_2 \sin(q_2)\end{split}\]</div>
+<p>On pose afin de simplifier les équations :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A = l_1 \cos(q_1) \\
+B = l_1 \sin(q_1) \\
+C = l_4 \cos(q_4) + l_0 \\
+D = l_4 \sin(q_4)\end{split}\]</div>
+<p>En faisant <span class="math notranslate nohighlight">\((5)-(7)\)</span> et <span class="math notranslate nohighlight">\((6)-(8)\)</span> on obtient :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}(x-A)^2 + (y-B)^2 = l_2^2 \\
+(x-C)^2 + (y-D)^2 = l_3^2\end{split}\]</div>
+<p>En soustrayant <span class="math notranslate nohighlight">\((12)-(11)\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[2(A-C)x + 2(B-D)y = R\]</div>
+<p>avec</p>
+<div class="math notranslate nohighlight">
+\[R = l_3^2 - l_2^2 + A^2 + B^2 - C^2 - D^2\]</div>
+<p>On peut réécrire l’équation sous la forme :</p>
+<div class="math notranslate nohighlight">
+\[y = -\alpha x + \beta\]</div>
+<p>avec</p>
+<div class="math notranslate nohighlight">
+\[\alpha = \frac{A-C}{B-D}, \quad \beta = \frac{R}{2(B-D)}\]</div>
+<p>En injectant dans <span class="math notranslate nohighlight">\((11)\)</span> :</p>
+<div class="math notranslate nohighlight">
+\[a x^2 + b x + c = 0\]</div>
+<p>avec</p>
+<div class="math notranslate nohighlight">
+\[a = 1 + \alpha^2, \quad b = -2A - 2\alpha (\beta - B), \quad c = A^2 + (\beta - B)^2 - l_2^2\]</div>
+<p>Pour finir, on a :</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \\
+y = -\alpha x + \beta\end{split}\]</div>
+</section>
+<section id="ii-verifier-ces-equations-en-utilisant-le-modele-geometrique-direct">
+<h2>II. Vérifier ces équations en utilisant le modèle géométrique direct<a class="headerlink" href="#ii-verifier-ces-equations-en-utilisant-le-modele-geometrique-direct" title="Lien vers cette rubrique"></a></h2>
+<p>En traçant <span class="math notranslate nohighlight">\(y\)</span> et les deux solutions pour <span class="math notranslate nohighlight">\(x\)</span>, on peut obtenir tous les points atteignables avec
+le mécanisme. Ainsi il est possible de comparer si le modèle est correct en
+déplaçant manuellement l’effecteur dans l’espace.</p>
+<p>On balaye les angles <span class="math notranslate nohighlight">\(q_1\)</span> et <span class="math notranslate nohighlight">\(q_4\)</span> afin d’obtenir toute la zone accessible par l’effecteur.</p>
+<p>Code Python :</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tk</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="kn">import</span> <span class="n">messagebox</span>
+
+<span class="c1"># --- Paramètres géométriques du mécanisme ---</span>
+<span class="n">l0</span> <span class="o">=</span> <span class="mf">137.98</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">l4</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="mf">146.3</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="mf">146.3</span>
+<span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">A5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+<span class="c1"># FONCTION 1 : Résolution de q1 à partir de A3</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_q1</span><span class="p">(</span><span class="n">A3</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">A3</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">l1</span> <span class="o">/</span> <span class="n">r</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">phi</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">phi</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">]</span>
+
+<span class="c1"># FONCTION 2 : Résolution de q4 à partir de A3</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">solve_q4</span><span class="p">(</span><span class="n">A3</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">A3</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">l0</span> <span class="o">-</span> <span class="n">x</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">l4</span> <span class="o">/</span> <span class="n">r</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">phi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arctan2</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+    <span class="n">alpha</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arccos</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">phi</span> <span class="o">+</span> <span class="n">alpha</span><span class="p">,</span> <span class="n">phi</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">]</span>
+
+<span class="c1"># FONCTION 3 : Trace une configuration du mécanisme</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_configuration</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q4</span><span class="p">,</span> <span class="n">A3</span><span class="p">):</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="n">A1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">),</span> <span class="n">l1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">)])</span>
+    <span class="n">A4</span> <span class="o">=</span> <span class="n">A5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">l4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q4</span><span class="p">),</span> <span class="n">l4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q4</span><span class="p">)])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">A1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A2</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A2</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">A2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A3</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A3</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">A3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A4</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A5</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A4</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">A5</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="s1">&#39;-o&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A5</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A5</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A4</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">A1</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;A1&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">A2</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A2</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;A2&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">A3</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A3</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;A3&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">A4</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A4</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;A4&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">A5</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">A5</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s2">&quot;A5&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Configuration du mécanisme pour A3 : X = </span><span class="si">{</span><span class="n">A3</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> mm, Y = </span><span class="si">{</span><span class="n">A3</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2"> mm&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X (mm)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y (mm)&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># FENÊTRE POP-UP TKINTER</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">launch_gui</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">validate</span><span class="p">():</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry_x</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">entry_y</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Erreur&quot;</span><span class="p">,</span> <span class="s2">&quot;Veuillez entrer des nombres valides.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">A3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">])</span>
+        <span class="n">q1_list</span> <span class="o">=</span> <span class="n">solve_q1</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span>
+        <span class="n">q4_list</span> <span class="o">=</span> <span class="n">solve_q4</span><span class="p">(</span><span class="n">A3</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">q1_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">q4_list</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">messagebox</span><span class="o">.</span><span class="n">showerror</span><span class="p">(</span><span class="s2">&quot;Erreur&quot;</span><span class="p">,</span> <span class="s2">&quot;Cette position A3 n&#39;est pas atteignable.&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="n">q1</span> <span class="o">=</span> <span class="n">q1_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">q4</span> <span class="o">=</span> <span class="n">q4_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">window</span><span class="o">.</span><span class="n">destroy</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">--- ANGLES EN DEGRÉS ---&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;q1 = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">q1</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">°&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;q4 = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">degrees</span><span class="p">(</span><span class="n">q4</span><span class="p">)</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">°&quot;</span><span class="p">)</span>
+        <span class="n">plot_configuration</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q4</span><span class="p">,</span> <span class="n">A3</span><span class="p">)</span>
+
+    <span class="n">window</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Choisir les coordonnées de A3&quot;</span><span class="p">)</span>
+    <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;X (mm) :&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Y (mm) :&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">entry_x</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">entry_y</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Entry</span><span class="p">(</span><span class="n">window</span><span class="p">)</span>
+    <span class="n">entry_x</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">entry_y</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">btn</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Valider&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">validate</span><span class="p">)</span>
+    <span class="n">btn</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">columnspan</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">window</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+
+<span class="n">launch_gui</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="iii-utiliser-le-mgi-afin-davoir-q-1-q-2-f-x-a3-y-a3">
+<h2>III. Utiliser le MGI afin d’avoir <span class="math notranslate nohighlight">\((q_1, q_2) = f(X_{A3}, Y_{A3})\)</span><a class="headerlink" href="#iii-utiliser-le-mgi-afin-davoir-q-1-q-2-f-x-a3-y-a3" title="Lien vers cette rubrique"></a></h2>
+<p>Maintenant que le modèle est vérifié, on peut passer au modèle indirect. Le code suivant
+permet de tracer les positions possibles du système. Il faut entrer les coordonnées du
+point <span class="math notranslate nohighlight">\(A3\)</span> souhaité. Si le point n’est pas atteignable, le code renverra une erreur.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+
+<span class="n">l0</span> <span class="o">=</span> <span class="mf">137.98</span>
+<span class="n">l1</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">l4</span> <span class="o">=</span> <span class="mi">80</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="mf">146.3</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="mf">146.3</span>
+
+<span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="n">A5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+
+<span class="n">q1_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">+</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="n">q4_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">+</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+
+<span class="n">A3_solutions</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">circle_intersections</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">r2</span><span class="p">):</span>
+    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">C1</span>
+    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">C2</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">r1</span> <span class="o">+</span> <span class="n">r2</span> <span class="ow">or</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="p">)</span> <span class="ow">or</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">r1</span><span class="o">*</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r1</span><span class="o">*</span><span class="n">r1</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">xm</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
+    <span class="n">ym</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
+    <span class="n">xs1</span> <span class="o">=</span> <span class="n">xm</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
+    <span class="n">ys1</span> <span class="o">=</span> <span class="n">ym</span> <span class="o">-</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
+    <span class="n">xs2</span> <span class="o">=</span> <span class="n">xm</span> <span class="o">-</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
+    <span class="n">ys2</span> <span class="o">=</span> <span class="n">ym</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
+    <span class="k">return</span> <span class="p">[(</span><span class="n">xs1</span><span class="p">,</span> <span class="n">ys1</span><span class="p">),</span> <span class="p">(</span><span class="n">xs2</span><span class="p">,</span> <span class="n">ys2</span><span class="p">)]</span>
+
+<span class="k">for</span> <span class="n">q1</span> <span class="ow">in</span> <span class="n">q1_range</span><span class="p">:</span>
+    <span class="n">A2</span> <span class="o">=</span> <span class="n">A1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">),</span> <span class="n">l1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">)])</span>
+    <span class="k">for</span> <span class="n">q4</span> <span class="ow">in</span> <span class="n">q4_range</span><span class="p">:</span>
+        <span class="n">A4</span> <span class="o">=</span> <span class="n">A5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">l4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q4</span><span class="p">),</span> <span class="n">l4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q4</span><span class="p">)])</span>
+        <span class="n">inter</span> <span class="o">=</span> <span class="n">circle_intersections</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">A4</span><span class="p">,</span> <span class="n">l3</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">inter</span><span class="p">:</span>
+            <span class="n">A3_solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+
+<span class="n">A3_solutions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A3_solutions</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A3_solutions</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">A3_solutions</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">A1</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">A5</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A5</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;A5&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Positions atteignables de A3 (2 solutions incluses)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X (mm)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y (mm)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -92,6 +330,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Pied de page">
         <a href="../04_RViz/04_RViz.html" class="btn btn-neutral float-left" title="Visualisation RViz" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Précédent</a>
+        <a href="../06_ROS2/06_ROS2.html" class="btn btn-neutral float-right" title="Tests et installation logicielle" accesskey="n" rel="next">Suivant <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

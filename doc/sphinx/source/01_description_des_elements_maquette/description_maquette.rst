@@ -83,6 +83,8 @@ pour la boucle de rétroaction.
    :width: 400px
    :align: center
 
+Les sources des images sont disponibles `à cette adresse <https://emanual.robotis.com/docs/en/dxl/ax/ax-12a/>`_.
+
 Convertisseur d’interface U2D2
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -5,8 +5,7 @@ Création du projet
 ^^^^^^^^^^^^^^^^^^
 .. note::
    Cette partie s’inspire de la documentation fournie par **M. Yguel**
-   dans le cadre du cours d’informatique industrielle. Le contenu a été
-   reformulé et adapté à notre projet.
+   dans le cadre du cours d’informatique industrielle. `à cette adresse <https://yguel.github.io/informatique_industrielle_avec_ROS2/c01_create_and_publish_doc/p01s02_create_and_publish_doc.html>`_.
 
 Introduction
 ------------

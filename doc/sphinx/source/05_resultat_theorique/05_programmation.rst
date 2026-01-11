@@ -17,7 +17,7 @@ point :math:`A_1`.
 
 .. figure:: ../images/mecanisme.png
    :alt: Documentation technique du servomoteur AX-12A
-   :width: 400px
+   :width: 600px
    :align: center
 
 
@@ -105,7 +105,7 @@ déplaçant manuellement l’effecteur dans l’espace.
 
 .. figure:: ../images/position_atteinte.png
    :alt: Documentation technique du servomoteur AX-12A
-   :width: 400px
+   :width: 600px
    :align: center
 
 On balaye les angles :math:`q_1` et :math:`q_4` afin d’obtenir toute la zone accessible par l’effecteur.
@@ -228,7 +228,7 @@ point :math:`A3` souhaité. Si le point n’est pas atteignable, le code renverr
 
 .. figure:: ../images/config_mecanisme.png
    :alt: Documentation technique du servomoteur AX-12A
-   :width: 400px
+   :width: 600px
    :align: center
 
 .. code-block:: python

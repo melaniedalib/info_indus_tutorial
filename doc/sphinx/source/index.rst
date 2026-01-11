@@ -24,7 +24,7 @@ Le projet consiste à :
 #. :doc:`Créer la représentation mécanique du pantographe dans un fichier URDF <03_URDF/03_URDF>`
 #. :doc:`Visualiser le résultat avec RViz <04_RViz/04_RViz>`
 #. :doc:`Décrire la dynamique et donner les équations permettant de piloter la position de l'organe terminal du pantographe <05_resultat_theorique/05_programmation>`
-#. Créer un package ROS2 pour contrôler le pantographe
+#. :doc:`Créer un package ROS2 pour contrôler le pantographe <06_ROS2/06_ROS2>`
 #. Créer des tests et documenter ces tests
 #. Créer un code pour dessiner avec le pantographe
 #. Tester le pantographe en conditions réelles
@@ -43,3 +43,4 @@ Le rendu attendu est un site web correspondant à un fork du site internet de M.
    03_URDF/03_URDF
    04_RViz/04_RViz
    05_resultat_theorique/05_programmation
+   06_ROS2/06_ROS2

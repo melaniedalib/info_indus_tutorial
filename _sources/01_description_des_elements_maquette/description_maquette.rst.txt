@@ -10,7 +10,7 @@ Descriptions des éléments
 -------------------------
 
 Servomoteur AX-12A (Dynamixel)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Un **Dynamixel** est un type de servo-moteur intelligent développé par la société **ROBOTIS**,
 largement utilisé en robotique (recherche, robots humanoïdes, bras robotiques, etc.).
@@ -66,10 +66,25 @@ Un Dynamixel MX-28 peut être utilisé dans un bras robotique à 6 axes.
 Chaque axe reçoit une consigne via un contrôleur (ROS, MATLAB) et renvoie sa position réelle
 pour la boucle de rétroaction.
 
----
+6. Documentation technique
+""""""""""""""""""""""""""
+.. image:: images/datasheet_AX_12A.png
+   :alt: Documentation technique du servomoteur AX-12A
+   :width: 400px
+   :align: center
+
+.. image:: images/control_table_EEPROM_area.png
+   :alt: Table de control de la mémoire EEPROM
+   :width: 400px
+   :align: center
+
+.. image:: images/control_table_of_RAM_Area.png
+   :alt: table de control de la mémoire RAM
+   :width: 400px
+   :align: center
 
 Convertisseur d’interface U2D2
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 1. Fonction principale
 """"""""""""""""""""""

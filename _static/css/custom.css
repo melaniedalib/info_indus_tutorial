@@ -29,29 +29,55 @@ pre {
 }
 
 
-/* Reduce space below titles */
+/* ===========================
+   GLOBAL SPACING REDUCTION
+   =========================== */
+
+/* Titles: extremely compact */
 h1, h2, h3, h4, h5, h6 {
-    margin-bottom: 0.3em;  /* default ~0.8–1em */
+    margin-top: 0.6em !important;
+    margin-bottom: 0.2em !important;
+    line-height: 1.2;
 }
 
-/* Reduce space above titles */
-h1, h2, h3, h4, h5, h6 {
-    margin-top: 0.8em;
+/* Paragraphs */
+p {
+    margin-top: 0.2em !important;
+    margin-bottom: 0.4em !important;
 }
 
-/* Reduce space after titles when followed by text */
-h1 + p,
-h2 + p,
-h3 + p,
-h4 + p,
-h5 + p,
-h6 + p {
-    margin-top: 0.3em;
+/* Lists */
+ul, ol {
+    margin-top: 0.2em !important;
+    margin-bottom: 0.4em !important;
 }
 
-/* Reduce space around code blocks */
+/* Code blocks */
 pre,
 div.highlight {
-    margin-top: 0.4em;
-    margin-bottom: 0.4em;
+    margin-top: 0.2em !important;
+    margin-bottom: 0.2em !important;
+}
+
+/* Inline code */
+code {
+    padding: 0.1em 0.2em;
+}
+
+/* Notes, warnings, admonitions */
+.rst-content .admonition {
+    margin-top: 0.4em !important;
+    margin-bottom: 0.4em !important;
+    padding: 0.4em 0.6em;
+}
+
+/* Reduce space between sections */
+.section {
+    margin-top: 0.6em !important;
+}
+
+/* Figures */
+.figure {
+    margin-top: 0.4em !important;
+    margin-bottom: 0.4em !important;
 }

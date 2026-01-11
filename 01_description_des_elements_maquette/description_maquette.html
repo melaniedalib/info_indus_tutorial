@@ -12,7 +12,7 @@
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=c1fc3b06" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=3f2f65c8" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -60,6 +60,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#modes-de-fonctionnement">3. Modes de fonctionnement</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#avantages">4. Avantages</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#exemple-dutilisation">5. Exemple d’utilisation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#documentation-technique">6. Documentation technique</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#convertisseur-dinterface-u2d2">Convertisseur d’interface U2D2</a><ul>
@@ -123,28 +124,29 @@
 <li><p><a class="reference internal" href="#modes-de-fonctionnement" id="id7">3. Modes de fonctionnement</a></p></li>
 <li><p><a class="reference internal" href="#avantages" id="id8">4. Avantages</a></p></li>
 <li><p><a class="reference internal" href="#exemple-dutilisation" id="id9">5. Exemple d’utilisation</a></p></li>
+<li><p><a class="reference internal" href="#documentation-technique" id="id10">6. Documentation technique</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#convertisseur-dinterface-u2d2" id="id10">Convertisseur d’interface U2D2</a></p>
+<li><p><a class="reference internal" href="#convertisseur-dinterface-u2d2" id="id11">Convertisseur d’interface U2D2</a></p>
 <ul>
-<li><p><a class="reference internal" href="#id1" id="id11">1. Fonction principale</a></p></li>
-<li><p><a class="reference internal" href="#role-technique" id="id12">2. Rôle technique</a></p></li>
-<li><p><a class="reference internal" href="#schema-typique-de-connexion" id="id13">3. Schéma typique de connexion</a></p></li>
-<li><p><a class="reference internal" href="#id2" id="id14">4. Avantages</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id12">1. Fonction principale</a></p></li>
+<li><p><a class="reference internal" href="#role-technique" id="id13">2. Rôle technique</a></p></li>
+<li><p><a class="reference internal" href="#schema-typique-de-connexion" id="id14">3. Schéma typique de connexion</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id15">4. Avantages</a></p></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#tests-et-installation-logicielle" id="id15">Tests et installation logicielle</a></p>
+<li><p><a class="reference internal" href="#tests-et-installation-logicielle" id="id16">Tests et installation logicielle</a></p>
 <ul>
-<li><p><a class="reference internal" href="#commandes-ros" id="id16">Commandes ROS</a></p></li>
-<li><p><a class="reference internal" href="#recuperation-de-la-position-des-moteurs-ax-12a" id="id17">Récupération de la position des moteurs (AX-12A)</a></p>
+<li><p><a class="reference internal" href="#commandes-ros" id="id17">Commandes ROS</a></p></li>
+<li><p><a class="reference internal" href="#recuperation-de-la-position-des-moteurs-ax-12a" id="id18">Récupération de la position des moteurs (AX-12A)</a></p>
 <ul>
-<li><p><a class="reference internal" href="#installation-de-la-bibliotheque" id="id18">Installation de la bibliothèque</a></p></li>
+<li><p><a class="reference internal" href="#installation-de-la-bibliotheque" id="id19">Installation de la bibliothèque</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#test-de-communication-python" id="id19">Test de communication Python</a></p></li>
-<li><p><a class="reference internal" href="#interpretation-de-la-position-angulaire" id="id20">Interprétation de la position angulaire</a></p></li>
+<li><p><a class="reference internal" href="#test-de-communication-python" id="id20">Test de communication Python</a></p></li>
+<li><p><a class="reference internal" href="#interpretation-de-la-position-angulaire" id="id21">Interprétation de la position angulaire</a></p></li>
 </ul>
 </li>
 </ul>
@@ -205,13 +207,21 @@ largement utilisé en robotique (recherche, robots humanoïdes, bras robotiques,
 <p>Un Dynamixel MX-28 peut être utilisé dans un bras robotique à 6 axes.
 Chaque axe reçoit une consigne via un contrôleur (ROS, MATLAB) et renvoie sa position réelle
 pour la boucle de rétroaction.</p>
-<p>—</p>
+</section>
+<section id="documentation-technique">
+<h4><a class="toc-backref" href="#id10" role="doc-backlink">6. Documentation technique</a><a class="headerlink" href="#documentation-technique" title="Lien vers cette rubrique"></a></h4>
+<a class="reference internal image-reference" href="01_description_des_elements_maquette/images/datasheet_AX_12A.png"><img alt="Documentation technique du servomoteur AX-12A" class="align-center" src="01_description_des_elements_maquette/images/datasheet_AX_12A.png" style="width: 400px;" />
+</a>
+<a class="reference internal image-reference" href="01_description_des_elements_maquette/images/control_table_EEPROM_area.png"><img alt="Table de control de la mémoire EEPROM" class="align-center" src="01_description_des_elements_maquette/images/control_table_EEPROM_area.png" style="width: 400px;" />
+</a>
+<a class="reference internal image-reference" href="01_description_des_elements_maquette/images/control_table_of_RAM_Area.png"><img alt="table de control de la mémoire RAM" class="align-center" src="01_description_des_elements_maquette/images/control_table_of_RAM_Area.png" style="width: 400px;" />
+</a>
 </section>
 </section>
 <section id="convertisseur-dinterface-u2d2">
-<h3><a class="toc-backref" href="#id10" role="doc-backlink">Convertisseur d’interface U2D2</a><a class="headerlink" href="#convertisseur-dinterface-u2d2" title="Lien vers cette rubrique"></a></h3>
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Convertisseur d’interface U2D2</a><a class="headerlink" href="#convertisseur-dinterface-u2d2" title="Lien vers cette rubrique"></a></h3>
 <section id="id1">
-<h4><a class="toc-backref" href="#id11" role="doc-backlink">1. Fonction principale</a><a class="headerlink" href="#id1" title="Lien vers cette rubrique"></a></h4>
+<h4><a class="toc-backref" href="#id12" role="doc-backlink">1. Fonction principale</a><a class="headerlink" href="#id1" title="Lien vers cette rubrique"></a></h4>
 <p>Le <strong>U2D2 (USB to Dynamixel 2)</strong> est un convertisseur d’interface permettant de relier
 un ordinateur ou une carte contrôleur à un ou plusieurs moteurs Dynamixel.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PC / Raspberry Pi / Arduino ⇄ U2D2 ⇄ Dynamixel(s)
@@ -220,7 +230,7 @@ un ordinateur ou une carte contrôleur à un ou plusieurs moteurs Dynamixel.</p>
 <p>Il convertit les signaux USB en signaux série TTL ou RS-485.</p>
 </section>
 <section id="role-technique">
-<h4><a class="toc-backref" href="#id12" role="doc-backlink">2. Rôle technique</a><a class="headerlink" href="#role-technique" title="Lien vers cette rubrique"></a></h4>
+<h4><a class="toc-backref" href="#id13" role="doc-backlink">2. Rôle technique</a><a class="headerlink" href="#role-technique" title="Lien vers cette rubrique"></a></h4>
 <ul class="simple">
 <li><p>Conversion de protocole :
 - USB → TTL (AX, XL, XM-T)
@@ -230,7 +240,7 @@ un ordinateur ou une carte contrôleur à un ou plusieurs moteurs Dynamixel.</p>
 </ul>
 </section>
 <section id="schema-typique-de-connexion">
-<h4><a class="toc-backref" href="#id13" role="doc-backlink">3. Schéma typique de connexion</a><a class="headerlink" href="#schema-typique-de-connexion" title="Lien vers cette rubrique"></a></h4>
+<h4><a class="toc-backref" href="#id14" role="doc-backlink">3. Schéma typique de connexion</a><a class="headerlink" href="#schema-typique-de-connexion" title="Lien vers cette rubrique"></a></h4>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">PC</span> <span class="o">/</span> <span class="n">MATLAB</span> <span class="o">/</span> <span class="n">ROS</span><span class="p">]</span>
          <span class="o">|</span>
         <span class="n">USB</span>
@@ -242,7 +252,7 @@ un ordinateur ou une carte contrôleur à un ou plusieurs moteurs Dynamixel.</p>
 </div>
 </section>
 <section id="id2">
-<h4><a class="toc-backref" href="#id14" role="doc-backlink">4. Avantages</a><a class="headerlink" href="#id2" title="Lien vers cette rubrique"></a></h4>
+<h4><a class="toc-backref" href="#id15" role="doc-backlink">4. Avantages</a><a class="headerlink" href="#id2" title="Lien vers cette rubrique"></a></h4>
 <ul class="simple">
 <li><p>Plug &amp; play</p></li>
 <li><p>Compatible avec tous les logiciels ROBOTIS</p></li>
@@ -254,9 +264,9 @@ un ordinateur ou une carte contrôleur à un ou plusieurs moteurs Dynamixel.</p>
 </section>
 </section>
 <section id="tests-et-installation-logicielle">
-<h2><a class="toc-backref" href="#id15" role="doc-backlink">Tests et installation logicielle</a><a class="headerlink" href="#tests-et-installation-logicielle" title="Lien vers cette rubrique"></a></h2>
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Tests et installation logicielle</a><a class="headerlink" href="#tests-et-installation-logicielle" title="Lien vers cette rubrique"></a></h2>
 <section id="commandes-ros">
-<h3><a class="toc-backref" href="#id16" role="doc-backlink">Commandes ROS</a><a class="headerlink" href="#commandes-ros" title="Lien vers cette rubrique"></a></h3>
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Commandes ROS</a><a class="headerlink" href="#commandes-ros" title="Lien vers cette rubrique"></a></h3>
 <p>Initialisation de l’environnement ROS 2 :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.sh
 </pre></div>
@@ -268,10 +278,10 @@ un ordinateur ou une carte contrôleur à un ou plusieurs moteurs Dynamixel.</p>
 <p>—</p>
 </section>
 <section id="recuperation-de-la-position-des-moteurs-ax-12a">
-<h3><a class="toc-backref" href="#id17" role="doc-backlink">Récupération de la position des moteurs (AX-12A)</a><a class="headerlink" href="#recuperation-de-la-position-des-moteurs-ax-12a" title="Lien vers cette rubrique"></a></h3>
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Récupération de la position des moteurs (AX-12A)</a><a class="headerlink" href="#recuperation-de-la-position-des-moteurs-ax-12a" title="Lien vers cette rubrique"></a></h3>
 <p>Pour les servos AX-12A, la position actuelle se lit à l’adresse <strong>36</strong>.</p>
 <section id="installation-de-la-bibliotheque">
-<h4><a class="toc-backref" href="#id18" role="doc-backlink">Installation de la bibliothèque</a><a class="headerlink" href="#installation-de-la-bibliotheque" title="Lien vers cette rubrique"></a></h4>
+<h4><a class="toc-backref" href="#id19" role="doc-backlink">Installation de la bibliothèque</a><a class="headerlink" href="#installation-de-la-bibliotheque" title="Lien vers cette rubrique"></a></h4>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
 sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
 pip<span class="w"> </span>install<span class="w"> </span>dynamixel-sdk
@@ -285,7 +295,7 @@ pip<span class="w"> </span>install<span class="w"> </span>dynamixel-sdk
 </section>
 </section>
 <section id="test-de-communication-python">
-<h3><a class="toc-backref" href="#id19" role="doc-backlink">Test de communication Python</a><a class="headerlink" href="#test-de-communication-python" title="Lien vers cette rubrique"></a></h3>
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Test de communication Python</a><a class="headerlink" href="#test-de-communication-python" title="Lien vers cette rubrique"></a></h3>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynamixel_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
 <span class="n">DEVICENAME</span> <span class="o">=</span> <span class="s1">&#39;/dev/ttyUSB0&#39;</span>
@@ -309,7 +319,7 @@ pip<span class="w"> </span>install<span class="w"> </span>dynamixel-sdk
 <p>—</p>
 </section>
 <section id="interpretation-de-la-position-angulaire">
-<h3><a class="toc-backref" href="#id20" role="doc-backlink">Interprétation de la position angulaire</a><a class="headerlink" href="#interpretation-de-la-position-angulaire" title="Lien vers cette rubrique"></a></h3>
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">Interprétation de la position angulaire</a><a class="headerlink" href="#interpretation-de-la-position-angulaire" title="Lien vers cette rubrique"></a></h3>
 <ul class="simple">
 <li><p>0   → 0°</p></li>
 <li><p>512 → ~150°</p></li>

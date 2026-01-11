@@ -74,7 +74,7 @@ Nous avons ouvert le projet dans VS Code avec la commande :
 Nous avons ensuite complété le fichier ``settings.json`` afin d’améliorer
 le formatage automatique et le confort d’édition.
 
-.. literalinclude:: .vscode/settings.json
+.. literalinclude:: resources/code/config.vscode/settings.json
    :language: json
    :caption: Configuration VS Code (settings.json)
 
@@ -209,10 +209,6 @@ Nous avons renseigné notre nom et notre adresse e-mail :
 
    git config user.email "prenom.nom@insa-strasbourg.fr"
    git config user.name "Prénom NOM"
-
-.. note::
-
-   Nous n'avons pas écrit notre adresse mail dans le rapport afin de ne pas divulguer nos informations personnel.
 
 .. note::
 

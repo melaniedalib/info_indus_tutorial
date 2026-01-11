@@ -53,32 +53,27 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Création du site web</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creation-du-projet">Création du projet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-de-vs-code">Configuration de VS Code</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#creation-des-fichiers-de-configuration">Création des fichiers de configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-du-projet">Création du projet</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Création du projet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-de-vs-code">Configuration de VS Code</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#ouverture-du-projet">Ouverture du projet</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-des-raccourcis-clavier">Configuration des raccourcis clavier</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#installation-des-extensions">Installation des extensions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#introduction-au-versionnement-avec-git">Introduction au versionnement avec Git</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#initialisation-du-depot">Initialisation du dépôt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#verification-de-letat-du-depot">Vérification de l’état du dépôt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#ajout-des-fichiers">Ajout des fichiers</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#creation-du-premier-commit">Création du premier commit</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#consultation-de-lhistorique">Consultation de l’historique</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-des-fichiers-de-configuration">Création des fichiers de configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ouverture-du-projet">Ouverture du projet</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-des-raccourcis-clavier">Configuration des raccourcis clavier</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation-des-extensions">Installation des extensions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#introduction-au-versionnement-avec-git">Introduction au versionnement avec Git</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#initialisation-du-depot">Initialisation du dépôt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#verification-de-letat-du-depot">Vérification de l’état du dépôt</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ajout-des-fichiers">Ajout des fichiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-du-premier-commit">Création du premier commit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#consultation-de-lhistorique">Consultation de l’historique</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="#creation-dune-premiere-documentation-sphinx">Création d’une première documentation Sphinx</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#installation-de-sphinx">Installation de Sphinx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#configuration-de-sphinx">Configuration de Sphinx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#creation-de-la-documentation">Création de la documentation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#sauvegarde-avec-git">Sauvegarde avec Git</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="#creation-dune-premiere-documentation-sphinx">Création d’une première documentation Sphinx</a></li>
 <li class="toctree-l1"><a class="reference internal" href="#publication-sur-github">Publication sur GitHub</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/description_maquette.html">Décrire la plateforme mécanique</a></li>
 </ul>
@@ -109,6 +104,8 @@
              
   <section id="creation-du-site-web">
 <h1>Création du site web<a class="headerlink" href="#creation-du-site-web" title="Lien vers cette rubrique"></a></h1>
+<section id="creation-du-projet">
+<h2>Création du projet<a class="headerlink" href="#creation-du-projet" title="Lien vers cette rubrique"></a></h2>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Cette partie s’inspire de la documentation fournie par <strong>M. Yguel</strong>
@@ -116,11 +113,11 @@ dans le cadre du cours d’informatique industrielle. Le contenu a été
 reformulé et adapté à notre projet.</p>
 </div>
 <section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique"></a></h2>
+<h3>Introduction<a class="headerlink" href="#introduction" title="Lien vers cette rubrique"></a></h3>
 <p>Nous avons créé ce site web afin de documenter le projet de pantographe et de présenter les étapes de conception, de simulation et de contrôle sous ROS 2. Le site repose sur <strong>Sphinx</strong> et est hébergé via <strong>GitHub Pages</strong>.</p>
 </section>
-<section id="creation-du-projet">
-<h2>Création du projet<a class="headerlink" href="#creation-du-projet" title="Lien vers cette rubrique"></a></h2>
+<section id="id1">
+<h3>Création du projet<a class="headerlink" href="#id1" title="Lien vers cette rubrique"></a></h3>
 <p>Nous avons ouvert un terminal sous Ubuntu avec le raccourci <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Alt</span> <span class="pre">+</span> <span class="pre">T</span></code> puis créé le répertoire du projet :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/info_indus/info_indus_tutorial
 </pre></div>
@@ -131,10 +128,12 @@ reformulé et adapté à notre projet.</p>
 </div>
 </section>
 <section id="configuration-de-vs-code">
-<h2>Configuration de VS Code<a class="headerlink" href="#configuration-de-vs-code" title="Lien vers cette rubrique"></a></h2>
+<h3>Configuration de VS Code<a class="headerlink" href="#configuration-de-vs-code" title="Lien vers cette rubrique"></a></h3>
 <p>Nous avons utilisé <strong>Visual Studio Code</strong> comme éditeur principal.</p>
+</section>
+</section>
 <section id="creation-des-fichiers-de-configuration">
-<h3>Création des fichiers de configuration<a class="headerlink" href="#creation-des-fichiers-de-configuration" title="Lien vers cette rubrique"></a></h3>
+<h2>Création des fichiers de configuration<a class="headerlink" href="#creation-des-fichiers-de-configuration" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons créé le dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> et le fichier <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>.vscode
 touch<span class="w"> </span>.vscode/settings.json
@@ -145,10 +144,8 @@ touch<span class="w"> </span>.vscode/settings.json
 touch<span class="w"> </span>keybindings.json
 </pre></div>
 </div>
-</section>
-</section>
 <section id="ouverture-du-projet">
-<h2>Ouverture du projet<a class="headerlink" href="#ouverture-du-projet" title="Lien vers cette rubrique"></a></h2>
+<h3>Ouverture du projet<a class="headerlink" href="#ouverture-du-projet" title="Lien vers cette rubrique"></a></h3>
 <p>Nous avons ouvert le projet dans VS Code :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>code<span class="w"> </span>.
 </pre></div>
@@ -156,19 +153,21 @@ touch<span class="w"> </span>keybindings.json
 <p>Nous avons complété le fichier <code class="docutils literal notranslate"><span class="pre">settings.json</span></code> afin d’améliorer le formatage et le confort d’édition.</p>
 </section>
 <section id="configuration-des-raccourcis-clavier">
-<h2>Configuration des raccourcis clavier<a class="headerlink" href="#configuration-des-raccourcis-clavier" title="Lien vers cette rubrique"></a></h2>
+<h3>Configuration des raccourcis clavier<a class="headerlink" href="#configuration-des-raccourcis-clavier" title="Lien vers cette rubrique"></a></h3>
 <p>Nous avons modifié les raccourcis clavier afin d’éviter des erreurs de manipulation et de corriger un problème lié à l’extension Sphinx.</p>
 <p>Nous avons ensuite rechargé VS Code via <code class="docutils literal notranslate"><span class="pre">Ctrl</span> <span class="pre">+</span> <span class="pre">Shift</span> <span class="pre">+</span> <span class="pre">P</span></code> puis <code class="docutils literal notranslate"><span class="pre">Developer:</span> <span class="pre">Reload</span> <span class="pre">Window</span></code>.</p>
 </section>
 <section id="installation-des-extensions">
-<h2>Installation des extensions<a class="headerlink" href="#installation-des-extensions" title="Lien vers cette rubrique"></a></h2>
+<h3>Installation des extensions<a class="headerlink" href="#installation-des-extensions" title="Lien vers cette rubrique"></a></h3>
 <p>Nous avons installé les extensions nécessaires au développement, à la documentation et à ROS 2 : Gremlins Tracker, Git Graph, Python, Python Debugger, Esbonio, ROS 2, ROS 2 Ament Task Provider, Uncrustify et GitHub Copilot. Ces extensions ont amélioré la productivité et la qualité de la documentation.</p>
 </section>
 <section id="introduction-au-versionnement-avec-git">
-<h2>Introduction au versionnement avec Git<a class="headerlink" href="#introduction-au-versionnement-avec-git" title="Lien vers cette rubrique"></a></h2>
+<h3>Introduction au versionnement avec Git<a class="headerlink" href="#introduction-au-versionnement-avec-git" title="Lien vers cette rubrique"></a></h3>
 <p>Nous avons utilisé <strong>Git</strong> afin de suivre l’évolution du projet et conserver un historique clair des modifications.</p>
+</section>
+</section>
 <section id="initialisation-du-depot">
-<h3>Initialisation du dépôt<a class="headerlink" href="#initialisation-du-depot" title="Lien vers cette rubrique"></a></h3>
+<h2>Initialisation du dépôt<a class="headerlink" href="#initialisation-du-depot" title="Lien vers cette rubrique"></a></h2>
 <p>Nous nous sommes placés à la racine du projet et avons initialisé le dépôt Git :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial
 git<span class="w"> </span>init
@@ -177,7 +176,7 @@ git<span class="w"> </span>init
 <p>Cette commande a créé le répertoire caché <code class="docutils literal notranslate"><span class="pre">.git</span></code> contenant l’historique du projet.</p>
 </section>
 <section id="verification-de-letat-du-depot">
-<h3>Vérification de l’état du dépôt<a class="headerlink" href="#verification-de-letat-du-depot" title="Lien vers cette rubrique"></a></h3>
+<h2>Vérification de l’état du dépôt<a class="headerlink" href="#verification-de-letat-du-depot" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons vérifié l’état du dépôt avec :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>status
 </pre></div>
@@ -185,7 +184,7 @@ git<span class="w"> </span>init
 <p>Le dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> apparaissait comme non suivi.</p>
 </section>
 <section id="ajout-des-fichiers">
-<h3>Ajout des fichiers<a class="headerlink" href="#ajout-des-fichiers" title="Lien vers cette rubrique"></a></h3>
+<h2>Ajout des fichiers<a class="headerlink" href="#ajout-des-fichiers" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons ajouté le dossier <code class="docutils literal notranslate"><span class="pre">.vscode</span></code> au suivi Git :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span>.vscode
 git<span class="w"> </span>status
@@ -193,7 +192,7 @@ git<span class="w"> </span>status
 </div>
 </section>
 <section id="creation-du-premier-commit">
-<h3>Création du premier commit<a class="headerlink" href="#creation-du-premier-commit" title="Lien vers cette rubrique"></a></h3>
+<h2>Création du premier commit<a class="headerlink" href="#creation-du-premier-commit" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons créé un premier commit :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit&quot;</span>
 </pre></div>
@@ -213,18 +212,15 @@ git<span class="w"> </span>config<span class="w"> </span>user.name<span class="w
 </div>
 </section>
 <section id="consultation-de-lhistorique">
-<h3>Consultation de l’historique<a class="headerlink" href="#consultation-de-lhistorique" title="Lien vers cette rubrique"></a></h3>
+<h2>Consultation de l’historique<a class="headerlink" href="#consultation-de-lhistorique" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons consulté l’historique des commits avec :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>log
 </pre></div>
 </div>
 </section>
 </section>
-</section>
 <section id="creation-dune-premiere-documentation-sphinx">
 <h1>Création d’une première documentation Sphinx<a class="headerlink" href="#creation-dune-premiere-documentation-sphinx" title="Lien vers cette rubrique"></a></h1>
-<section id="installation-de-sphinx">
-<h2>Installation de Sphinx<a class="headerlink" href="#installation-de-sphinx" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons installé Sphinx :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
 sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-f<span class="w"> </span>python3-sphinx
@@ -245,18 +241,12 @@ python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </
 pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </pre></div>
 </div>
-</section>
-<section id="configuration-de-sphinx">
-<h2>Configuration de Sphinx<a class="headerlink" href="#configuration-de-sphinx" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons initialisé la documentation avec :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial/doc
 sphinx-quickstart<span class="w"> </span>sphinx
 </pre></div>
 </div>
 <p>Nous avons conservé une séparation claire entre les sources et le build afin de ne versionner que les fichiers utiles.</p>
-</section>
-<section id="creation-de-la-documentation">
-<h2>Création de la documentation<a class="headerlink" href="#creation-de-la-documentation" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons généré la documentation HTML :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx
 make<span class="w"> </span>html
@@ -266,16 +256,12 @@ make<span class="w"> </span>html
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>firefox<span class="w"> </span>~/info_indus/info_indus_tutorial/doc/sphinx/build/html/index.html
 </pre></div>
 </div>
-</section>
-<section id="sauvegarde-avec-git">
-<h2>Sauvegarde avec Git<a class="headerlink" href="#sauvegarde-avec-git" title="Lien vers cette rubrique"></a></h2>
 <p>Nous avons ajouté la documentation au dépôt Git et effectué un commit :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>add<span class="w"> </span><span class="nb">source</span>
 git<span class="w"> </span>add<span class="w"> </span>Makefile<span class="w"> </span>make.bat<span class="w"> </span>requirements.txt
 git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First commit of the documentation&quot;</span>
 </pre></div>
 </div>
-</section>
 </section>
 <section id="publication-sur-github">
 <h1>Publication sur GitHub<a class="headerlink" href="#publication-sur-github" title="Lien vers cette rubrique"></a></h1>

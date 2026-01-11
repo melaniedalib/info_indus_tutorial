@@ -1,5 +1,8 @@
 Création du site web
-===================
+====================
+
+Création du projet
+^^^^^^^^^^^^^^^^^^
 .. note::
    Cette partie s’inspire de la documentation fournie par **M. Yguel**
    dans le cadre du cours d’informatique industrielle. Le contenu a été
@@ -14,7 +17,7 @@ Création du projet
 Nous avons ouvert un terminal sous Ubuntu avec le raccourci ``Ctrl + Alt + T`` puis créé le répertoire du projet :
 
 .. code-block:: bash
-    
+
    mkdir -p ~/info_indus/info_indus_tutorial
 
 Nous avons nommé le projet ``info_indus_tutorial`` puis nous nous sommes placés dans ce répertoire :

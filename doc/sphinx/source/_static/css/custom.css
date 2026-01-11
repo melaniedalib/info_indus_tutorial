@@ -36,7 +36,7 @@ pre {
 /* Titles: extremely compact */
 h1, h2, h3, h4, h5, h6 {
     margin-top: 0.6em !important;
-    margin-bottom: 0.2em !important;
+    margin-bottom: 0.3em !important;
     line-height: 1.2;
 }
 

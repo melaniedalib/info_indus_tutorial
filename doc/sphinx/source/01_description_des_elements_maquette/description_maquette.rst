@@ -68,17 +68,17 @@ pour la boucle de rétroaction.
 
 6. Documentation technique
 """"""""""""""""""""""""""
-.. image:: images/datasheet_AX_12A.png
+.. figure:: ../images/datasheet_AX_12A.png
    :alt: Documentation technique du servomoteur AX-12A
    :width: 400px
    :align: center
 
-.. image:: images/control_table_EEPROM_area.png
+.. figure:: ../images/control_table_EEPROM_area.png
    :alt: Table de control de la mémoire EEPROM
    :width: 400px
    :align: center
 
-.. image:: images/control_table_of_RAM_Area.png
+.. figure:: ../images/control_table_of_RAM_Area.png
    :alt: table de control de la mémoire RAM
    :width: 400px
    :align: center

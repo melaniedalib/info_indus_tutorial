@@ -62,12 +62,12 @@
 <li class="toctree-l3"><a class="reference internal" href="#branchement-des-moteurs">Branchement des moteurs :</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#programmation">Programmation :</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#position-1">Position 1</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#piloter-en-4-positions">Piloter en 4 positions :</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#position-4">Position 4</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="#brouillon-commandes-ros">Brouillon : Commandes ROS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#recuperation-de-la-position-des-moteurs-ax-12a">Récupération de la position des moteurs (AX-12A)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#test-de-communication-python">Test de communication Python</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#interpretation-de-la-position-angulaire">Interprétation de la position angulaire</a></li>
 </ul>
 </li>
@@ -206,10 +206,14 @@ colcon build –symlink-install</p>
 </section>
 <section id="position-1">
 <h3>Position 1<a class="headerlink" href="#position-1" title="Lien vers cette rubrique"></a></h3>
-<video width="80%" controls>
+<video width="50%" controls>
     <source src="_static/videos/1pos.mp4" type="video/mp4">
     Votre navigateur ne supporte pas la vidéo.
-</video><p>Ensuite, nous avons créé un noeud, afin que notre moteur 1 aille en 4 positions différentes. Pour ce faire, nous nous créons un package :</p>
+</video></section>
+</section>
+<section id="piloter-en-4-positions">
+<h2>Piloter en 4 positions :<a class="headerlink" href="#piloter-en-4-positions" title="Lien vers cette rubrique"></a></h2>
+<p>Ensuite, nous avons créé un noeud, afin que notre moteur 1 aille en 4 positions différentes. Pour ce faire, nous nous créons un package :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotics_ws/src
 ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>dynamixel_controller<span class="w"> </span>--dependencies<span class="w"> </span>rclpy<span class="w"> </span>dynamixel_sdk_custom_interfaces
 </pre></div>
@@ -284,68 +288,16 @@ def<span class="w"> </span>main<span class="o">(</span><span class="nv">args</sp
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>dynamixel_controller<span class="w"> </span>move_positions
 </pre></div>
 </div>
-<p>Dans le terminal, nous voyions :
-.. code-block:: bash</p>
-<blockquote>
-<div><p>[INFO] [dynamixel_mover]: Publishing position #1: dynamixel_sdk_custom_interfaces.msg.SetPosition(id=1, position=1000)
-[INFO] [dynamixel_mover]: Publishing position #2: …</p>
-</div></blockquote>
-</section>
+<p>Dans le terminal, nous voyions :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="o">[</span>dynamixel_mover<span class="o">]</span>:<span class="w"> </span>Publishing<span class="w"> </span>position<span class="w"> </span><span class="c1">#1: dynamixel_sdk_custom_interfaces.msg.SetPosition(id=1, position=1000)</span>
+<span class="o">[</span>INFO<span class="o">]</span><span class="w"> </span><span class="o">[</span>dynamixel_mover<span class="o">]</span>:<span class="w"> </span>Publishing<span class="w"> </span>position<span class="w"> </span><span class="c1">#2: ...</span>
+</pre></div>
+</div>
 <section id="position-4">
 <h3>Position 4<a class="headerlink" href="#position-4" title="Lien vers cette rubrique"></a></h3>
 <a class="reference internal image-reference" href="06_ROS2/_static/videos/1pos.gif"><img alt="06_ROS2/_static/videos/1pos.gif" class="align-center" src="06_ROS2/_static/videos/1pos.gif" style="width: 80%;" />
 </a>
 </section>
-</section>
-<section id="brouillon-commandes-ros">
-<h2>Brouillon : Commandes ROS<a class="headerlink" href="#brouillon-commandes-ros" title="Lien vers cette rubrique"></a></h2>
-<p>Initialisation de l’environnement ROS 2 :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.sh
-</pre></div>
-</div>
-<p>Vérification de la version ROS :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt<span class="w"> </span>show<span class="w"> </span>ros-<span class="si">${</span><span class="nv">ROS_DISTRO</span><span class="si">}</span>-ros-core
-</pre></div>
-</div>
-<p>—</p>
-</section>
-<section id="recuperation-de-la-position-des-moteurs-ax-12a">
-<h2>Récupération de la position des moteurs (AX-12A)<a class="headerlink" href="#recuperation-de-la-position-des-moteurs-ax-12a" title="Lien vers cette rubrique"></a></h2>
-<p>Pour les servos AX-12A, la position actuelle se lit à l’adresse <strong>36</strong>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>update
-sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>python3-pip
-pip<span class="w"> </span>install<span class="w"> </span>dynamixel-sdk
-</pre></div>
-</div>
-<p>Vérification du port série :</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/dev/ttyUSB*
-</pre></div>
-</div>
-<p>—</p>
-</section>
-<section id="test-de-communication-python">
-<h2>Test de communication Python<a class="headerlink" href="#test-de-communication-python" title="Lien vers cette rubrique"></a></h2>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">dynamixel_sdk</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-
-<span class="n">DEVICENAME</span> <span class="o">=</span> <span class="s1">&#39;/dev/ttyUSB0&#39;</span>
-<span class="n">BAUDRATE</span> <span class="o">=</span> <span class="mi">57600</span>
-<span class="n">PROTOCOL_VERSION</span> <span class="o">=</span> <span class="mf">1.0</span>
-<span class="n">DXL_ID</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="n">ADDR_PRESENT_POSITION</span> <span class="o">=</span> <span class="mi">36</span>
-
-<span class="n">portHandler</span> <span class="o">=</span> <span class="n">PortHandler</span><span class="p">(</span><span class="n">DEVICENAME</span><span class="p">)</span>
-<span class="n">packetHandler</span> <span class="o">=</span> <span class="n">PacketHandler</span><span class="p">(</span><span class="n">PROTOCOL_VERSION</span><span class="p">)</span>
-
-<span class="n">portHandler</span><span class="o">.</span><span class="n">openPort</span><span class="p">()</span>
-<span class="n">portHandler</span><span class="o">.</span><span class="n">setBaudRate</span><span class="p">(</span><span class="n">BAUDRATE</span><span class="p">)</span>
-
-<span class="n">pos</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">packetHandler</span><span class="o">.</span><span class="n">read2ByteTxRx</span><span class="p">(</span>
-    <span class="n">portHandler</span><span class="p">,</span> <span class="n">DXL_ID</span><span class="p">,</span> <span class="n">ADDR_PRESENT_POSITION</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Position actuelle : </span><span class="si">{</span><span class="n">pos</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>—</p>
 </section>
 <section id="interpretation-de-la-position-angulaire">
 <h2>Interprétation de la position angulaire<a class="headerlink" href="#interpretation-de-la-position-angulaire" title="Lien vers cette rubrique"></a></h2>

@@ -28,6 +28,7 @@ extensions = [
     "sphinx_rtd_theme",
     "myst_parser",
     "sphinx_design",
+    'sphinx_tabs.tabs',
 ]
 
 

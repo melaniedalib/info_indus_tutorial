@@ -142,14 +142,14 @@ Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d'un certain ang
 .. raw:: html
 
    <video width="600" controls>
-       <source src="_images/1pos.mp4" type="video/mp4">
+       <source src="_static/videos/1pos.mp4" type="video/mp4">
        Votre navigateur ne supporte pas la vidéo.
    </video>
 
 .. raw:: html
 
    <video width="600" controls>
-       <source src="_images/4pos.mp4" type="video/mp4">
+       <source src="_static/videos/4pos.mp4" type="video/mp4">
        Votre navigateur ne supporte pas la vidéo.
    </video>
 

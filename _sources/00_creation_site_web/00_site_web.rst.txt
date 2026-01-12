@@ -55,17 +55,41 @@ Nous avons ouvert le projet dans VS Code :
 
 Nous avons complété le fichier ``settings.json`` afin d’améliorer le formatage et le confort d’édition.
 
-.. literalinclude:: .vscode/settings.json
-   :language: json
-   :caption: Configuration VS Code
+.. code-block:: bash
+
+   {
+    "editor.formatOnSave": true,
+    "editor.detectIndentation": true,
+    "editor.formatOnPaste": true,
+    "editor.wordWrap": "on",
+    "C_Cpp.clang_format_sortIncludes": false,
+    "python.formatting.autopep8Args": [
+        "--ignore",
+        "E402"
+    ],
+    "terminal.integrated.scrollback": 100000,
+    "workbench.editor.enablePreview": false,
+    "[restructuredtext]": {
+        "editor.tabSize": 3
+    },
+   }
 
 Configuration des raccourcis clavier
 ------------------------------------
 Nous avons modifié les raccourcis clavier afin d’éviter des erreurs de manipulation et de corriger un problème lié à l’extension Sphinx.
 
-.. literalinclude:: resources/code/config.vscode/keybindings.json
-   :language: json
-   :caption: Raccourcis clavier
+.. code-block:: bash
+
+   [
+    {
+        "key": "ctrl+q",
+        "command": "-workbench.action.quit"
+    },
+    {
+        "key": "enter",
+        "command": "-restructuredtext.editor.listEditing"
+      }
+   ]  
 
 Nous avons ensuite rechargé VS Code via ``Ctrl + Shift + P`` puis ``Developer: Reload Window``.
 

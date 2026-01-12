@@ -1,67 +1,53 @@
-Modèle URDF du pantographe
-==========================
+Gestion de la Géométrie et Importation des Meshes
+=================================================
 
 .. contents::
    :local:
    :depth: 2
 
-Introduction
-------------
+1. Importation de la géométrie du robot
+---------------------------------------
 
-Cette partie décrit la réalisation de la description URDF du pantographe.  
-L’objectif est de modéliser correctement la structure mécanique du robot afin de
-permettre sa visualisation et sa simulation dans ROS2.
+La première étape de la description URDF a consisté à importer la géométrie du robot.  
+Bien que la modélisation 3D initiale du pantographe soit disponible aux formats **STP** et **DAE**, des contraintes techniques ont imposé une conversion.
 
-Plan
-----
+**Problématique :**  
+Les fichiers DAE présentaient des erreurs d'orientation d'axes lors de l'importation.
 
-#. Importer les fichiers
-#. Créer un fichier Xacro
-#. Remplir et orienter correctement le fichier Xacro
+**Solution :**  
+Utilisation du logiciel *Creo Parametric* pour générer des fichiers **STL** à partir des fichiers sources STP.  
+Cette méthode a permis de définir manuellement et précisément l'origine et l'orientation des axes de chaque pièce avant l'exportation, garantissant une compatibilité parfaite avec le format URDF.
 
-Importer les fichiers
----------------------
 
-Afin de réaliser la description URDF du robot, il est nécessaire d’importer sa géométrie
-sous forme de *mesh* dans le fichier URDF.
-
-La modélisation 3D du pantographe est disponible sous les formats **STP** et **DAE**.
-Cependant, le format URDF n’accepte que les fichiers **DAE**.  
-Un problème a été rencontré : les axes des fichiers DAE étaient mal orientés.
-
-Pour résoudre ce problème, des fichiers **STL** ont été générés à partir des fichiers
-STP à l’aide du logiciel *Creo Parametric*.  
-Cette étape a permis de choisir correctement l’orientation des axes avant l’export
-vers un format compatible avec l’URDF.
-
-Créer un fichier URDF (Xacro)
+2. Structure du Package ROS 2
 -----------------------------
 
-Pour décrire le robot, un fichier **Xacro** est utilisé à la place d’un fichier URDF
-classique.
+Pour organiser le projet, un package nommé **mon_robot_description** a été créé avec l'arborescence standardisée suivante :  
 
-L’utilisation de Xacro permet de :
-- définir des constantes en début de fichier ;
-- réutiliser ces constantes comme paramètres ;
-- simplifier la description du robot.
+- **/meshes** : Contient l'ensemble des fichiers STL exportés.  
+- **/urdf** : Contient le fichier de description principal au format Xacro.  
+- **/launch** : Regroupe les scripts Python permettant de lancer la visualisation sur RViz2.  
 
-Par exemple, les propriétés d’inertie des bras peuvent être définies une seule fois
-et réutilisées pour plusieurs liens.
 
-Remplir et orienter correctement le fichier Xacro
---------------------------------------------------
+3. Développement du Modèle Xacro
+--------------------------------
 
-Chaque lien et chaque articulation du pantographe est défini en respectant :
-- la position des repères ;
-- l’orientation correcte des axes ;
-- la cohérence entre les éléments mécaniques.
+Le choix du format **Xacro (XML Macros)** a été privilégié par rapport à l'URDF classique pour ses avantages en termes de flexibilité :  
 
-Simulation
-----------
+- **Paramétrage :** Définition de constantes (dimensions, masses, offsets) en début de fichier.  
+- **Modularité :** Réutilisation des constantes comme paramètres pour plusieurs liens (*links*), notamment pour les propriétés d'inertie des bras, évitant ainsi les répétitions et les erreurs de saisie.  
 
-Pour la simulation, un **dummy link** est utilisé afin de connecter *link3* à l’extrémité
-de *link2* et non à l’origine de son repère.
 
-Cette approche permet de :
-- respecter la géométrie réelle du robot ;
-- garantir une simulation correcte dans RViz et Gazebo.
+4. Configuration des Liens et Articulations
+-------------------------------------------
+
+L'intégration dans le fichier Xacro a nécessité une attention particulière sur :  
+
+- La position exacte des repères de chaque lien.  
+- L'orientation des axes de rotation des articulations (*joints*).  
+- La cohérence globale de la chaîne cinématique.  
+
+.. note::
+   Remarque : il n’est pas possible de réaliser une boucle fermée dans une description URDF.  
+   Nous avons donc décrit les deux bras indépendamment afin de les relier ensuite lors de la simulation.
+

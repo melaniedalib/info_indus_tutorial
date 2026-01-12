@@ -70,6 +70,8 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#interpretation-de-la-position-angulaire">Interprétation de la position angulaire</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#piloter-deux-moteurs-en-meme-temps">Piloter deux moteurs en même temps :</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#modele-geometrique-indirect">Modèle géométrique indirect :</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../07_Gazebo/07_Gazebo.html">Limites de l’URDF et modélisation pour la simulation</a></li>
@@ -319,6 +321,315 @@ def<span class="w"> </span>main<span class="o">(</span><span class="nv">args</sp
 <p class="admonition-title">Avertissement</p>
 <p>Le débattement angulaire maximal est de <strong>300°</strong>.</p>
 </div>
+<p>Une fois que nous avons piloter en position un moteur. Nous nous sommes rendu compte qu’en remplaçant l’identifiant 1 par un 2, nous parvenons à piloter en position le 2nd moteur.
+Nous avons ainsi cherché à piloter en position les deux moteurs en même temps.</p>
+</section>
+<section id="piloter-deux-moteurs-en-meme-temps">
+<h2>Piloter deux moteurs en même temps :<a class="headerlink" href="#piloter-deux-moteurs-en-meme-temps" title="Lien vers cette rubrique"></a></h2>
+<p>Tout d’abord, nous avons créé un code, qui permet de commander la position des deux moteurs simultanément et individuellement.</p>
+<p>Pour ce faire, nous nous plaçons dans le workspace :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotics_ws/src
+</pre></div>
+</div>
+<p>L’on va créé un package python afin de mettre le fichier que nous venons de créer dedans :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>pkg<span class="w"> </span>create<span class="w"> </span>two_motors_controller<span class="w"> </span>--build-type<span class="w"> </span>ament_python<span class="w"> </span>--dependencies<span class="w"> </span>rclpy<span class="w"> </span>dynamixel_sdk_custom_interfaces
+</pre></div>
+</div>
+<p>Voici l’endroit où il faudra mettre le fichier move_two_motors.py :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>~/robotics_ws/src/two_motors_controller/
+└──<span class="w"> </span>two_motors_controller/
+<span class="w">   </span>└──<span class="w"> </span>move_two_motors.py
+</pre></div>
+</div>
+<p>Nous créons le fichier :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>move_two_motors.py
+</pre></div>
+</div>
+<p>Dans ce fichier nous mettons le code :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w">   </span><span class="c1">#!/usr/bin/env python3</span>
+
+import<span class="w"> </span>rclpy
+from<span class="w"> </span>rclpy.node<span class="w"> </span>import<span class="w"> </span>Node
+from<span class="w"> </span>dynamixel_sdk_custom_interfaces.msg<span class="w"> </span>import<span class="w"> </span>SetPosition
+import<span class="w"> </span><span class="nb">time</span>
+
+
+class<span class="w"> </span>TwoMotorsController<span class="o">(</span>Node<span class="o">)</span>:
+
+<span class="w">   </span>def<span class="w"> </span>__init__<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">      </span>super<span class="o">()</span>.__init__<span class="o">(</span><span class="s1">&#39;two_motors_controller&#39;</span><span class="o">)</span>
+
+<span class="w">      </span>self.publisher_<span class="w"> </span><span class="o">=</span><span class="w"> </span>self.create_publisher<span class="o">(</span>
+<span class="w">            </span>SetPosition,
+<span class="w">            </span><span class="s1">&#39;/set_position&#39;</span>,
+<span class="w">            </span><span class="m">10</span>
+<span class="w">      </span><span class="o">)</span>
+
+<span class="w">      </span><span class="c1"># 🔹 Deux moteurs, chacun aura sa propre séquence</span>
+<span class="w">      </span>self.motor_ids<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span><span class="m">1</span>,<span class="w"> </span><span class="m">2</span><span class="o">]</span>
+
+<span class="w">      </span><span class="c1"># 🔹 Positions à atteindre pour chaque moteur</span>
+<span class="w">      </span><span class="c1"># Moteur 1 : [0, 100, 150, 0]</span>
+<span class="w">      </span><span class="c1"># Moteur 2 : [0, 200, 100, 50]</span>
+<span class="w">      </span>self.targets<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[</span>
+<span class="w">            </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">0</span><span class="o">]</span>,<span class="w">       </span><span class="c1"># étape 0 : moteur 1 → 0, moteur 2 → 0</span>
+<span class="w">            </span><span class="o">[</span><span class="m">164</span>,<span class="w"> </span><span class="m">338</span><span class="o">]</span>,<span class="w">   </span><span class="c1"># étape 1</span>
+<span class="w">            </span><span class="o">[</span><span class="m">398</span>,<span class="w"> </span><span class="m">216</span><span class="o">]</span>,<span class="w">   </span><span class="c1"># étape 2</span>
+<span class="w">            </span><span class="o">[</span><span class="m">0</span>,<span class="w"> </span><span class="m">0</span><span class="o">]</span><span class="w">       </span><span class="c1"># étape 3</span>
+<span class="w">      </span><span class="o">]</span>
+
+<span class="w">      </span><span class="c1"># Paramètres de vitesse &quot;logicielle&quot;</span>
+<span class="w">      </span>self.step<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">5</span><span class="w">        </span><span class="c1"># plus petit = plus lent</span>
+<span class="w">      </span>self.delay<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.05<span class="w">    </span><span class="c1"># plus grand = plus lent</span>
+
+<span class="w">      </span><span class="c1"># 🔹 Position de départ : on initialise avec la première position cible</span>
+<span class="w">      </span>self.current_position<span class="w"> </span><span class="o">=</span><span class="w"> </span>self.targets<span class="o">[</span><span class="m">0</span><span class="o">][</span><span class="m">0</span><span class="o">]</span><span class="w">  </span><span class="c1"># pour moteur 1</span>
+<span class="w">      </span>self.current_position2<span class="w"> </span><span class="o">=</span><span class="w"> </span>self.targets<span class="o">[</span><span class="m">0</span><span class="o">][</span><span class="m">1</span><span class="o">]</span><span class="w"> </span><span class="c1"># pour moteur 2</span>
+
+<span class="w">      </span>self.run_sequence<span class="o">()</span>
+
+<span class="w">   </span>def<span class="w"> </span>move_slowly<span class="o">(</span>self,<span class="w"> </span>target1,<span class="w"> </span>target2<span class="o">)</span>:
+<span class="w">      </span><span class="c1"># Calcul du pas pour chaque moteur</span>
+<span class="w">      </span><span class="nv">step1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.step<span class="w"> </span><span class="k">if</span><span class="w"> </span>target1<span class="w"> </span>&gt;<span class="w"> </span>self.current_position<span class="w"> </span><span class="k">else</span><span class="w"> </span>-self.step
+<span class="w">      </span><span class="nv">step2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.step<span class="w"> </span><span class="k">if</span><span class="w"> </span>target2<span class="w"> </span>&gt;<span class="w"> </span>self.current_position2<span class="w"> </span><span class="k">else</span><span class="w"> </span>-self.step
+
+<span class="w">      </span><span class="c1"># Déplacement pas à pas</span>
+<span class="w">      </span>pos1,<span class="w"> </span><span class="nv">pos2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>self.current_position,<span class="w"> </span>self.current_position2
+<span class="w">      </span><span class="k">while</span><span class="w"> </span>pos1<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>target1<span class="w"> </span>or<span class="w"> </span>pos2<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>target2:
+<span class="w">            </span><span class="c1"># Moteur 1</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>pos1<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>target1:
+<span class="w">               </span><span class="nv">pos1</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>step1
+<span class="w">               </span><span class="c1"># éviter de dépasser la cible</span>
+<span class="w">               </span><span class="k">if</span><span class="w"> </span><span class="o">(</span>step1<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span>and<span class="w"> </span>pos1<span class="w"> </span>&gt;<span class="w"> </span>target1<span class="o">)</span><span class="w"> </span>or<span class="w"> </span><span class="o">(</span>step1<span class="w"> </span>&lt;<span class="w"> </span><span class="m">0</span><span class="w"> </span>and<span class="w"> </span>pos1<span class="w"> </span>&lt;<span class="w"> </span>target1<span class="o">)</span>:
+<span class="w">                  </span><span class="nv">pos1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>target1
+
+<span class="w">            </span><span class="c1"># Moteur 2</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>pos2<span class="w"> </span>!<span class="o">=</span><span class="w"> </span>target2:
+<span class="w">               </span><span class="nv">pos2</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span>step2
+<span class="w">               </span><span class="k">if</span><span class="w"> </span><span class="o">(</span>step2<span class="w"> </span>&gt;<span class="w"> </span><span class="m">0</span><span class="w"> </span>and<span class="w"> </span>pos2<span class="w"> </span>&gt;<span class="w"> </span>target2<span class="o">)</span><span class="w"> </span>or<span class="w"> </span><span class="o">(</span>step2<span class="w"> </span>&lt;<span class="w"> </span><span class="m">0</span><span class="w"> </span>and<span class="w"> </span>pos2<span class="w"> </span>&lt;<span class="w"> </span>target2<span class="o">)</span>:
+<span class="w">                  </span><span class="nv">pos2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>target2
+
+<span class="w">            </span><span class="c1"># Publier</span>
+<span class="w">            </span><span class="nv">msg1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>SetPosition<span class="o">()</span>
+<span class="w">            </span>msg1.id<span class="w"> </span><span class="o">=</span><span class="w"> </span>self.motor_ids<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">            </span>msg1.position<span class="w"> </span><span class="o">=</span><span class="w"> </span>pos1
+<span class="w">            </span>self.publisher_.publish<span class="o">(</span>msg1<span class="o">)</span>
+
+<span class="w">            </span><span class="nv">msg2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>SetPosition<span class="o">()</span>
+<span class="w">            </span>msg2.id<span class="w"> </span><span class="o">=</span><span class="w"> </span>self.motor_ids<span class="o">[</span><span class="m">1</span><span class="o">]</span>
+<span class="w">            </span>msg2.position<span class="w"> </span><span class="o">=</span><span class="w"> </span>pos2
+<span class="w">            </span>self.publisher_.publish<span class="o">(</span>msg2<span class="o">)</span>
+
+<span class="w">            </span>time.sleep<span class="o">(</span>self.delay<span class="o">)</span>
+
+<span class="w">      </span><span class="c1"># Mettre à jour les positions courantes</span>
+<span class="w">      </span>self.current_position<span class="w"> </span><span class="o">=</span><span class="w"> </span>target1
+<span class="w">      </span>self.current_position2<span class="w"> </span><span class="o">=</span><span class="w"> </span>target2
+
+<span class="w">   </span>def<span class="w"> </span>run_sequence<span class="o">(</span>self<span class="o">)</span>:
+<span class="w">      </span><span class="k">for</span><span class="w"> </span>step_targets<span class="w"> </span><span class="k">in</span><span class="w"> </span>self.targets:
+<span class="w">            </span>target1,<span class="w"> </span><span class="nv">target2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>step_targets
+<span class="w">            </span>self.get_logger<span class="o">()</span>.info<span class="o">(</span>f<span class="s1">&#39;Moving motors slowly to {target1}, {target2}&#39;</span><span class="o">)</span>
+<span class="w">            </span>self.move_slowly<span class="o">(</span>target1,<span class="w"> </span>target2<span class="o">)</span>
+<span class="w">            </span>time.sleep<span class="o">(</span><span class="m">1</span><span class="o">)</span>
+
+
+def<span class="w"> </span>main<span class="o">(</span><span class="nv">args</span><span class="o">=</span>None<span class="o">)</span>:
+<span class="w">   </span>rclpy.init<span class="o">(</span><span class="nv">args</span><span class="o">=</span>args<span class="o">)</span>
+<span class="w">   </span><span class="nv">node</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>TwoMotorsController<span class="o">()</span>
+<span class="w">   </span>rclpy.shutdown<span class="o">()</span>
+
+
+<span class="k">if</span><span class="w"> </span><span class="nv">__name__</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;__main__&#39;</span>:
+<span class="w">   </span>main<span class="o">()</span>
+</pre></div>
+</div>
+<p>Puis nous rendons le fichier executable :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>chmod<span class="w"> </span>+x<span class="w"> </span>~/robotics_ws/src/two_motors_controller/two_motors_controller/move_two_motors.py
+</pre></div>
+</div>
+<p>Puis, nous ouvrons setup.py afin de le modifier :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano<span class="w"> </span>~/robotics_ws/src/two_motors_controller/setup.py
+</pre></div>
+</div>
+<p>Modifier ça :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">entry_points</span><span class="o">={</span>
+<span class="w"> </span><span class="s1">&#39;console_scripts&#39;</span>:<span class="w"> </span><span class="o">[</span>
+<span class="w">     </span><span class="s1">&#39;move_two_motors = two_motors_controller.move_two_motors:main&#39;</span>,
+<span class="w">   </span><span class="o">]</span>,
+<span class="o">}</span>,
+</pre></div>
+</div>
+<p>Puis nous recompilons :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotics_ws
+colcon<span class="w"> </span>build
+<span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+<p>On lance le node que nous venons de créer :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>two_motors_controller<span class="w"> </span>move_two_motors
+</pre></div>
+</div>
+</section>
+<section id="modele-geometrique-indirect">
+<h2>Modèle géométrique indirect :<a class="headerlink" href="#modele-geometrique-indirect" title="Lien vers cette rubrique"></a></h2>
+<p>Nous avons fait le modèle géométrique directe sur un code python à part. Sur ce code nous donnons en entrée la postion que nous aimerions atteindre avec notre mécanisme, le code nous sort alors la consigne à donner à nos moteurs.
+Ainsi, nous pouvons utiliser le code précédent une fois avoir utilisé ce fichier.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>import<span class="w"> </span>numpy<span class="w"> </span>as<span class="w"> </span>np
+import<span class="w"> </span>matplotlib.pyplot<span class="w"> </span>as<span class="w"> </span>plt
+import<span class="w"> </span>tkinter<span class="w"> </span>as<span class="w"> </span>tk
+from<span class="w"> </span>tkinter<span class="w"> </span>import<span class="w"> </span>messagebox
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   CONSTANTES GEOMETRIQUES (RIGIDES)</span>
+<span class="c1"># ===================================================</span>
+<span class="nv">L0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">137</span>.98
+<span class="nv">L1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>.0
+<span class="nv">L2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">146</span>.3
+<span class="nv">L3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">146</span>.3
+<span class="nv">L4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>.0
+
+<span class="nv">A1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">0</span>.0<span class="o">])</span>
+<span class="nv">A5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span>L0,<span class="w"> </span><span class="m">0</span>.0<span class="o">])</span>
+
+<span class="nv">ANGLE_REF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>np.pi<span class="w"> </span>/<span class="w"> </span><span class="m">3</span><span class="w">  </span><span class="c1"># 120°</span>
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   OUTILS</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>normalize_angle<span class="o">(</span>a<span class="o">)</span>:
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>%<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>np.pi<span class="o">)</span>
+
+def<span class="w"> </span>angle_valid<span class="o">(</span>a<span class="o">)</span>:
+<span class="w">   </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.degrees<span class="o">(</span>a<span class="o">)</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>not<span class="w"> </span><span class="o">(</span><span class="m">300</span><span class="w"> </span>&lt;<span class="o">=</span><span class="w"> </span>d<span class="w"> </span>&lt;<span class="w"> </span><span class="m">360</span><span class="o">)</span>
+
+def<span class="w"> </span>circles_intersection<span class="o">(</span>C1,<span class="w"> </span>r1,<span class="w"> </span>C2,<span class="w"> </span>r2<span class="o">)</span>:
+<span class="w">   </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linalg.norm<span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span>d<span class="w"> </span>&gt;<span class="w"> </span>r1<span class="w"> </span>+<span class="w"> </span>r2<span class="w"> </span>or<span class="w"> </span>d<span class="w"> </span>&lt;<span class="w"> </span>abs<span class="o">(</span>r1<span class="w"> </span>-<span class="w"> </span>r2<span class="o">)</span><span class="w"> </span>or<span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">[]</span>
+
+<span class="w">   </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>r1**2<span class="w"> </span>-<span class="w"> </span>r2**2<span class="w"> </span>+<span class="w"> </span>d**2<span class="o">)</span><span class="w"> </span>/<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>d<span class="o">)</span>
+<span class="w">   </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.sqrt<span class="o">(</span>max<span class="o">(</span>r1**2<span class="w"> </span>-<span class="w"> </span>a**2,<span class="w"> </span><span class="m">0</span>.0<span class="o">))</span>
+
+<span class="w">   </span><span class="nv">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>C1<span class="w"> </span>+<span class="w"> </span>a<span class="w"> </span>*<span class="w"> </span><span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)</span><span class="w"> </span>/<span class="w"> </span>d
+<span class="w">   </span><span class="nv">perp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span>-<span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span><span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)[</span><span class="m">0</span><span class="o">]])</span><span class="w"> </span>/<span class="w"> </span>d
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>P<span class="w"> </span>+<span class="w"> </span>h<span class="w"> </span>*<span class="w"> </span>perp,<span class="w"> </span>P<span class="w"> </span>-<span class="w"> </span>h<span class="w"> </span>*<span class="w"> </span>perp<span class="o">]</span>
+
+def<span class="w"> </span>segments_intersect<span class="o">(</span>p1,<span class="w"> </span>p2,<span class="w"> </span>p3,<span class="w"> </span>p4<span class="o">)</span>:
+<span class="w">   </span>def<span class="w"> </span>ccw<span class="o">(</span>a,<span class="w"> </span>b,<span class="w"> </span>c<span class="o">)</span>:
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">(</span>c<span class="o">[</span><span class="m">1</span><span class="o">]</span>-a<span class="o">[</span><span class="m">1</span><span class="o">])</span>*<span class="o">(</span>b<span class="o">[</span><span class="m">0</span><span class="o">]</span>-a<span class="o">[</span><span class="m">0</span><span class="o">])</span><span class="w"> </span>&gt;<span class="w"> </span><span class="o">(</span>b<span class="o">[</span><span class="m">1</span><span class="o">]</span>-a<span class="o">[</span><span class="m">1</span><span class="o">])</span>*<span class="o">(</span>c<span class="o">[</span><span class="m">0</span><span class="o">]</span>-a<span class="o">[</span><span class="m">0</span><span class="o">])</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>ccw<span class="o">(</span>p1,<span class="w"> </span>p3,<span class="w"> </span>p4<span class="o">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>ccw<span class="o">(</span>p2,<span class="w"> </span>p3,<span class="w"> </span>p4<span class="o">)</span><span class="w"> </span>and<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>ccw<span class="o">(</span>p1,<span class="w"> </span>p2,<span class="w"> </span>p3<span class="o">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>ccw<span class="o">(</span>p1,<span class="w"> </span>p2,<span class="w"> </span>p4<span class="o">)</span>
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   INVERSE CINEMATIQUE : A3 -&gt; (q1, q4)</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>solve_from_A3<span class="o">(</span>A3<span class="o">)</span>:
+<span class="w">   </span><span class="nv">A2_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>circles_intersection<span class="o">(</span>A1,<span class="w"> </span>L1,<span class="w"> </span>A3,<span class="w"> </span>L2<span class="o">)</span>
+<span class="w">   </span><span class="nv">A4_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>circles_intersection<span class="o">(</span>A5,<span class="w"> </span>L4,<span class="w"> </span>A3,<span class="w"> </span>L3<span class="o">)</span>
+
+<span class="w">   </span><span class="nv">solutions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+
+<span class="w">   </span><span class="k">for</span><span class="w"> </span>A2<span class="w"> </span><span class="k">in</span><span class="w"> </span>A2_list:
+<span class="w">      </span><span class="nv">theta1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.arctan2<span class="o">(</span>A2<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A1<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>A2<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A1<span class="o">[</span><span class="m">0</span><span class="o">])</span>
+<span class="w">      </span><span class="nv">q1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>normalize_angle<span class="o">(</span>theta1<span class="w"> </span>-<span class="w"> </span>ANGLE_REF<span class="o">)</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>angle_valid<span class="o">(</span>q1<span class="o">)</span>:
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">      </span><span class="k">for</span><span class="w"> </span>A4<span class="w"> </span><span class="k">in</span><span class="w"> </span>A4_list:
+<span class="w">            </span><span class="c1"># ✅ CORRECTION ICI</span>
+<span class="w">            </span><span class="nv">theta4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.arctan2<span class="o">(</span>A4<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A5<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>A4<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A5<span class="o">[</span><span class="m">0</span><span class="o">])</span>
+<span class="w">            </span><span class="nv">q4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>normalize_angle<span class="o">(</span>theta4<span class="w"> </span>-<span class="w"> </span>ANGLE_REF<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>angle_valid<span class="o">(</span>q4<span class="o">)</span>:
+<span class="w">               </span><span class="k">continue</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>segments_intersect<span class="o">(</span>A1,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4<span class="o">)</span>:
+<span class="w">               </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>segments_intersect<span class="o">(</span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4,<span class="w"> </span>A5<span class="o">)</span>:
+<span class="w">               </span><span class="k">continue</span>
+
+<span class="w">            </span>solutions.append<span class="o">((</span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span>A4<span class="o">))</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>solutions
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   TRACE</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>plot_solution<span class="o">(</span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4<span class="o">)</span>:
+<span class="w">   </span>plt.figure<span class="o">(</span><span class="nv">figsize</span><span class="o">=(</span><span class="m">6</span>,<span class="w"> </span><span class="m">6</span><span class="o">))</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span>P,<span class="w"> </span>Q<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[(</span>A1,<span class="w"> </span>A2<span class="o">)</span>,<span class="w"> </span><span class="o">(</span>A2,<span class="w"> </span>A3<span class="o">)</span>,<span class="w"> </span><span class="o">(</span>A3,<span class="w"> </span>A4<span class="o">)</span>,<span class="w"> </span><span class="o">(</span>A4,<span class="w"> </span>A5<span class="o">)]</span>:
+<span class="w">      </span>plt.plot<span class="o">([</span>P<span class="o">[</span><span class="m">0</span><span class="o">]</span>,<span class="w"> </span>Q<span class="o">[</span><span class="m">0</span><span class="o">]]</span>,<span class="w"> </span><span class="o">[</span>P<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>Q<span class="o">[</span><span class="m">1</span><span class="o">]]</span>,<span class="w"> </span><span class="s1">&#39;-o&#39;</span><span class="o">)</span>
+
+<span class="w">   </span><span class="k">for</span><span class="w"> </span>name,<span class="w"> </span>P<span class="w"> </span><span class="k">in</span><span class="w"> </span>zip<span class="o">(</span>
+<span class="w">      </span><span class="o">[</span><span class="s2">&quot;A1&quot;</span>,<span class="w"> </span><span class="s2">&quot;A2&quot;</span>,<span class="w"> </span><span class="s2">&quot;A3&quot;</span>,<span class="w"> </span><span class="s2">&quot;A4&quot;</span>,<span class="w"> </span><span class="s2">&quot;A5&quot;</span><span class="o">]</span>,
+<span class="w">      </span><span class="o">[</span>A1,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4,<span class="w"> </span>A5<span class="o">]</span>
+<span class="w">   </span><span class="o">)</span>:
+<span class="w">      </span>plt.text<span class="o">(</span>P<span class="o">[</span><span class="m">0</span><span class="o">]</span>,<span class="w"> </span>P<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>name<span class="o">)</span>
+
+<span class="w">   </span>plt.axis<span class="o">(</span><span class="s2">&quot;equal&quot;</span><span class="o">)</span>
+<span class="w">   </span>plt.grid<span class="o">(</span>True<span class="o">)</span>
+<span class="w">   </span>plt.title<span class="o">(</span><span class="s2">&quot;Quadrilatère articulé – cohérence q4 OK&quot;</span><span class="o">)</span>
+<span class="w">   </span>plt.show<span class="o">()</span>
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   GUI</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>launch_gui<span class="o">()</span>:
+<span class="w">   </span>def<span class="w"> </span>validate<span class="o">()</span>:
+<span class="w">      </span>try:
+<span class="w">            </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>float<span class="o">(</span>entry_x.get<span class="o">())</span>
+<span class="w">            </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>float<span class="o">(</span>entry_y.get<span class="o">())</span>
+<span class="w">      </span>except<span class="w"> </span>ValueError:
+<span class="w">            </span>messagebox.showerror<span class="o">(</span><span class="s2">&quot;Erreur&quot;</span>,<span class="w"> </span><span class="s2">&quot;Coordonnées invalides.&quot;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">      </span><span class="nv">A3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span>x,<span class="w"> </span>y<span class="o">])</span>
+<span class="w">      </span><span class="nv">sols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>solve_from_A3<span class="o">(</span>A3<span class="o">)</span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>sols:
+<span class="w">            </span>messagebox.showerror<span class="o">(</span><span class="s2">&quot;Erreur&quot;</span>,<span class="w"> </span><span class="s2">&quot;Position A3 non réalisable.&quot;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">      </span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span><span class="nv">A4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sols<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">      </span>window.destroy<span class="o">()</span>
+
+<span class="w">      </span><span class="nv">q1_1023</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>q1*1023/360
+<span class="w">      </span><span class="nv">q4_1023</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>q4*1023/360
+<span class="w">      </span>print<span class="o">(</span><span class="s2">&quot;\n--- ANGLES COHERENTS ---&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q1 = {np.degrees(q1):.2f}°&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q4 = {np.degrees(q4):.2f}°&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q1 = {np.degrees(q1_1023):.2f}&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q4 = {np.degrees(q4_1023):.2f}&quot;</span><span class="o">)</span>
+<span class="w">      </span>plot_solution<span class="o">(</span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4<span class="o">)</span>
+
+<span class="w">   </span><span class="nv">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tk.Tk<span class="o">()</span>
+<span class="w">   </span>window.title<span class="o">(</span><span class="s2">&quot;A3 → angles (réf 120°)&quot;</span><span class="o">)</span>
+
+<span class="w">   </span>tk.Label<span class="o">(</span>window,<span class="w"> </span><span class="nv">text</span><span class="o">=</span><span class="s2">&quot;X A3 (mm)&quot;</span><span class="o">)</span>.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+<span class="w">   </span>tk.Label<span class="o">(</span>window,<span class="w"> </span><span class="nv">text</span><span class="o">=</span><span class="s2">&quot;Y A3 (mm)&quot;</span><span class="o">)</span>.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+
+<span class="w">   </span><span class="nv">entry_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tk.Entry<span class="o">(</span>window<span class="o">)</span>
+<span class="w">   </span><span class="nv">entry_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tk.Entry<span class="o">(</span>window<span class="o">)</span>
+<span class="w">   </span>entry_x.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+<span class="w">   </span>entry_y.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">   </span>tk.Button<span class="o">(</span>window,<span class="w"> </span><span class="nv">text</span><span class="o">=</span><span class="s2">&quot;Valider&quot;</span>,<span class="w"> </span><span class="nv">command</span><span class="o">=</span>validate<span class="o">)</span><span class="se">\</span>
+<span class="w">      </span>.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">columnspan</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>
+
+<span class="w">   </span>window.mainloop<span class="o">()</span>
+
+launch_gui<span class="o">()</span>
+</pre></div>
+</div>
+<p>Nous avons rentré les positions suivantes : blablablabla,
+Les résultats pour le moteur 1 [0,164,0,0], [0,338, 0, 0]</p>
+<p>Puis nous relançons le code voici la vidéo final !</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/video_finale.gif"><img alt="../_images/video_finale.gif" src="../_images/video_finale.gif" style="width: 20%;" />
+</a>
+</figure>
 </section>
 </section>
 

@@ -6,7 +6,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Modèle URDF &mdash; Documentation Dm_info_indus__tutorial </title>
+  <title>Modèle URDF du pantographe &mdash; Documentation Dm_info_indus__tutorial </title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
@@ -55,7 +55,15 @@
 <li class="toctree-l1"><a class="reference internal" href="../00_creation_site_web/00_site_web.html">Création du site web</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/description_maquette.html">Décrire la plateforme mécanique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../01_description_des_elements_maquette/materiel_electronique.html">Matériel électronique</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Modèle URDF</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Modèle URDF du pantographe</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#plan">Plan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#importer-les-fichiers">Importer les fichiers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creer-un-fichier-urdf-xacro">Créer un fichier URDF (Xacro)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#remplir-et-orienter-correctement-le-fichier-xacro">Remplir et orienter correctement le fichier Xacro</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#simulation">Simulation</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="../04_RViz/04_RViz.html">Visualisation RViz</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../05_resultat_theorique/05_programmation.html">Comparaison entre résultats pratiques et analyse théorique</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../06_ROS2/06_ROS2.html">Tests et installation logicielle</a></li>
@@ -75,7 +83,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Modèle URDF</li>
+      <li class="breadcrumb-item active">Modèle URDF du pantographe</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/03_URDF/03_URDF.rst.txt" rel="nofollow"> Afficher la source de la page</a>
       </li>
@@ -85,8 +93,70 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="modele-urdf">
-<h1>Modèle URDF<a class="headerlink" href="#modele-urdf" title="Lien vers cette rubrique"></a></h1>
+  <section id="modele-urdf-du-pantographe">
+<h1>Modèle URDF du pantographe<a class="headerlink" href="#modele-urdf-du-pantographe" title="Lien vers cette rubrique"></a></h1>
+<nav class="contents local" id="sommaire">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id1">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#plan" id="id2">Plan</a></p></li>
+<li><p><a class="reference internal" href="#importer-les-fichiers" id="id3">Importer les fichiers</a></p></li>
+<li><p><a class="reference internal" href="#creer-un-fichier-urdf-xacro" id="id4">Créer un fichier URDF (Xacro)</a></p></li>
+<li><p><a class="reference internal" href="#remplir-et-orienter-correctement-le-fichier-xacro" id="id5">Remplir et orienter correctement le fichier Xacro</a></p></li>
+<li><p><a class="reference internal" href="#simulation" id="id6">Simulation</a></p></li>
+</ul>
+</nav>
+<section id="introduction">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Lien vers cette rubrique"></a></h2>
+<p>Cette partie décrit la réalisation de la description URDF du pantographe.
+L’objectif est de modéliser correctement la structure mécanique du robot afin de
+permettre sa visualisation et sa simulation dans ROS2.</p>
+</section>
+<section id="plan">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Plan</a><a class="headerlink" href="#plan" title="Lien vers cette rubrique"></a></h2>
+<ol class="arabic simple">
+<li><p>Importer les fichiers</p></li>
+<li><p>Créer un fichier Xacro</p></li>
+<li><p>Remplir et orienter correctement le fichier Xacro</p></li>
+</ol>
+</section>
+<section id="importer-les-fichiers">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Importer les fichiers</a><a class="headerlink" href="#importer-les-fichiers" title="Lien vers cette rubrique"></a></h2>
+<p>Afin de réaliser la description URDF du robot, il est nécessaire d’importer sa géométrie
+sous forme de <em>mesh</em> dans le fichier URDF.</p>
+<p>La modélisation 3D du pantographe est disponible sous les formats <strong>STP</strong> et <strong>DAE</strong>.
+Cependant, le format URDF n’accepte que les fichiers <strong>DAE</strong>.
+Un problème a été rencontré : les axes des fichiers DAE étaient mal orientés.</p>
+<p>Pour résoudre ce problème, des fichiers <strong>STL</strong> ont été générés à partir des fichiers
+STP à l’aide du logiciel <em>Creo Parametric</em>.
+Cette étape a permis de choisir correctement l’orientation des axes avant l’export
+vers un format compatible avec l’URDF.</p>
+</section>
+<section id="creer-un-fichier-urdf-xacro">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Créer un fichier URDF (Xacro)</a><a class="headerlink" href="#creer-un-fichier-urdf-xacro" title="Lien vers cette rubrique"></a></h2>
+<p>Pour décrire le robot, un fichier <strong>Xacro</strong> est utilisé à la place d’un fichier URDF
+classique.</p>
+<p>L’utilisation de Xacro permet de :
+- définir des constantes en début de fichier ;
+- réutiliser ces constantes comme paramètres ;
+- simplifier la description du robot.</p>
+<p>Par exemple, les propriétés d’inertie des bras peuvent être définies une seule fois
+et réutilisées pour plusieurs liens.</p>
+</section>
+<section id="remplir-et-orienter-correctement-le-fichier-xacro">
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">Remplir et orienter correctement le fichier Xacro</a><a class="headerlink" href="#remplir-et-orienter-correctement-le-fichier-xacro" title="Lien vers cette rubrique"></a></h2>
+<p>Chaque lien et chaque articulation du pantographe est défini en respectant :
+- la position des repères ;
+- l’orientation correcte des axes ;
+- la cohérence entre les éléments mécaniques.</p>
+</section>
+<section id="simulation">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Simulation</a><a class="headerlink" href="#simulation" title="Lien vers cette rubrique"></a></h2>
+<p>Pour la simulation, un <strong>dummy link</strong> est utilisé afin de connecter <em>link3</em> à l’extrémité
+de <em>link2</em> et non à l’origine de son repère.</p>
+<p>Cette approche permet de :
+- respecter la géométrie réelle du robot ;
+- garantir une simulation correcte dans RViz et Gazebo.</p>
+</section>
 </section>
 
 

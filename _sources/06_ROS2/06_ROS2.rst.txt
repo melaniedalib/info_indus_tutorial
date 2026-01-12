@@ -140,6 +140,7 @@ Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d'un certain ang
 
 Pour éviter de casser la maquette, nous avons déconnecté le bras du moteur 1.
 
+
 Position 1
 ----------
 
@@ -150,20 +151,113 @@ Position 1
        Votre navigateur ne supporte pas la vidéo.
    </video>
 
+Ensuite, nous avons créé un noeud, afin que notre moteur 1 aille en 4 positions différentes. Pour ce faire, nous nous créons un package : 
+
+.. code-block:: bash
+
+   cd ~/robotics_ws/src
+   ros2 pkg create --build-type ament_python dynamixel_controller --dependencies rclpy dynamixel_sdk_custom_interfaces
+
+Nous créons le node Python :
+
+.. code-block:: bash
+
+   nano move_positions.py
+
+Dans ce fichier, nous collons le code python suivant : 
+
+.. code-block:: bash
+
+   #!/usr/bin/env python3
+
+   import rclpy
+   from rclpy.node import Node
+   from dynamixel_sdk_custom_interfaces.msg import SetPosition
+   import time
+
+   class DynamixelMover(Node):
+      def __init__(self):
+         super().__init__('dynamixel_mover')
+         # Publisher sur le topic /set_position
+         self.pub = self.create_publisher(SetPosition, '/set_position', 10)
+
+         # Liste des positions à atteindre
+         self.positions = [0, 200, 500, 300, 0]
+         self.id = 1  # ID du moteur Dynamixel
+
+         self.timer_period = 2.0  # secondes entre chaque mouvement
+         self.timer = self.create_timer(self.timer_period, self.move_motor)
+         self.index = 0
+         self.get_logger().info("Dynamixel Mover Node Started")
+
+      def move_motor(self):
+         if self.index < len(self.positions):
+               pos = self.positions[self.index]
+               msg = SetPosition()
+               msg.id = self.id
+               msg.position = pos
+               self.pub.publish(msg)
+               self.get_logger().info(f'Publishing position #{self.index+1}: {msg}')
+               self.index += 1
+         else:
+               self.get_logger().info("All positions reached, stopping.")
+               self.timer.cancel()  # stop the timer
+
+
+   def main(args=None):
+      rclpy.init(args=args)
+      node = DynamixelMover()
+      rclpy.spin(node)
+      node.destroy_node()
+      rclpy.shutdown()
+
+   if __name__ == '__main__':
+      main()
+
+Puis on modifie le fichier setup.py
+
+Dans : ~/robotics_ws/src/dynamixel_controller/setup.py il faut modifier : 
+
+.. code-block:: bash
+
+   entry_points={
+    'console_scripts': [
+        'move_positions = dynamixel_controller.move_positions:main',
+      ],
+   },
+
+Dans ~/robotics_ws, on construit le package : 
+
+.. code-block:: bash
+
+   colcon build --symlink-install
+   source install/setup.bash
+
+Puis, on lance le node : 
+
+.. code-block:: bash
+
+   ros2 run dynamixel_controller move_positions
+
+Dans le terminal, nous voyions : 
+.. code-block:: bash
+
+   [INFO] [dynamixel_mover]: Publishing position #1: dynamixel_sdk_custom_interfaces.msg.SetPosition(id=1, position=1000)
+   [INFO] [dynamixel_mover]: Publishing position #2: ...
+
+
 Position 4
 ----------
 
-.. raw:: html
-
-   <video width="80%" controls>
-       <source src="_static/videos/4pos.mp4" type="video/mp4">
-       Votre navigateur ne supporte pas la vidéo.
-   </video>
+.. image:: _static/videos/1pos.gif
+   :width: 80%
+   :align: center
 
 
 
 
-A présent, créons un code qui permet d'aller succesivement en plusieurs positions.
+
+
 Brouillon : Commandes ROS
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 

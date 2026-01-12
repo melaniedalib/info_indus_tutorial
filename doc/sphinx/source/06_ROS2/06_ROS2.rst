@@ -151,12 +151,9 @@ Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d'un certain ang
 Position 1
 ----------
 
-.. raw:: html
-
-   <video width="50%" controls>
-       <source src="_static/videos/1pos.mp4" type="video/mp4">
-       Votre navigateur ne supporte pas la vidéo.
-   </video>
+.. figure:: ../_static/videos/1pos.gif
+   :width: 20%
+   :align: center
 
 Piloter en 4 positions : 
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -260,8 +257,8 @@ Dans le terminal, nous voyions :
 Position 4
 ----------
 
-.. figure:: ../_static/videos/1pos.gif
-   :width: 80%
+.. figure:: ../_static/videos/4pos.gif
+   :width: 20%
    :align: center
 
 

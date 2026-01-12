@@ -124,6 +124,13 @@ Puis sourçons :
 
    cd ~/robotis_ws && source install/setup.bash
 
+Pour éviter de casser la maquette, nous avons déconnecté le bras du moteur 1.
+
+.. figure:: ../images/maquette_deconnectee.png
+   :alt: déconnection entre bras et moteur
+   :width: 400px
+   :align: center
+
 Ensuite lançons l'exemple. A la racine faire :
 
 .. code-block:: bash
@@ -138,7 +145,7 @@ Puis dans un seconde terminal, écrire :
 
 Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d'un certain angle.
 
-Pour éviter de casser la maquette, nous avons déconnecté le bras du moteur 1.
+
 
 
 Position 1
@@ -253,10 +260,9 @@ Dans le terminal, nous voyions :
 Position 4
 ----------
 
-.. image:: _static/videos/1pos.gif
+.. figure:: ../_static/videos/1pos.gif
    :width: 80%
    :align: center
-
 
 
 Interprétation de la position angulaire

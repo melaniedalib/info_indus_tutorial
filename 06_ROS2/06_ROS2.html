@@ -193,6 +193,11 @@ colcon build –symlink-install</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotis_ws<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
 </pre></div>
 </div>
+<p>Pour éviter de casser la maquette, nous avons déconnecté le bras du moteur 1.</p>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/maquette_deconnectee.png"><img alt="déconnection entre bras et moteur" src="../_images/maquette_deconnectee.png" style="width: 400px;" />
+</a>
+</figure>
 <p>Ensuite lançons l’exemple. A la racine faire :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>dynamixel_sdk_examples<span class="w"> </span>read_write_node
 </pre></div>
@@ -202,7 +207,6 @@ colcon build –symlink-install</p>
 </pre></div>
 </div>
 <p>Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d’un certain angle.</p>
-<p>Pour éviter de casser la maquette, nous avons déconnecté le bras du moteur 1.</p>
 </section>
 <section id="position-1">
 <h3>Position 1<a class="headerlink" href="#position-1" title="Lien vers cette rubrique"></a></h3>
@@ -295,8 +299,10 @@ def<span class="w"> </span>main<span class="o">(</span><span class="nv">args</sp
 </div>
 <section id="position-4">
 <h3>Position 4<a class="headerlink" href="#position-4" title="Lien vers cette rubrique"></a></h3>
-<a class="reference internal image-reference" href="06_ROS2/_static/videos/1pos.gif"><img alt="06_ROS2/_static/videos/1pos.gif" class="align-center" src="06_ROS2/_static/videos/1pos.gif" style="width: 80%;" />
+<figure class="align-center">
+<a class="reference internal image-reference" href="../_images/1pos.gif"><img alt="../_images/1pos.gif" src="../_images/1pos.gif" style="width: 80%;" />
 </a>
+</figure>
 </section>
 </section>
 <section id="interpretation-de-la-position-angulaire">

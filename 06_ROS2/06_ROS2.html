@@ -12,7 +12,6 @@
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
-      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
       <link rel="stylesheet" type="text/css" href="../_static/css/custom.css?v=44e3ebe8" />
 
   
@@ -25,7 +24,6 @@
       <script src="../_static/copybutton.js?v=30646c52"></script>
       <script src="../_static/translations.js?v=e6b791cb"></script>
       <script src="../_static/design-tabs.js?v=f930bc37"></script>
-      <script src="../_static/tabs.js?v=3030b3cb"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
@@ -63,6 +61,8 @@
 <li class="toctree-l2"><a class="reference internal" href="#premier-test-utilisation-des-moteurs-dynamixel">Premier test : Utilisation des moteurs Dynamixel</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#branchement-des-moteurs">Branchement des moteurs :</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#programmation">Programmation :</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#position-1">Position 1</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#position-4">Position 4</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#recuperation-de-la-position-des-moteurs-ax-12a">Récupération de la position des moteurs (AX-12A)</a></li>
@@ -202,15 +202,19 @@ colcon build –symlink-install</p>
 </div>
 <p>Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d’un certain angle.</p>
 <p>Pour éviter de casser la maquette, nous avons déconnecté le bras du moteur 1.</p>
-<div class="sphinx-tabs docutils container" id="pantographe-videos">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">Position 1</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Position 4</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><video width="80%" controls>
+</section>
+<section id="position-1">
+<h3>Position 1<a class="headerlink" href="#position-1" title="Lien vers cette rubrique"></a></h3>
+<video width="80%" controls>
     <source src="_static/videos/1pos.mp4" type="video/mp4">
     Votre navigateur ne supporte pas la vidéo.
-</video></div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><video width="80%" controls>
+</video></section>
+<section id="position-4">
+<h3>Position 4<a class="headerlink" href="#position-4" title="Lien vers cette rubrique"></a></h3>
+<video width="80%" controls>
     <source src="_static/videos/4pos.mp4" type="video/mp4">
     Votre navigateur ne supporte pas la vidéo.
-</video></div></div>
-<p>A présent, créons un code qui permet d’aller succesivement en plusieurs positions.
+</video><p>A présent, créons un code qui permet d’aller succesivement en plusieurs positions.
 Brouillon : Commandes ROS
 ^^^^^^^^^^^^^^^^^^^^^^^^^</p>
 <p>Initialisation de l’environnement ROS 2 :</p>

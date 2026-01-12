@@ -609,6 +609,6 @@ Les résultats pour le moteur 1 [0,164,0,0], [0,338, 0, 0]
 
 Puis nous relançons le code voici la vidéo final !
 
-.. figure:: ../_static/videos/video_finale.gif
-   :width: 20%
+.. figure:: ../_static/videos/video_finale2.gif
+   :width: 80%
    :align: center

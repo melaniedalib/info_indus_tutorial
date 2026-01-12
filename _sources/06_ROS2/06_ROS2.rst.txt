@@ -138,20 +138,29 @@ Puis dans un seconde terminal, écrire :
 
 Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d'un certain angle.
 
+Pour éviter de casser la maquette, nous avons déconnecté le bras du moteur 1.
 
-.. raw:: html
+.. _pantographe_videos:
+.. tabs::
 
-   <video width="600" controls>
-       <source src="_static/videos/1pos.mp4" type="video/mp4">
-       Votre navigateur ne supporte pas la vidéo.
-   </video>
+   .. tab:: Position 1
 
-.. raw:: html
+      .. raw:: html
 
-   <video width="600" controls>
-       <source src="_static/videos/4pos.mp4" type="video/mp4">
-       Votre navigateur ne supporte pas la vidéo.
-   </video>
+         <video width="80%" controls>
+             <source src="_static/videos/1pos.mp4" type="video/mp4">
+             Votre navigateur ne supporte pas la vidéo.
+         </video>
+
+   .. tab:: Position 4
+
+      .. raw:: html
+
+         <video width="80%" controls>
+             <source src="_static/videos/4pos.mp4" type="video/mp4">
+             Votre navigateur ne supporte pas la vidéo.
+         </video>
+
 
 
 A présent, créons un code qui permet d'aller succesivement en plusieurs positions.

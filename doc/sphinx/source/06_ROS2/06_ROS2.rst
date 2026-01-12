@@ -249,12 +249,10 @@ Dans le terminal, nous voyions :
 Position 4
 ----------
 
-.. raw:: html
+.. image:: _static/videos/1pos.gif
+   :width: 80%
+   :align: center
 
-   <video width="80%" controls>
-       <source src="_static/videos/4pos.mp4" type="video/mp4">
-       Votre navigateur ne supporte pas la vidéo.
-   </video>
 
 
 

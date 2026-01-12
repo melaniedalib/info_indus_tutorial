@@ -1,8 +1,139 @@
 Tests et installation logicielle
 ================================
 
-Commandes ROS
-^^^^^^^^^^^^^
+Premier test : Utilisation des moteurs Dynamixel
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rapellons que nous utilisons les servomoteur AX-12 de chez Dynamixel. Pour les piloter nous utilisons le convertisseur de communication USB U2D2.
+
+Branchement des moteurs : 
+-------------------------
+
+Pour tester les moteurs, nous avons suivi un tutoriel de Robotics OpenSourceTeam. Dans leur vidéo : DYNAMIXEL Quick Start Guide for ROS 2 `ici <https://www.youtube.com/watch?v=E8XPqDjof4U>`_, il présentent comment brancher les différents composants entre eux et comment faire tourner un moteur XL430-W250 de chez Dynamixel.
+Il faudra donc adapter certaines parties du code :
+
+Matériel nécéssaire d'après la vidéo :
+
+.. figure:: ../images/materiel.png
+   :alt: matériel
+   :width: 400px
+   :align: center
+
+.. note::
+   Nous remplaçons le moteur XL430-W250-T par le AX-12A
+
+Branchement à effectuer :
+
+.. figure:: ../images/branchements.png
+   :alt: Branchement
+   :width: 400px
+   :align: center
+
+Programmation : 
+---------------
+Tout d'abord, nous avons créé notre répertoire de travail :
+
+.. code-block:: bash
+
+   mkdir -p ~/robotics_ws/src
+
+Puis nous nous rendons dedans à l'aide de la commande suivante : 
+.. code-block:: bash
+
+   cd ~/robotics_ws/src/
+
+Ensuite nous clonons l'exemple de Dynamixel rajoutons humbel-devel afin que nous puissions le lancer avec n'importe quelle version de ROS2: 
+
+.. code-block:: bash
+
+   git clone -b humbel-devel https://github.com/ROBOTICS-GIT/DynamixelSDK
+
+Puis, entrez afin de compiler le projet: 
+
+.. code-block:: bash
+
+   cd ~/robotis_ws && colcon build --symlink-install
+
+A présent, sourçons notre projet à l'aide de la commande suivante : 
+.. code-block:: bash
+
+   source /opt/ros/VERSIONROS2/setup.bash
+
+Afin d'éviter de devoir sourcer dans chaque terminal, modifions le fichier bashrc.
+
+.. code-block:: bash
+
+   sudo nano ~/.bashrc
+
+Puis Ctrl + S et Ctrl + X pour enregistrer et quitter.
+
+La communication avec les moteurs se fait via USB. Via la commande suivante, nous pouvons savoir sur quel port nous communiquons : Retournons tout d'abord à la racine
+
+.. code-block:: bash
+
+   cd ..
+   cd ..
+   ls /dev/tty*
+
+Dans notre cas le port était : /dev/ttyUSB0
+
+Puis utilisons whoami afin de permet de connaitre le nom de son compte linux :
+
+.. code-block:: bash
+
+   whoami
+
+.. code-block:: bash
+
+   sudo usermod -aG dialout <linux_account>
+
+Le projet que nous avons cloné, est adapté pour les moteurs XL430-W250. Ainsi nous devons adapter le code pour qu'il fonctionne avec nos moteurs. Nous devons utiliser adapter les adresses du tableau : Control Table of Ram Area de la datasheet.
+Nous devons changer certaines adresses dans le fichier **read_write_node.cpp**. Ainsi nous avons changé de répertoire et sommes allez dans
+
+.. code-block:: bash
+
+   cd ~/robotis_ws/src/DynamixelSDK/dynamixel_sdk_examples/src && code .
+
+Dans le fichier **read_write_node.cpp**, nous avons changez les lignes 42 à 46 suivantes en : 
+
+.. code-block:: bash
+
+   // Control table address for X series (except XL-320)
+   #define ADDR_OPERATING_MODE 255
+   #define ADDR_TORQUE_ENABLE 24
+   #define ADDR_GOAL_POSITION 30
+   #define ADDR_PRESENT_POSITION 36
+
+Et ligne 49, nous avons adapté le protocole de communication.
+
+.. code-block:: bash
+
+   #define PROTOCOL_VERSION 1.0
+
+Puis ligne 52 nous devons adapter le baudrate en 115200 afin de communiquer à la même fréquence
+
+Puis sourçons :
+
+.. code-block:: bash
+
+   cd ~/robotis_ws && source install/setup.bash
+
+Ensuite lançons l'exemple. A la racine faire :
+
+.. code-block:: bash
+
+   ros2 run dynamixel_sdk_examples read_write_node
+
+Puis dans un seconde terminal, écrire : 
+
+.. code-block:: bash
+
+   ros2 topic pub -1 /set_position dynamixel_sdk_custom_interfaces/SetPosition "{id: 1, position: 0}"
+
+Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d'un certain angle.
+
+
+Brouillon : Commandes ROS
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Initialisation de l’environnement ROS 2 :
 

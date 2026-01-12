@@ -15,7 +15,7 @@ Matériel nécéssaire d'après la vidéo :
 
 .. figure:: ../images/materiel.png
    :alt: matériel
-   :width: 400px
+   :width: 600px
    :align: center
 
 .. note::
@@ -25,7 +25,7 @@ Branchement à effectuer :
 
 .. figure:: ../images/branchements.png
    :alt: Branchement
-   :width: 400px
+   :width: 600px
    :align: center
 
 Programmation : 

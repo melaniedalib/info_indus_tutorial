@@ -13,6 +13,6 @@ De plus on utilise l’outil joint_state_publisher_gui afin de pouvoir commander
 
 .. figure:: ../images/rviz_mouse.png
    :alt: Branchement
-   :width: 600px
+   :width: 150px
    :align: center
 

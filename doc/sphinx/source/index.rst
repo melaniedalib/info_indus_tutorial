@@ -23,7 +23,7 @@ Le projet consiste à :
 #. :doc:`Créer la représentation mécanique du pantographe dans un fichier URDF <03_URDF/03_URDF>`
 #. :doc:`Visualiser le résultat avec RViz <04_RViz/04_RViz>`
 #. :doc:`Décrire la dynamique et donner les équations permettant de piloter la position de l'organe terminal du pantographe <05_resultat_theorique/05_programmation>`
-#. :doc:`Créer un package ROS2 pour contrôler le pantographe et pilotage d'un moteur <06_ROS2/06_ROS2>`
+#. :doc:`Pilotage du panthographe <06_ROS2/06_ROS2>`
 #. :doc:`Tester la simulation avec Gazebo et RViz <07_Gazebo/07_Gazebo>`
 
 Le rendu attendu est un site web correspondant à un fork du site internet de M. Yguel. Ce site décrira comment nous sommes parvenus à piloter le pantographe réel.

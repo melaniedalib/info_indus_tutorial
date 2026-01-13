@@ -608,17 +608,17 @@ Nous avons rentré les positions suivantes :
 
 .. figure:: ../images/position0.jpeg
    :alt: matériel
-   :width: 100px
+   :width: 200px
    :align: center
 
 .. figure:: ../images/position1.jpeg
    :alt: matériel
-   :width: 100px
+   :width: 200px
    :align: center
 
 .. figure:: ../images/position2.jpeg
    :alt: matériel
-   :width: 100px
+   :width: 200px
    :align: center
 
 Nous obtenons les positions d'angle du moteur suivant : 
@@ -634,10 +634,10 @@ Voici les positions théoriques intermédiaires :
 
 .. figure:: ../images/theo_1.jpeg
    :alt: matériel
-   :width: 600px
+   :width: 300px
    :align: center
 
 .. figure:: ../images/theo_2.jpeg
    :alt: matériel
-   :width: 600px
+   :width: 300px
    :align: center

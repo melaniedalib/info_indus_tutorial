@@ -54,6 +54,7 @@ Puis, entrez afin de compiler le projet:
    cd ~/robotis_ws && colcon build --symlink-install
 
 A présent, sourçons notre projet à l'aide de la commande suivante : 
+
 .. code-block:: bash
 
    source /opt/ros/humble/setup.bash
@@ -111,6 +112,7 @@ Et ligne 49, nous avons adapté le protocole de communication.
 
 Puis ligne 52 nous devons adapter le baudrate en 115200 afin de communiquer à la même fréquence
 Puis nous faisons un colcon build :
+
 .. code-block:: bash
 
    cd ~/robotics_ws
@@ -143,7 +145,7 @@ Puis dans un seconde terminal, écrire :
 
    ros2 topic pub -1 /set_position dynamixel_sdk_custom_interfaces/SetPosition "{id: 1, position: 0}"
 
-Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d'un certain angle.
+Faire varier theta entre 0 et 1023, afin de faire tourner le moteur d'un certain angle.
 
 
 
@@ -622,7 +624,7 @@ Nous avons rentré les positions suivantes :
    :align: center
 
 Nous obtenons les positions d'angle du moteur suivant : 
-Les résultats pour le moteur 1 [0,164,398,0], [0,338, 216, 0]
+Les résultats pour le moteur 1 : [0,164,398,0], et pour le moteur 2 : [0,338, 216, 0]
 
 Puis nous relançons le code voici la vidéo final !
 
@@ -632,12 +634,13 @@ Puis nous relançons le code voici la vidéo final !
 
 Voici les positions théoriques intermédiaires : 
 
-.. figure:: ../images/theo_1.jpeg
-   :alt: matériel
-   :width: 300px
+.. list-table::
    :align: center
 
-.. figure:: ../images/theo_2.jpeg
-   :alt: matériel
-   :width: 300px
-   :align: center
+   * - .. image:: ../images/theo_1.jpeg
+          :width: 300px
+          :alt: matériel
+     - .. image:: ../images/theo_2.jpeg
+          :width: 300px
+          :alt: matériel
+

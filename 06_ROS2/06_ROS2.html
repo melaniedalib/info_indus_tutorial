@@ -144,11 +144,10 @@ Il faudra donc adapter certaines parties du code. L’objectif est de déjà com
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotis_ws<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
 </pre></div>
 </div>
-<p>A présent, sourçons notre projet à l’aide de la commande suivante :
-.. code-block:: bash</p>
-<blockquote>
-<div><p>source /opt/ros/humble/setup.bash</p>
-</div></blockquote>
+<p>A présent, sourçons notre projet à l’aide de la commande suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</pre></div>
+</div>
 <p>Afin d’éviter de devoir sourcer dans chaque terminal, modifions le fichier bashrc.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>nano<span class="w"> </span>~/.bashrc
 </pre></div>
@@ -186,13 +185,12 @@ Nous devons changer certaines adresses dans le fichier <strong>read_write_node.c
 </pre></div>
 </div>
 <p>Puis ligne 52 nous devons adapter le baudrate en 115200 afin de communiquer à la même fréquence
-Puis nous faisons un colcon build :
-.. code-block:: bash</p>
-<blockquote>
-<div><p>cd ~/robotics_ws
-rm -rf build install log
-colcon build –symlink-install</p>
-</div></blockquote>
+Puis nous faisons un colcon build :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotics_ws
+rm<span class="w"> </span>-rf<span class="w"> </span>build<span class="w"> </span>install<span class="w"> </span>log
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install
+</pre></div>
+</div>
 <p>Puis sourçons :</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotis_ws<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">source</span><span class="w"> </span>install/setup.bash
 </pre></div>
@@ -210,7 +208,7 @@ colcon build –symlink-install</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>topic<span class="w"> </span>pub<span class="w"> </span>-1<span class="w"> </span>/set_position<span class="w"> </span>dynamixel_sdk_custom_interfaces/SetPosition<span class="w"> </span><span class="s2">&quot;{id: 1, position: 0}&quot;</span>
 </pre></div>
 </div>
-<p>Faire varier 0 entre 0 et 1023, afin de faire tourner le moteur d’un certain angle.</p>
+<p>Faire varier theta entre 0 et 1023, afin de faire tourner le moteur d’un certain angle.</p>
 </section>
 <section id="position-1">
 <h3>Position 1<a class="headerlink" href="#position-1" title="Lien vers cette rubrique"></a></h3>
@@ -637,21 +635,24 @@ launch_gui<span class="o">()</span>
 </a>
 </figure>
 <p>Nous obtenons les positions d’angle du moteur suivant :
-Les résultats pour le moteur 1 [0,164,398,0], [0,338, 216, 0]</p>
+Les résultats pour le moteur 1 : [0,164,398,0], et pour le moteur 2 : [0,338, 216, 0]</p>
 <p>Puis nous relançons le code voici la vidéo final !</p>
 <figure class="align-center">
 <a class="reference internal image-reference" href="../_images/video_finale2.gif"><img alt="../_images/video_finale2.gif" src="../_images/video_finale2.gif" style="width: 80%;" />
 </a>
 </figure>
 <p>Voici les positions théoriques intermédiaires :</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/theo_1.jpeg"><img alt="matériel" src="../_images/theo_1.jpeg" style="width: 300px;" />
+<table class="docutils align-center">
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="../_images/theo_1.jpeg"><img alt="matériel" src="../_images/theo_1.jpeg" style="width: 300px;" />
 </a>
-</figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/theo_2.jpeg"><img alt="matériel" src="../_images/theo_2.jpeg" style="width: 300px;" />
+</td>
+<td><a class="reference internal image-reference" href="../_images/theo_2.jpeg"><img alt="matériel" src="../_images/theo_2.jpeg" style="width: 300px;" />
 </a>
-</figure>
+</td>
+</tr>
+</tbody>
+</table>
 </section>
 </section>
 

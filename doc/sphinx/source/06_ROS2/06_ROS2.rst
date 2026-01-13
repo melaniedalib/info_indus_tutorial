@@ -1,5 +1,5 @@
-Pilotage du panthographe 
-========================
+Pilotage du panthographes 
+=========================
 
 Premier test : Utilisation des moteurs Dynamixel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

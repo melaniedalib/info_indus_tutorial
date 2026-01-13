@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Informatique industrielle
-=====================================
+=========================
 
 Ce projet a été réalisé par Bonnet Gaëtan, Dalibard Mélanie et Luton Philémon dans le cadre du cours d'informatique industrielle de l’année 2025/2026 en MIQ5.
 
@@ -12,9 +12,8 @@ L'objectif de cette page internet est d'expliquer le fonctionnement de la platef
 
 Voici une image de la maquette :
 
-.. image:: images/real_system_photo.png
-   :alt: Photo du système réel
-   :width: 400px
+.. figure:: ./_static/videos/video_finale2.gif
+   :width: 80%
    :align: center
 
 Le projet consiste à :

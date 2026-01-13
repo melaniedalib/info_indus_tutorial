@@ -98,6 +98,92 @@
 <a class="reference internal image-reference" href="../_images/rviz_mouse.png"><img alt="Branchement" src="../_images/rviz_mouse.png" style="width: 150px;" />
 </a>
 </figure>
+<p>Voici le programme launch :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>import<span class="w"> </span>os
+
+from<span class="w"> </span>ament_index_python.packages<span class="w"> </span>import<span class="w"> </span>get_package_share_directory
+
+from<span class="w"> </span>launch<span class="w"> </span>import<span class="w"> </span>LaunchDescription
+
+from<span class="w"> </span>launch_ros.actions<span class="w"> </span>import<span class="w"> </span>Node
+
+from<span class="w"> </span>launch.substitutions<span class="w"> </span>import<span class="w"> </span>Command
+
+
+
+def<span class="w"> </span>generate_launch_description<span class="o">()</span>:
+
+<span class="w">    </span><span class="c1"># Chemin vers le fichier URDF</span>
+
+<span class="w">    </span><span class="nv">pkg_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mon_robot_description&#39;</span>
+
+<span class="w">    </span><span class="nv">file_name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;robot.xacro&#39;</span>
+
+<span class="w">    </span><span class="nv">pkg_share</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>get_package_share_directory<span class="o">(</span>pkg_name<span class="o">)</span>
+
+<span class="w">    </span><span class="nv">urdf_file</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>os.path.join<span class="o">(</span>pkg_share,<span class="w"> </span><span class="s1">&#39;urdf&#39;</span>,<span class="w"> </span>file_name<span class="o">)</span>
+
+
+
+<span class="w">    </span><span class="c1">#utilise pour comprendre le fichier xacro</span>
+
+<span class="w">    </span><span class="nv">robot_desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>Command<span class="o">([</span><span class="s1">&#39;xacro &#39;</span>,<span class="w"> </span>urdf_file<span class="o">])</span>
+
+
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span>LaunchDescription<span class="o">([</span>
+
+<span class="w">        </span><span class="c1"># Noeud qui publie l&#39;état du robot</span>
+
+<span class="w">        </span>Node<span class="o">(</span>
+
+<span class="w">            </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;robot_state_publisher&#39;</span>,
+
+<span class="w">            </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;robot_state_publisher&#39;</span>,
+
+<span class="w">            </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;robot_state_publisher&#39;</span>,
+
+<span class="w">            </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>,
+
+<span class="w">            </span><span class="nv">parameters</span><span class="o">=[{</span><span class="s1">&#39;robot_description&#39;</span>:<span class="w"> </span>robot_desc<span class="o">}]</span>,
+
+<span class="w">        </span><span class="o">)</span>,
+
+
+
+<span class="w">        </span><span class="c1"># Fenêtre pour bouger les joints manuellement</span>
+
+<span class="w">        </span>Node<span class="o">(</span>
+
+<span class="w">            </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
+
+<span class="w">            </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
+
+<span class="w">            </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;joint_state_publisher_gui&#39;</span>,
+
+<span class="w">            </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>,
+
+<span class="w">        </span><span class="o">)</span>,
+
+
+
+<span class="w">        </span><span class="c1"># Noeud Rviz2 pour la visualisation</span>
+
+<span class="w">        </span>Node<span class="o">(</span>
+
+<span class="w">            </span><span class="nv">package</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
+
+<span class="w">            </span><span class="nv">executable</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
+
+<span class="w">            </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;rviz2&#39;</span>,
+
+<span class="w">            </span><span class="nv">output</span><span class="o">=</span><span class="s1">&#39;screen&#39;</span>,
+
+<span class="w">        </span><span class="o">)</span>,
+
+<span class="w">    </span><span class="o">])</span>
+</pre></div>
+</div>
 </section>
 
 

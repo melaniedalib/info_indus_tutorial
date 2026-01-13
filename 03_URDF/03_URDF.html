@@ -142,6 +142,364 @@ Cette méthode a permis de définir manuellement et précisément l’origine et
 <p>Remarque : il n’est pas possible de réaliser une boucle fermée dans une description URDF.
 Nous avons donc décrit les deux bras indépendamment afin de les relier ensuite lors de la simulation.</p>
 </div>
+<p>Voici le fichier xacro :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>&lt;?xml<span class="w"> </span><span class="nv">version</span><span class="o">=</span><span class="s2">&quot;1.0&quot;</span>?&gt;
+
+&lt;robot<span class="w"> </span>xmlns:xacro<span class="o">=</span><span class="s2">&quot;http://www.ros.org/wiki/xacro&quot;</span><span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;robot_5_bars&quot;</span>&gt;
+
+
+
+&lt;xacro:property<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;mesh_path&quot;</span><span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;package://mon_robot_description/meshes/&quot;</span><span class="w"> </span>/&gt;
+
+
+
+&lt;xacro:macro<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;default_inertial&quot;</span><span class="w"> </span><span class="nv">params</span><span class="o">=</span><span class="s2">&quot;mass&quot;</span>&gt;
+
+<span class="w">   </span>&lt;inertial&gt;
+
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mass</span><span class="si">}</span><span class="s2">&quot;</span><span class="w"> </span>/&gt;
+
+<span class="w">      </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;0.001&quot;</span><span class="w"> </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span><span class="w"> </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span>
+
+<span class="w">               </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;0.001&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0.0&quot;</span>
+
+<span class="w">               </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;0.001&quot;</span><span class="w"> </span>/&gt;
+
+<span class="w">   </span>&lt;/inertial&gt;
+
+&lt;/xacro:macro&gt;
+
+
+
+&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span>&gt;
+
+<span class="w">   </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0.5 0.5 0.5 1&quot;</span>/&gt;
+
+&lt;/material&gt;
+
+&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span>&gt;
+
+<span class="w">   </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;0 0 0.8 1&quot;</span>/&gt;
+
+&lt;/material&gt;
+
+&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>&gt;
+
+<span class="w">   </span>&lt;color<span class="w"> </span><span class="nv">rgba</span><span class="o">=</span><span class="s2">&quot;1 1 1 1&quot;</span>/&gt;
+
+&lt;/material&gt;
+
+
+
+&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;world&quot;</span>/&gt;
+
+
+
+&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;fix_to_world&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span>&gt;
+
+<span class="w">   </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;world&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>/&gt;
+
+&lt;/joint&gt;
+
+
+
+&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>&gt;
+
+<span class="w">   </span>&lt;visual&gt;
+
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;1.57 0 0&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;geometry&gt;
+
+<span class="w">      </span>&lt;mesh<span class="w"> </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mesh_path</span><span class="si">}</span><span class="s2">base.stl&quot;</span><span class="w"> </span><span class="nv">scale</span><span class="o">=</span><span class="s2">&quot;0.001 0.001 0.001&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;/geometry&gt;
+
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;grey&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/visual&gt;
+
+<span class="w">   </span>&lt;xacro:default_inertial<span class="w"> </span><span class="nv">mass</span><span class="o">=</span><span class="s2">&quot;5.0&quot;</span>/&gt;
+
+&lt;/link&gt;
+
+
+
+&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;left_motor&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;revolute&quot;</span>&gt;
+
+<span class="w">   </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;-0.08 -0.07 0.032&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 1.57&quot;</span><span class="w"> </span>/&gt;
+
+<span class="w">   </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 1&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;limit<span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;-6.28&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;6.28&quot;</span><span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;1000.0&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;5.0&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;dynamics<span class="w"> </span><span class="nv">damping</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span><span class="w"> </span><span class="nv">friction</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span>/&gt;
+
+&lt;/joint&gt;
+
+
+
+&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span>&gt;
+
+<span class="w">   </span>&lt;visual&gt;
+
+<span class="w">      </span>&lt;geometry&gt;
+
+<span class="w">      </span>&lt;mesh<span class="w"> </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mesh_path</span><span class="si">}</span><span class="s2">link1.stl&quot;</span><span class="w"> </span><span class="nv">scale</span><span class="o">=</span><span class="s2">&quot;0.001 0.001 0.001&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;/geometry&gt;
+
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/visual&gt;
+
+<span class="w">   </span>&lt;xacro:default_inertial<span class="w"> </span><span class="nv">mass</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span>/&gt;
+
+&lt;/link&gt;
+
+
+
+&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;left_joint&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;revolute&quot;</span>&gt;
+
+<span class="w">   </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link1&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0.08 0 0.054&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 1&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;limit<span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;-6.28&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;6.28&quot;</span><span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;1000.0&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;5.0&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;dynamics<span class="w"> </span><span class="nv">damping</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span><span class="w"> </span><span class="nv">friction</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span>/&gt;
+
+&lt;/joint&gt;
+
+
+
+&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span>&gt;
+
+<span class="w">   </span>&lt;visual&gt;
+
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;1.57 0 3.92699081699&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;geometry&gt;
+
+<span class="w">         </span>&lt;mesh<span class="w"> </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mesh_path</span><span class="si">}</span><span class="s2">link2.stl&quot;</span><span class="w"> </span><span class="nv">scale</span><span class="o">=</span><span class="s2">&quot;0.001 0.001 0.001&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;/geometry&gt;
+
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/visual&gt;
+
+<span class="w">   </span>&lt;xacro:default_inertial<span class="w"> </span><span class="nv">mass</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span>/&gt;
+
+&lt;/link&gt;
+
+
+
+&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link2_tip&quot;</span>&gt;
+
+<span class="w">   </span>&lt;inertial&gt;
+
+<span class="w">      </span>&lt;mass<span class="w"> </span><span class="nv">value</span><span class="o">=</span><span class="s2">&quot;0.001&quot;</span><span class="w"> </span>/&gt;
+
+<span class="w">      </span>&lt;inertia<span class="w"> </span><span class="nv">ixx</span><span class="o">=</span><span class="s2">&quot;0.0001&quot;</span><span class="w"> </span><span class="nv">ixy</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">ixz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">iyy</span><span class="o">=</span><span class="s2">&quot;0.0001&quot;</span><span class="w"> </span><span class="nv">iyz</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="w"> </span><span class="nv">izz</span><span class="o">=</span><span class="s2">&quot;0.0001&quot;</span><span class="w"> </span>/&gt;
+
+<span class="w">   </span>&lt;/inertial&gt;
+
+&lt;/link&gt;
+
+
+
+&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link2_to_tip&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;fixed&quot;</span>&gt;
+
+<span class="w">   </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link2&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link2_tip&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0.147 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+
+&lt;/joint&gt;
+
+
+
+&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;right_motor&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;revolute&quot;</span>&gt;
+
+<span class="w">   </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;base_link&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link4&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0.058 -0.07 0.032&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 1.57&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 1&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;limit<span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;-6.28&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;6.28&quot;</span><span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;1000.0&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;5.0&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;dynamics<span class="w"> </span><span class="nv">damping</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span><span class="w"> </span><span class="nv">friction</span><span class="o">=</span><span class="s2">&quot;0.1&quot;</span>/&gt;
+
+&lt;/joint&gt;
+
+
+
+&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link4&quot;</span>&gt;
+
+<span class="w">   </span>&lt;visual&gt;
+
+<span class="w">      </span>&lt;geometry&gt;
+
+<span class="w">      </span>&lt;mesh<span class="w"> </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mesh_path</span><span class="si">}</span><span class="s2">link4.stl&quot;</span><span class="w"> </span><span class="nv">scale</span><span class="o">=</span><span class="s2">&quot;0.001 0.001 0.001&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;/geometry&gt;
+
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/visual&gt;
+
+<span class="w">   </span>&lt;xacro:default_inertial<span class="w"> </span><span class="nv">mass</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span>/&gt;
+
+&lt;/link&gt;
+
+
+
+&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;right_joint&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;revolute&quot;</span>&gt;
+
+<span class="w">   </span>&lt;parent<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link4&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;child<span class="w"> </span><span class="nv">link</span><span class="o">=</span><span class="s2">&quot;link3&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0.079 0 0.053&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;axis<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 1&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;limit<span class="w"> </span><span class="nv">lower</span><span class="o">=</span><span class="s2">&quot;-6.28&quot;</span><span class="w"> </span><span class="nv">upper</span><span class="o">=</span><span class="s2">&quot;6.28&quot;</span><span class="w"> </span><span class="nv">effort</span><span class="o">=</span><span class="s2">&quot;1000.0&quot;</span><span class="w"> </span><span class="nv">velocity</span><span class="o">=</span><span class="s2">&quot;5.0&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;dynamics<span class="w"> </span><span class="nv">damping</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span><span class="w"> </span><span class="nv">friction</span><span class="o">=</span><span class="s2">&quot;0.01&quot;</span>/&gt;
+
+&lt;/joint&gt;
+
+
+
+&lt;link<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;link3&quot;</span>&gt;
+
+<span class="w">   </span>&lt;visual&gt;
+
+<span class="w">      </span>&lt;origin<span class="w"> </span><span class="nv">xyz</span><span class="o">=</span><span class="s2">&quot;0 0 0&quot;</span><span class="w"> </span><span class="nv">rpy</span><span class="o">=</span><span class="s2">&quot;-1.57 0 -3.92699081699&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;geometry&gt;
+
+<span class="w">      </span>&lt;mesh<span class="w"> </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mesh_path</span><span class="si">}</span><span class="s2">link3.stl&quot;</span><span class="w"> </span><span class="nv">scale</span><span class="o">=</span><span class="s2">&quot;0.001 0.001 0.001&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;/geometry&gt;
+
+<span class="w">      </span>&lt;material<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;white&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/visual&gt;
+
+<span class="w">   </span>&lt;xacro:default_inertial<span class="w"> </span><span class="nv">mass</span><span class="o">=</span><span class="s2">&quot;0.5&quot;</span>/&gt;
+
+&lt;/link&gt;
+
+
+
+&lt;ros2_control<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;FiveBarBotSystem&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;system&quot;</span>&gt;
+
+<span class="w">   </span>&lt;hardware&gt;
+
+<span class="w">      </span>&lt;plugin&gt;gazebo_ros2_control/GazeboSystem&lt;/plugin&gt;
+
+<span class="w">   </span>&lt;/hardware&gt;
+
+
+
+<span class="w">   </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;left_motor&quot;</span>&gt;
+
+<span class="w">      </span>&lt;command_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;position&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;position&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;velocity&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/joint&gt;
+
+<span class="w">   </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;right_motor&quot;</span>&gt;
+
+<span class="w">      </span>&lt;command_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;position&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;position&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;velocity&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/joint&gt;
+
+
+
+<span class="w">   </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;left_joint&quot;</span>&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;position&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;velocity&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/joint&gt;
+
+<span class="w">   </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;right_joint&quot;</span>&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;position&quot;</span>/&gt;
+
+<span class="w">      </span>&lt;state_interface<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;velocity&quot;</span>/&gt;
+
+<span class="w">   </span>&lt;/joint&gt;
+
+&lt;/ros2_control&gt;
+
+
+
+&lt;gazebo&gt;
+
+<span class="w">   </span>&lt;plugin<span class="w"> </span><span class="nv">filename</span><span class="o">=</span><span class="s2">&quot;libgazebo_ros2_control.so&quot;</span><span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;gazebo_ros2_control&quot;</span>&gt;
+
+<span class="w">      </span>&lt;parameters&gt;<span class="k">$(</span>find<span class="w"> </span>mon_robot_description<span class="k">)</span>/config/my_controllers.yaml&lt;/parameters&gt;
+
+<span class="w">   </span>&lt;/plugin&gt;
+
+&lt;/gazebo&gt;
+
+
+
+&lt;gazebo&gt;
+
+<span class="w">   </span>&lt;joint<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s2">&quot;loop_closure_joint&quot;</span><span class="w"> </span><span class="nv">type</span><span class="o">=</span><span class="s2">&quot;revolute&quot;</span>&gt;
+
+<span class="w">      </span>&lt;parent&gt;link2_tip&lt;/parent&gt;
+
+<span class="w">      </span>&lt;child&gt;link3&lt;/child&gt;
+
+<span class="w">      </span>&lt;pose&gt;0.11<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">0</span>&lt;/pose&gt;
+
+<span class="w">      </span>&lt;axis&gt;
+
+<span class="w">      </span>&lt;xyz&gt;0<span class="w"> </span><span class="m">0</span><span class="w"> </span><span class="m">1</span>&lt;/xyz&gt;
+
+<span class="w">      </span>&lt;/axis&gt;
+
+<span class="w">   </span>&lt;/joint&gt;
+
+&lt;/gazebo&gt;
+
+
+
+&lt;/robot&gt;
+</pre></div>
+</div>
 </section>
 </section>
 

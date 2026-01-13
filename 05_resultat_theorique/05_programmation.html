@@ -280,60 +280,152 @@ point <span class="math notranslate nohighlight">\(A3\)</span> souhaité. Si le 
 <a class="reference internal image-reference" href="../_images/config_mecanisme.png"><img alt="Documentation technique du servomoteur AX-12A" src="../_images/config_mecanisme.png" style="width: 600px;" />
 </a>
 </figure>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>import<span class="w"> </span>numpy<span class="w"> </span>as<span class="w"> </span>np
+import<span class="w"> </span>matplotlib.pyplot<span class="w"> </span>as<span class="w"> </span>plt
+import<span class="w"> </span>tkinter<span class="w"> </span>as<span class="w"> </span>tk
+from<span class="w"> </span>tkinter<span class="w"> </span>import<span class="w"> </span>messagebox
 
-<span class="n">l0</span> <span class="o">=</span> <span class="mf">137.98</span>
-<span class="n">l1</span> <span class="o">=</span> <span class="mi">80</span>
-<span class="n">l4</span> <span class="o">=</span> <span class="mi">80</span>
-<span class="n">l2</span> <span class="o">=</span> <span class="mf">146.3</span>
-<span class="n">l3</span> <span class="o">=</span> <span class="mf">146.3</span>
+<span class="c1"># ===================================================</span>
+<span class="c1">#   CONSTANTES GEOMETRIQUES (RIGIDES)</span>
+<span class="c1"># ===================================================</span>
+<span class="nv">L0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">137</span>.98
+<span class="nv">L1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>.0
+<span class="nv">L2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">146</span>.3
+<span class="nv">L3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">146</span>.3
+<span class="nv">L4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">80</span>.0
 
-<span class="n">A1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
-<span class="n">A5</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">])</span>
+<span class="nv">A1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span><span class="m">0</span>.0,<span class="w"> </span><span class="m">0</span>.0<span class="o">])</span>
+<span class="nv">A5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span>L0,<span class="w"> </span><span class="m">0</span>.0<span class="o">])</span>
 
-<span class="n">q1_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">+</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
-<span class="n">q4_range</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">+</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">-</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">400</span><span class="p">)</span>
+<span class="nv">ANGLE_REF</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>np.pi<span class="w"> </span>/<span class="w"> </span><span class="m">3</span><span class="w">  </span><span class="c1"># 120°</span>
 
-<span class="n">A3_solutions</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># ===================================================</span>
+<span class="c1">#   OUTILS</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>normalize_angle<span class="o">(</span>a<span class="o">)</span>:
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>a<span class="w"> </span>%<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>np.pi<span class="o">)</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">circle_intersections</span><span class="p">(</span><span class="n">C1</span><span class="p">,</span> <span class="n">r1</span><span class="p">,</span> <span class="n">C2</span><span class="p">,</span> <span class="n">r2</span><span class="p">):</span>
-    <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span> <span class="o">=</span> <span class="n">C1</span>
-    <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span> <span class="o">=</span> <span class="n">C2</span>
-    <span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="n">r1</span> <span class="o">+</span> <span class="n">r2</span> <span class="ow">or</span> <span class="n">d</span> <span class="o">&lt;</span> <span class="nb">abs</span><span class="p">(</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="p">)</span> <span class="ow">or</span> <span class="n">d</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[]</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">r1</span><span class="o">*</span><span class="n">r1</span> <span class="o">-</span> <span class="n">r2</span><span class="o">*</span><span class="n">r2</span> <span class="o">+</span> <span class="n">d</span><span class="o">*</span><span class="n">d</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">d</span><span class="p">)</span>
-    <span class="n">h</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r1</span><span class="o">*</span><span class="n">r1</span> <span class="o">-</span> <span class="n">a</span><span class="o">*</span><span class="n">a</span><span class="p">)</span>
-    <span class="n">xm</span> <span class="o">=</span> <span class="n">x1</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
-    <span class="n">ym</span> <span class="o">=</span> <span class="n">y1</span> <span class="o">+</span> <span class="n">a</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
-    <span class="n">xs1</span> <span class="o">=</span> <span class="n">xm</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
-    <span class="n">ys1</span> <span class="o">=</span> <span class="n">ym</span> <span class="o">-</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
-    <span class="n">xs2</span> <span class="o">=</span> <span class="n">xm</span> <span class="o">-</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">y2</span> <span class="o">-</span> <span class="n">y1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
-    <span class="n">ys2</span> <span class="o">=</span> <span class="n">ym</span> <span class="o">+</span> <span class="n">h</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span> <span class="o">-</span> <span class="n">x1</span><span class="p">)</span><span class="o">/</span><span class="n">d</span>
-    <span class="k">return</span> <span class="p">[(</span><span class="n">xs1</span><span class="p">,</span> <span class="n">ys1</span><span class="p">),</span> <span class="p">(</span><span class="n">xs2</span><span class="p">,</span> <span class="n">ys2</span><span class="p">)]</span>
+def<span class="w"> </span>angle_valid<span class="o">(</span>a<span class="o">)</span>:
+<span class="w">   </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.degrees<span class="o">(</span>a<span class="o">)</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>not<span class="w"> </span><span class="o">(</span><span class="m">300</span><span class="w"> </span>&lt;<span class="o">=</span><span class="w"> </span>d<span class="w"> </span>&lt;<span class="w"> </span><span class="m">360</span><span class="o">)</span>
 
-<span class="k">for</span> <span class="n">q1</span> <span class="ow">in</span> <span class="n">q1_range</span><span class="p">:</span>
-    <span class="n">A2</span> <span class="o">=</span> <span class="n">A1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">l1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q1</span><span class="p">),</span> <span class="n">l1</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q1</span><span class="p">)])</span>
-    <span class="k">for</span> <span class="n">q4</span> <span class="ow">in</span> <span class="n">q4_range</span><span class="p">:</span>
-        <span class="n">A4</span> <span class="o">=</span> <span class="n">A5</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="n">l4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">q4</span><span class="p">),</span> <span class="n">l4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">q4</span><span class="p">)])</span>
-        <span class="n">inter</span> <span class="o">=</span> <span class="n">circle_intersections</span><span class="p">(</span><span class="n">A2</span><span class="p">,</span> <span class="n">l2</span><span class="p">,</span> <span class="n">A4</span><span class="p">,</span> <span class="n">l3</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">P</span> <span class="ow">in</span> <span class="n">inter</span><span class="p">:</span>
-            <span class="n">A3_solutions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">P</span><span class="p">)</span>
+def<span class="w"> </span>circles_intersection<span class="o">(</span>C1,<span class="w"> </span>r1,<span class="w"> </span>C2,<span class="w"> </span>r2<span class="o">)</span>:
+<span class="w">   </span><span class="nv">d</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.linalg.norm<span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span>d<span class="w"> </span>&gt;<span class="w"> </span>r1<span class="w"> </span>+<span class="w"> </span>r2<span class="w"> </span>or<span class="w"> </span>d<span class="w"> </span>&lt;<span class="w"> </span>abs<span class="o">(</span>r1<span class="w"> </span>-<span class="w"> </span>r2<span class="o">)</span><span class="w"> </span>or<span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="m">0</span>:
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">[]</span>
 
-<span class="n">A3_solutions</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">A3_solutions</span><span class="p">)</span>
+<span class="w">   </span><span class="nv">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">(</span>r1**2<span class="w"> </span>-<span class="w"> </span>r2**2<span class="w"> </span>+<span class="w"> </span>d**2<span class="o">)</span><span class="w"> </span>/<span class="w"> </span><span class="o">(</span><span class="m">2</span><span class="w"> </span>*<span class="w"> </span>d<span class="o">)</span>
+<span class="w">   </span><span class="nv">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.sqrt<span class="o">(</span>max<span class="o">(</span>r1**2<span class="w"> </span>-<span class="w"> </span>a**2,<span class="w"> </span><span class="m">0</span>.0<span class="o">))</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">A3_solutions</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">A3_solutions</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">A1</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A1</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;A1&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">([</span><span class="n">A5</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="p">[</span><span class="n">A5</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;A5&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Positions atteignables de A3 (2 solutions incluses)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;X (mm)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Y (mm)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="w">   </span><span class="nv">P</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>C1<span class="w"> </span>+<span class="w"> </span>a<span class="w"> </span>*<span class="w"> </span><span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)</span><span class="w"> </span>/<span class="w"> </span>d
+<span class="w">   </span><span class="nv">perp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span>-<span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span><span class="o">(</span>C2<span class="w"> </span>-<span class="w"> </span>C1<span class="o">)[</span><span class="m">0</span><span class="o">]])</span><span class="w"> </span>/<span class="w"> </span>d
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span><span class="o">[</span>P<span class="w"> </span>+<span class="w"> </span>h<span class="w"> </span>*<span class="w"> </span>perp,<span class="w"> </span>P<span class="w"> </span>-<span class="w"> </span>h<span class="w"> </span>*<span class="w"> </span>perp<span class="o">]</span>
+
+def<span class="w"> </span>segments_intersect<span class="o">(</span>p1,<span class="w"> </span>p2,<span class="w"> </span>p3,<span class="w"> </span>p4<span class="o">)</span>:
+<span class="w">   </span>def<span class="w"> </span>ccw<span class="o">(</span>a,<span class="w"> </span>b,<span class="w"> </span>c<span class="o">)</span>:
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="o">(</span>c<span class="o">[</span><span class="m">1</span><span class="o">]</span>-a<span class="o">[</span><span class="m">1</span><span class="o">])</span>*<span class="o">(</span>b<span class="o">[</span><span class="m">0</span><span class="o">]</span>-a<span class="o">[</span><span class="m">0</span><span class="o">])</span><span class="w"> </span>&gt;<span class="w"> </span><span class="o">(</span>b<span class="o">[</span><span class="m">1</span><span class="o">]</span>-a<span class="o">[</span><span class="m">1</span><span class="o">])</span>*<span class="o">(</span>c<span class="o">[</span><span class="m">0</span><span class="o">]</span>-a<span class="o">[</span><span class="m">0</span><span class="o">])</span>
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>ccw<span class="o">(</span>p1,<span class="w"> </span>p3,<span class="w"> </span>p4<span class="o">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>ccw<span class="o">(</span>p2,<span class="w"> </span>p3,<span class="w"> </span>p4<span class="o">)</span><span class="w"> </span>and<span class="w"> </span><span class="se">\</span>
+<span class="w">         </span>ccw<span class="o">(</span>p1,<span class="w"> </span>p2,<span class="w"> </span>p3<span class="o">)</span><span class="w"> </span>!<span class="o">=</span><span class="w"> </span>ccw<span class="o">(</span>p1,<span class="w"> </span>p2,<span class="w"> </span>p4<span class="o">)</span>
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   INVERSE CINEMATIQUE : A3 -&gt; (q1, q4)</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>solve_from_A3<span class="o">(</span>A3<span class="o">)</span>:
+<span class="w">   </span><span class="nv">A2_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>circles_intersection<span class="o">(</span>A1,<span class="w"> </span>L1,<span class="w"> </span>A3,<span class="w"> </span>L2<span class="o">)</span>
+<span class="w">   </span><span class="nv">A4_list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>circles_intersection<span class="o">(</span>A5,<span class="w"> </span>L4,<span class="w"> </span>A3,<span class="w"> </span>L3<span class="o">)</span>
+
+<span class="w">   </span><span class="nv">solutions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">[]</span>
+
+<span class="w">   </span><span class="k">for</span><span class="w"> </span>A2<span class="w"> </span><span class="k">in</span><span class="w"> </span>A2_list:
+<span class="w">      </span><span class="nv">theta1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.arctan2<span class="o">(</span>A2<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A1<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>A2<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A1<span class="o">[</span><span class="m">0</span><span class="o">])</span>
+<span class="w">      </span><span class="nv">q1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>normalize_angle<span class="o">(</span>theta1<span class="w"> </span>-<span class="w"> </span>ANGLE_REF<span class="o">)</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>angle_valid<span class="o">(</span>q1<span class="o">)</span>:
+<span class="w">            </span><span class="k">continue</span>
+
+<span class="w">      </span><span class="k">for</span><span class="w"> </span>A4<span class="w"> </span><span class="k">in</span><span class="w"> </span>A4_list:
+<span class="w">            </span><span class="c1"># ✅ CORRECTION ICI</span>
+<span class="w">            </span><span class="nv">theta4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.arctan2<span class="o">(</span>A4<span class="o">[</span><span class="m">1</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A5<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>A4<span class="o">[</span><span class="m">0</span><span class="o">]</span><span class="w"> </span>-<span class="w"> </span>A5<span class="o">[</span><span class="m">0</span><span class="o">])</span>
+<span class="w">            </span><span class="nv">q4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>normalize_angle<span class="o">(</span>theta4<span class="w"> </span>-<span class="w"> </span>ANGLE_REF<span class="o">)</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>angle_valid<span class="o">(</span>q4<span class="o">)</span>:
+<span class="w">               </span><span class="k">continue</span>
+
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>segments_intersect<span class="o">(</span>A1,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4<span class="o">)</span>:
+<span class="w">               </span><span class="k">continue</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span>segments_intersect<span class="o">(</span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4,<span class="w"> </span>A5<span class="o">)</span>:
+<span class="w">               </span><span class="k">continue</span>
+
+<span class="w">            </span>solutions.append<span class="o">((</span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span>A4<span class="o">))</span>
+
+<span class="w">   </span><span class="k">return</span><span class="w"> </span>solutions
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   TRACE</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>plot_solution<span class="o">(</span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4<span class="o">)</span>:
+<span class="w">   </span>plt.figure<span class="o">(</span><span class="nv">figsize</span><span class="o">=(</span><span class="m">6</span>,<span class="w"> </span><span class="m">6</span><span class="o">))</span>
+<span class="w">   </span><span class="k">for</span><span class="w"> </span>P,<span class="w"> </span>Q<span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="o">[(</span>A1,<span class="w"> </span>A2<span class="o">)</span>,<span class="w"> </span><span class="o">(</span>A2,<span class="w"> </span>A3<span class="o">)</span>,<span class="w"> </span><span class="o">(</span>A3,<span class="w"> </span>A4<span class="o">)</span>,<span class="w"> </span><span class="o">(</span>A4,<span class="w"> </span>A5<span class="o">)]</span>:
+<span class="w">      </span>plt.plot<span class="o">([</span>P<span class="o">[</span><span class="m">0</span><span class="o">]</span>,<span class="w"> </span>Q<span class="o">[</span><span class="m">0</span><span class="o">]]</span>,<span class="w"> </span><span class="o">[</span>P<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>Q<span class="o">[</span><span class="m">1</span><span class="o">]]</span>,<span class="w"> </span><span class="s1">&#39;-o&#39;</span><span class="o">)</span>
+
+<span class="w">   </span><span class="k">for</span><span class="w"> </span>name,<span class="w"> </span>P<span class="w"> </span><span class="k">in</span><span class="w"> </span>zip<span class="o">(</span>
+<span class="w">      </span><span class="o">[</span><span class="s2">&quot;A1&quot;</span>,<span class="w"> </span><span class="s2">&quot;A2&quot;</span>,<span class="w"> </span><span class="s2">&quot;A3&quot;</span>,<span class="w"> </span><span class="s2">&quot;A4&quot;</span>,<span class="w"> </span><span class="s2">&quot;A5&quot;</span><span class="o">]</span>,
+<span class="w">      </span><span class="o">[</span>A1,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4,<span class="w"> </span>A5<span class="o">]</span>
+<span class="w">   </span><span class="o">)</span>:
+<span class="w">      </span>plt.text<span class="o">(</span>P<span class="o">[</span><span class="m">0</span><span class="o">]</span>,<span class="w"> </span>P<span class="o">[</span><span class="m">1</span><span class="o">]</span>,<span class="w"> </span>name<span class="o">)</span>
+
+<span class="w">   </span>plt.axis<span class="o">(</span><span class="s2">&quot;equal&quot;</span><span class="o">)</span>
+<span class="w">   </span>plt.grid<span class="o">(</span>True<span class="o">)</span>
+<span class="w">   </span>plt.title<span class="o">(</span><span class="s2">&quot;Quadrilatère articulé – cohérence q4 OK&quot;</span><span class="o">)</span>
+<span class="w">   </span>plt.show<span class="o">()</span>
+
+<span class="c1"># ===================================================</span>
+<span class="c1">#   GUI</span>
+<span class="c1"># ===================================================</span>
+def<span class="w"> </span>launch_gui<span class="o">()</span>:
+<span class="w">   </span>def<span class="w"> </span>validate<span class="o">()</span>:
+<span class="w">      </span>try:
+<span class="w">            </span><span class="nv">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>float<span class="o">(</span>entry_x.get<span class="o">())</span>
+<span class="w">            </span><span class="nv">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>float<span class="o">(</span>entry_y.get<span class="o">())</span>
+<span class="w">      </span>except<span class="w"> </span>ValueError:
+<span class="w">            </span>messagebox.showerror<span class="o">(</span><span class="s2">&quot;Erreur&quot;</span>,<span class="w"> </span><span class="s2">&quot;Coordonnées invalides.&quot;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">      </span><span class="nv">A3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>np.array<span class="o">([</span>x,<span class="w"> </span>y<span class="o">])</span>
+<span class="w">      </span><span class="nv">sols</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>solve_from_A3<span class="o">(</span>A3<span class="o">)</span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span>not<span class="w"> </span>sols:
+<span class="w">            </span>messagebox.showerror<span class="o">(</span><span class="s2">&quot;Erreur&quot;</span>,<span class="w"> </span><span class="s2">&quot;Position A3 non réalisable.&quot;</span><span class="o">)</span>
+<span class="w">            </span><span class="k">return</span>
+
+<span class="w">      </span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span><span class="nv">A4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>sols<span class="o">[</span><span class="m">0</span><span class="o">]</span>
+<span class="w">      </span>window.destroy<span class="o">()</span>
+
+<span class="w">      </span><span class="nv">q1_1023</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>q1*1023/360
+<span class="w">      </span><span class="nv">q4_1023</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>q4*1023/360
+<span class="w">      </span>print<span class="o">(</span><span class="s2">&quot;\n--- ANGLES COHERENTS ---&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q1 = {np.degrees(q1):.2f}°&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q4 = {np.degrees(q4):.2f}°&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q1 = {np.degrees(q1_1023):.2f}&quot;</span><span class="o">)</span>
+<span class="w">      </span>print<span class="o">(</span>f<span class="s2">&quot;q4 = {np.degrees(q4_1023):.2f}&quot;</span><span class="o">)</span>
+<span class="w">      </span>plot_solution<span class="o">(</span>q1,<span class="w"> </span>q4,<span class="w"> </span>A2,<span class="w"> </span>A3,<span class="w"> </span>A4<span class="o">)</span>
+
+<span class="w">   </span><span class="nv">window</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tk.Tk<span class="o">()</span>
+<span class="w">   </span>window.title<span class="o">(</span><span class="s2">&quot;A3 → angles (réf 120°)&quot;</span><span class="o">)</span>
+
+<span class="w">   </span>tk.Label<span class="o">(</span>window,<span class="w"> </span><span class="nv">text</span><span class="o">=</span><span class="s2">&quot;X A3 (mm)&quot;</span><span class="o">)</span>.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+<span class="w">   </span>tk.Label<span class="o">(</span>window,<span class="w"> </span><span class="nv">text</span><span class="o">=</span><span class="s2">&quot;Y A3 (mm)&quot;</span><span class="o">)</span>.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">0</span><span class="o">)</span>
+
+<span class="w">   </span><span class="nv">entry_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tk.Entry<span class="o">(</span>window<span class="o">)</span>
+<span class="w">   </span><span class="nv">entry_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>tk.Entry<span class="o">(</span>window<span class="o">)</span>
+<span class="w">   </span>entry_x.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+<span class="w">   </span>entry_y.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">1</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>
+
+<span class="w">   </span>tk.Button<span class="o">(</span>window,<span class="w"> </span><span class="nv">text</span><span class="o">=</span><span class="s2">&quot;Valider&quot;</span>,<span class="w"> </span><span class="nv">command</span><span class="o">=</span>validate<span class="o">)</span><span class="se">\</span>
+<span class="w">      </span>.grid<span class="o">(</span><span class="nv">row</span><span class="o">=</span><span class="m">2</span>,<span class="w"> </span><span class="nv">column</span><span class="o">=</span><span class="m">0</span>,<span class="w"> </span><span class="nv">columnspan</span><span class="o">=</span><span class="m">2</span><span class="o">)</span>
+
+<span class="w">   </span>window.mainloop<span class="o">()</span>
+
+launch_gui<span class="o">()</span>
 </pre></div>
 </div>
 </section>

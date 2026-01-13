@@ -605,10 +605,22 @@ Ainsi, nous pouvons utiliser le code précédent une fois avoir utilisé ce fich
    launch_gui()
 
 Nous avons rentré les positions suivantes : blablablabla,
-Les résultats pour le moteur 1 [0,164,0,0], [0,338, 0, 0]
+Les résultats pour le moteur 1 [0,164,398,0], [0,338, 216, 0]
 
 Puis nous relançons le code voici la vidéo final !
 
 .. figure:: ../_static/videos/video_finale2.gif
    :width: 80%
+   :align: center
+
+Voici les positions théoriques intermédiaires : 
+
+.. figure:: ../images/theo_1.jpeg
+   :alt: matériel
+   :width: 600px
+   :align: center
+
+.. figure:: ../images/theo_2.jpeg
+   :alt: matériel
+   :width: 600px
    :align: center

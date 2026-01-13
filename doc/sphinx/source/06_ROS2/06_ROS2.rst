@@ -1,5 +1,5 @@
-Tests et installation logicielle
-================================
+Pilotage du panthographe 
+========================
 
 Premier test : Utilisation des moteurs Dynamixel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -37,7 +37,7 @@ Tout d'abord, nous avons créé notre répertoire de travail :
    mkdir -p ~/robotics_ws/src
 
 Puis nous nous rendons dedans à l'aide de la commande suivante :
- 
+
 .. code-block:: bash
 
    cd ~/robotics_ws/src/

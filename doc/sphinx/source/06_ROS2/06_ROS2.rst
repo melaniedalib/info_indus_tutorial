@@ -604,7 +604,24 @@ Ainsi, nous pouvons utiliser le code précédent une fois avoir utilisé ce fich
 
    launch_gui()
 
-Nous avons rentré les positions suivantes : blablablabla,
+Nous avons rentré les positions suivantes :
+
+.. figure:: ../images/position0.jpeg
+   :alt: matériel
+   :width: 100px
+   :align: center
+
+.. figure:: ../images/position1.jpeg
+   :alt: matériel
+   :width: 100px
+   :align: center
+
+.. figure:: ../images/position2.jpeg
+   :alt: matériel
+   :width: 100px
+   :align: center
+
+Nous obtenons les positions d'angle du moteur suivant : 
 Les résultats pour le moteur 1 [0,164,398,0], [0,338, 216, 0]
 
 Puis nous relançons le code voici la vidéo final !

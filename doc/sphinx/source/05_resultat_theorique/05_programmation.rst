@@ -231,59 +231,151 @@ point :math:`A3` souhaité. Si le point n’est pas atteignable, le code renverr
    :width: 600px
    :align: center
 
-.. code-block:: python
+.. code-block:: bash
 
-    import numpy as np
-    import matplotlib.pyplot as plt
+   import numpy as np
+   import matplotlib.pyplot as plt
+   import tkinter as tk
+   from tkinter import messagebox
 
-    l0 = 137.98
-    l1 = 80
-    l4 = 80
-    l2 = 146.3
-    l3 = 146.3
+   # ===================================================
+   #   CONSTANTES GEOMETRIQUES (RIGIDES)
+   # ===================================================
+   L0 = 137.98
+   L1 = 80.0
+   L2 = 146.3
+   L3 = 146.3
+   L4 = 80.0
 
-    A1 = np.array([0.0, 0.0])
-    A5 = np.array([l0, 0.0])
+   A1 = np.array([0.0, 0.0])
+   A5 = np.array([L0, 0.0])
 
-    q1_range = np.linspace(-np.pi+0.01, np.pi-0.01, 400)
-    q4_range = np.linspace(-np.pi+0.01, np.pi-0.01, 400)
+   ANGLE_REF = 2 * np.pi / 3  # 120°
 
-    A3_solutions = []
+   # ===================================================
+   #   OUTILS
+   # ===================================================
+   def normalize_angle(a):
+      return a % (2 * np.pi)
 
-    def circle_intersections(C1, r1, C2, r2):
-        x1, y1 = C1
-        x2, y2 = C2
-        d = np.hypot(x2 - x1, y2 - y1)
-        if d > r1 + r2 or d < abs(r1 - r2) or d == 0:
-            return []
-        a = (r1*r1 - r2*r2 + d*d) / (2*d)
-        h = np.sqrt(r1*r1 - a*a)
-        xm = x1 + a*(x2-x1)/d
-        ym = y1 + a*(y2-y1)/d
-        xs1 = xm + h*(y2 - y1)/d
-        ys1 = ym - h*(x2 - x1)/d
-        xs2 = xm - h*(y2 - y1)/d
-        ys2 = ym + h*(x2 - x1)/d
-        return [(xs1, ys1), (xs2, ys2)]
+   def angle_valid(a):
+      d = np.degrees(a)
+      return not (300 <= d < 360)
 
-    for q1 in q1_range:
-        A2 = A1 + np.array([l1*np.cos(q1), l1*np.sin(q1)])
-        for q4 in q4_range:
-            A4 = A5 + np.array([-l4*np.cos(q4), l4*np.sin(q4)])
-            inter = circle_intersections(A2, l2, A4, l3)
-            for P in inter:
-                A3_solutions.append(P)
+   def circles_intersection(C1, r1, C2, r2):
+      d = np.linalg.norm(C2 - C1)
+      if d > r1 + r2 or d < abs(r1 - r2) or d == 0:
+         return []
 
-    A3_solutions = np.array(A3_solutions)
+      a = (r1**2 - r2**2 + d**2) / (2 * d)
+      h = np.sqrt(max(r1**2 - a**2, 0.0))
 
-    plt.figure(figsize=(8, 6))
-    plt.scatter(A3_solutions[:,0], A3_solutions[:,1], s=1, color="black")
-    plt.scatter([A1[0]], [A1[1]], color="red", label="A1")
-    plt.scatter([A5[0]], [A5[1]], color="blue", label="A5")
-    plt.axis('equal')
-    plt.grid(True)
-    plt.title("Positions atteignables de A3 (2 solutions incluses)")
-    plt.xlabel("X (mm)")
-    plt.ylabel("Y (mm)")
-    plt.legend()
-    plt.show()
+      P = C1 + a * (C2 - C1) / d
+      perp = np.array([-(C2 - C1)[1], (C2 - C1)[0]]) / d
+
+      return [P + h * perp, P - h * perp]
+
+   def segments_intersect(p1, p2, p3, p4):
+      def ccw(a, b, c):
+         return (c[1]-a[1])*(b[0]-a[0]) > (b[1]-a[1])*(c[0]-a[0])
+      return ccw(p1, p3, p4) != ccw(p2, p3, p4) and \
+            ccw(p1, p2, p3) != ccw(p1, p2, p4)
+
+   # ===================================================
+   #   INVERSE CINEMATIQUE : A3 -> (q1, q4)
+   # ===================================================
+   def solve_from_A3(A3):
+      A2_list = circles_intersection(A1, L1, A3, L2)
+      A4_list = circles_intersection(A5, L4, A3, L3)
+
+      solutions = []
+
+      for A2 in A2_list:
+         theta1 = np.arctan2(A2[1] - A1[1], A2[0] - A1[0])
+         q1 = normalize_angle(theta1 - ANGLE_REF)
+         if not angle_valid(q1):
+               continue
+
+         for A4 in A4_list:
+               # ✅ CORRECTION ICI
+               theta4 = np.arctan2(A4[1] - A5[1], A4[0] - A5[0])
+               q4 = normalize_angle(theta4 - ANGLE_REF)
+               if not angle_valid(q4):
+                  continue
+
+               if segments_intersect(A1, A2, A3, A4):
+                  continue
+               if segments_intersect(A2, A3, A4, A5):
+                  continue
+
+               solutions.append((q1, q4, A2, A4))
+
+      return solutions
+
+   # ===================================================
+   #   TRACE
+   # ===================================================
+   def plot_solution(q1, q4, A2, A3, A4):
+      plt.figure(figsize=(6, 6))
+      for P, Q in [(A1, A2), (A2, A3), (A3, A4), (A4, A5)]:
+         plt.plot([P[0], Q[0]], [P[1], Q[1]], '-o')
+
+      for name, P in zip(
+         ["A1", "A2", "A3", "A4", "A5"],
+         [A1, A2, A3, A4, A5]
+      ):
+         plt.text(P[0], P[1], name)
+
+      plt.axis("equal")
+      plt.grid(True)
+      plt.title("Quadrilatère articulé – cohérence q4 OK")
+      plt.show()
+
+   # ===================================================
+   #   GUI
+   # ===================================================
+   def launch_gui():
+      def validate():
+         try:
+               x = float(entry_x.get())
+               y = float(entry_y.get())
+         except ValueError:
+               messagebox.showerror("Erreur", "Coordonnées invalides.")
+               return
+
+         A3 = np.array([x, y])
+         sols = solve_from_A3(A3)
+
+         if not sols:
+               messagebox.showerror("Erreur", "Position A3 non réalisable.")
+               return
+
+         q1, q4, A2, A4 = sols[0]
+         window.destroy()
+
+         q1_1023 = q1*1023/360
+         q4_1023 = q4*1023/360
+         print("\n--- ANGLES COHERENTS ---")
+         print(f"q1 = {np.degrees(q1):.2f}°")
+         print(f"q4 = {np.degrees(q4):.2f}°")
+         print(f"q1 = {np.degrees(q1_1023):.2f}")
+         print(f"q4 = {np.degrees(q4_1023):.2f}")
+         plot_solution(q1, q4, A2, A3, A4)
+
+      window = tk.Tk()
+      window.title("A3 → angles (réf 120°)")
+
+      tk.Label(window, text="X A3 (mm)").grid(row=0, column=0)
+      tk.Label(window, text="Y A3 (mm)").grid(row=1, column=0)
+
+      entry_x = tk.Entry(window)
+      entry_y = tk.Entry(window)
+      entry_x.grid(row=0, column=1)
+      entry_y.grid(row=1, column=1)
+
+      tk.Button(window, text="Valider", command=validate)\
+         .grid(row=2, column=0, columnspan=2)
+
+      window.mainloop()
+
+   launch_gui()

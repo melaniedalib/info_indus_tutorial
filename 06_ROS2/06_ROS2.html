@@ -131,11 +131,10 @@ Il faudra donc adapter certaines parties du code. L’objectif est de déjà com
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/robotics_ws/src
 </pre></div>
 </div>
-<p>Puis nous nous rendons dedans à l’aide de la commande suivante :
-.. code-block:: bash</p>
-<blockquote>
-<div><p>cd ~/robotics_ws/src/</p>
-</div></blockquote>
+<p>Puis nous nous rendons dedans à l’aide de la commande suivante :</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/robotics_ws/src/
+</pre></div>
+</div>
 <p>Ensuite nous clonons l’exemple de Dynamixel rajoutons humbel-devel afin que nous puissions le lancer avec n’importe quelle version de ROS2:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>humbel-devel<span class="w"> </span>https://github.com/ROBOTICS-GIT/DynamixelSDK
 </pre></div>
@@ -622,18 +621,20 @@ launch_gui<span class="o">()</span>
 </pre></div>
 </div>
 <p>Nous avons rentré les positions suivantes :</p>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/position0.jpeg"><img alt="matériel" src="../_images/position0.jpeg" style="width: 200px;" />
+<table class="docutils align-center">
+<tbody>
+<tr class="row-odd"><td><a class="reference internal image-reference" href="../_images/position0.jpeg"><img alt="matériel" src="../_images/position0.jpeg" style="width: 200px;" />
 </a>
-</figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/position1.jpeg"><img alt="matériel" src="../_images/position1.jpeg" style="width: 200px;" />
+</td>
+<td><a class="reference internal image-reference" href="../_images/position1.jpeg"><img alt="matériel" src="../_images/position1.jpeg" style="width: 200px;" />
 </a>
-</figure>
-<figure class="align-center">
-<a class="reference internal image-reference" href="../_images/position2.jpeg"><img alt="matériel" src="../_images/position2.jpeg" style="width: 200px;" />
+</td>
+<td><a class="reference internal image-reference" href="../_images/position2.jpeg"><img alt="matériel" src="../_images/position2.jpeg" style="width: 200px;" />
 </a>
-</figure>
+</td>
+</tr>
+</tbody>
+</table>
 <p>Nous obtenons les positions d’angle du moteur suivant :
 Les résultats pour le moteur 1 : [0,164,398,0], et pour le moteur 2 : [0,338, 216, 0]</p>
 <p>Puis nous relançons le code voici la vidéo final !</p>

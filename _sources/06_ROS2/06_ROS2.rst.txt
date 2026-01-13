@@ -36,7 +36,8 @@ Tout d'abord, nous avons créé notre répertoire de travail :
 
    mkdir -p ~/robotics_ws/src
 
-Puis nous nous rendons dedans à l'aide de la commande suivante : 
+Puis nous nous rendons dedans à l'aide de la commande suivante :
+ 
 .. code-block:: bash
 
    cd ~/robotics_ws/src/
@@ -608,20 +609,19 @@ Ainsi, nous pouvons utiliser le code précédent une fois avoir utilisé ce fich
 
 Nous avons rentré les positions suivantes :
 
-.. figure:: ../images/position0.jpeg
-   :alt: matériel
-   :width: 200px
+.. list-table::
    :align: center
 
-.. figure:: ../images/position1.jpeg
-   :alt: matériel
-   :width: 200px
-   :align: center
+   * - .. image:: ../images/position0.jpeg
+          :width: 200px
+          :alt: matériel
+     - .. image:: ../images/position1.jpeg
+          :width: 200px
+          :alt: matériel
+     - .. image:: ../images/position2.jpeg
+          :width: 200px
+          :alt: matériel
 
-.. figure:: ../images/position2.jpeg
-   :alt: matériel
-   :width: 200px
-   :align: center
 
 Nous obtenons les positions d'angle du moteur suivant : 
 Les résultats pour le moteur 1 : [0,164,398,0], et pour le moteur 2 : [0,338, 216, 0]

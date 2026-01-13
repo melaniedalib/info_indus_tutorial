@@ -10,7 +10,7 @@ Ce projet a été réalisé par Bonnet Gaëtan, Dalibard Mélanie et Luton Phil�
 
 L'objectif de cette page internet est d'expliquer le fonctionnement de la plateforme robotique « pantographe » avec ROS2 sur une Raspberry Pi (PI5) et de documenter le projet.
 
-Voici une image de la maquette :
+Voici une vidéo du pilotage :
 
 .. figure:: ./_static/videos/video_finale2.gif
    :width: 80%
